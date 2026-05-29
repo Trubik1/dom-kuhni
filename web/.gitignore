@@ -2,3 +2,8 @@ node_modules/
 .netlify/
 .vercel/
 package-lock.json
+calculator.html
+catalog.html
+blog.html
+RECOMMENDATIONS.md
+SITE_MAP.md
