@@ -18,12 +18,12 @@ router.post('/submit-order', validateOrder, async (req, res) => {
 
     // Отправка в Telegram
     const bot = req.app.locals.bot;
-    const adminChatId = process.env.ADMIN_CHAT_ID;
+    const notifyChatId = process.env.GROUP_CHAT_ID || process.env.ADMIN_CHAT_ID;
 
-    if (bot && adminChatId) {
+    if (bot && notifyChatId) {
       try {
         const sent = await bot.sendMessage(
-          adminChatId,
+          notifyChatId,
           formatOrderText(order),
           { parse_mode: 'HTML', reply_markup: getInlineKeyboard(order.orderId) }
         );

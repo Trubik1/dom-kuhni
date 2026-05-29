@@ -20,6 +20,12 @@ import {
 // ====== Конфигурация ======
 const PORT = process.env.PORT || 3000;
 const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID;
+const GROUP_CHAT_ID = process.env.GROUP_CHAT_ID || ADMIN_CHAT_ID;
+const ALLOWED_IDS = [ADMIN_CHAT_ID, ...(process.env.ADDITIONAL_ADMINS || '').split(',').filter(Boolean).map(s => s.trim())];
+
+function isAdmin(userId) {
+  return ALLOWED_IDS.includes(userId?.toString());
+}
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const ADMIN_URL = process.env.ADMIN_URL || 'http://localhost:5173';
@@ -77,7 +83,7 @@ if (BOT_TOKEN) {
 
   // /start
   bot.onText(/\/start/, async (msg) => {
-    if (msg.chat.id.toString() !== ADMIN_CHAT_ID) {
+    if (!isAdmin(msg.from?.id)) {
       return bot.sendMessage(msg.chat.id, '⛔ Доступ запрещён');
     }
     const cmds = [
@@ -92,7 +98,7 @@ if (BOT_TOKEN) {
 
   // /new — показать новые заявки
   bot.onText(/\/new/, async (msg) => {
-    if (msg.chat.id.toString() !== ADMIN_CHAT_ID) return;
+    if (!isAdmin(msg.from?.id)) return;
     try {
       const orders = await Order.find({ status: 'new' }).sort({ createdAt: -1 }).limit(10);
       if (!orders.length) {
@@ -113,7 +119,7 @@ if (BOT_TOKEN) {
 
   // /stats
   bot.onText(/\/stats/, async (msg) => {
-    if (msg.chat.id.toString() !== ADMIN_CHAT_ID) return;
+    if (!isAdmin(msg.from?.id)) return;
     try {
       const [total, byStatus, today] = await Promise.all([
         Order.countDocuments(),
@@ -143,7 +149,7 @@ if (BOT_TOKEN) {
 
   // /export_csv
   bot.onText(/\/export_csv/, async (msg) => {
-    if (msg.chat.id.toString() !== ADMIN_CHAT_ID) return;
+    if (!isAdmin(msg.from?.id)) return;
     try {
       const orders = await Order.find({}).sort({ createdAt: -1 }).lean();
       const header = 'ID,Имя,Телефон,Email,Комментарий,Тип кухни,Бюджет,Источник,Статус,Комментарий менеджера,Дата\n';
@@ -164,7 +170,7 @@ if (BOT_TOKEN) {
   // ====== Callback-кнопки ======
   bot.on('callback_query', async (query) => {
     const chatId = query.message.chat.id;
-    if (chatId.toString() !== ADMIN_CHAT_ID) {
+    if (!isAdmin(query.from?.id)) {
       return bot.answerCallbackQuery(query.id, { text: '⛔ Доступ запрещён' });
     }
 
