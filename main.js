@@ -131,24 +131,49 @@ document.addEventListener('DOMContentLoaded', () => {
   // Contact form (on index.html and contact.html)
   const contactForm = document.getElementById('contactForm') || document.getElementById('homeForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', e => {
+    contactForm.addEventListener('submit', async e => {
       e.preventDefault();
-      const data = Object.fromEntries(new FormData(contactForm));
-      console.log('[Lead] Contact form:', { ...data, ...getUTM() });
+      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(formData);
       if (typeof gtag !== 'undefined') gtag('event', 'form_submit', { form_name: 'contact' });
+      if (typeof ym !== 'undefined' && window.ymId) ym(window.ymId, 'reachGoal', 'form_submit');
 
-      // === ВСТАВЬТЕ ВАШ WEBHOOK / Formspree ===
-      // fetch('https://formspree.io/f/YOUR_FORM_ID', {
-      //   method: 'POST', body: JSON.stringify({ ...data, ...getUTM() }),
-      //   headers: { 'Content-Type': 'application/json' }
-      // });
+      // Отправка в API
+      const API_URL = 'https://dom-kuhni-server.railway.app/api/submit-order';
 
-      contactForm.innerHTML = `
-        <div style="text-align:center;padding:20px">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" style="margin:0 auto 16px;display:block"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px">Спасибо за заявку!</h3>
-          <p style="color:var(--color-text-secondary)">Перезвоним в течение 30 минут</p>
-        </div>`;
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.name || data.homeName || '',
+            phone: data.phone || data.homePhone || '',
+            email: data.email || '',
+            comment: data.comment || data.homeComment || '',
+            kitchenType: data.kitchenType || '',
+            budget: data.budget || '',
+            source: 'Сайт',
+            _honeypot: data.honeypot || '',
+            ...getUTM(),
+          }),
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+          contactForm.innerHTML = `
+            <div style="text-align:center;padding:20px">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" style="margin:0 auto 16px;display:block"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px">Спасибо за заявку!</h3>
+              <p style="color:var(--color-text-secondary)">Заявка #${result.orderId}. Перезвоним в течение 30 минут</p>
+            </div>`;
+        } else {
+          alert('Ошибка отправки. Попробуйте ещё раз.');
+        }
+      } catch (err) {
+        console.error('Submit error:', err);
+        alert('Ошибка соединения. Проверьте подключение к интернету.');
+      }
     });
   }
 
