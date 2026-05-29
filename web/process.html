@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>" />
+  <title>Как мы работаем — Дом кухни</title>
+  <meta name="description" content="Прозрачный процесс создания кухни: от бесплатного замера до установки под ключ. Сроки, гарантии, договор. Узнайте, как мы работаем." />
+  <meta name="keywords" content="этапы создания кухни, изготовление кухни под ключ, замер кухни, дизайн проект кухни, установка кухни, производство кухонь" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')</script>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-header { background: var(--color-dark-bg); color: var(--color-dark-text); padding: 120px 0 48px; text-align: center; }
+    [data-theme="light"] .page-header { background: var(--color-surface); color: var(--color-text); }
+    .page-header h1 { font-family: 'Cormorant Garamond',serif; font-size: clamp(2rem,4vw,3rem); margin-bottom: 8px; }
+    .page-header p { color: rgba(255,255,255,.6); }
+    [data-theme="light"] .page-header p { color: var(--color-text-secondary); }
+
+
+    .timeline { max-width: 720px; margin: 0 auto; position: relative; padding-left: 60px; }
+    .timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: var(--color-border); }
+    .timeline-item { position: relative; padding-bottom: 48px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-marker {
+      position: absolute; left: -60px; top: 0; width: 48px; height: 48px;
+      border-radius: 50%; background: var(--color-surface); border: 2px solid var(--color-border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .timeline-marker.active { background: var(--color-accent); border-color: var(--color-accent); }
+    .timeline-num { font-size: .85rem; font-weight: 700; color: var(--color-text-light); }
+    .timeline-marker.active .timeline-num { color: #1A1A1A; }
+    .timeline-content { background: var(--color-surface); padding: 24px; border-radius: 12px; border: 1px solid var(--color-border); }
+    .timeline-content h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+    .timeline-content p { color: var(--color-text-secondary); font-size: .95rem; line-height: 1.7; }
+    .timeline-duration { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 100px; background: var(--color-accent-light); color: var(--color-accent); font-size: .8rem; font-weight: 600; }
+
+    .guarantees { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; justify-content: center; }
+    .guarantee-card { text-align: center; padding: 32px 20px; background: var(--color-surface); border-radius: 12px; border: 1px solid var(--color-border); }
+    .guarantee-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+    .guarantee-card p { color: var(--color-text-secondary); font-size: .9rem; }
+
+    @media (max-width: 480px) {
+        .guarantees { grid-template-columns: 1fr; }
+    }
+    @media(max-width:768px) {
+      .timeline { padding-left: 48px; }
+      .timeline::before { left: 18px; }
+      .timeline-marker { left: -48px; width: 36px; height: 36px; }
+      .timeline-num { font-size: .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header"><div class="header__inner container">
+  <button class="theme-toggle" aria-label="Переключить тему"></button>
+  <a href="index.html" class="header__logo"><img src="images/logobd.png" alt="Дом кухни" class="header__logo-img" width="160" height="36" /></a>
+  <nav class="header__nav" id="nav">
+    <a href="portfolio.html" class="header__nav-link">Проекты</a>
+    <a href="process.html" class="header__nav-link active">Этапы</a>
+    <a href="materials.html" class="header__nav-link">Материалы</a>
+    <a href="calculator.html" class="header__nav-link">Калькулятор</a>
+    <a href="reviews.html" class="header__nav-link">Отзывы</a>
+    <a href="contact.html" class="header__nav-link">Контакты</a>
+  </nav>
+  <div class="header__actions">
+    <a href="https://wa.me/375445842233" target="_blank" class="header__social" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+    <a href="https://t.me/domkuhni" target="_blank" class="header__social" aria-label="Telegram"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+      <span class="header__address">г. Гомель, пр-т Ленина 30</span>
+      <a href="tel:+375445842233" class="header__phone">+375 (44) 584-22-33</a>
+    <button class="header__burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</div></header>
+
+<main>
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumbs" style="justify-content:center;margin-bottom:16px">
+        <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span>Этапы работы</span>
+      </div>
+      <h1>Как мы создаём вашу кухню</h1>
+      <p>Прозрачный процесс от замера до установки — вы всегда знаете, что происходит</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-marker active"><span class="timeline-num">1</span></div>
+          <div class="timeline-content">
+            <h3>Встреча с дизайнером</h3>
+            <p>Знакомимся, обсуждаем ваши пожелания, стиль и функциональность будущей кухни. Показываем образцы материалов и фурнитуры, помогаем определиться с направлением дизайна.</p>
+            <span class="timeline-duration">1 день</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-marker"><span class="timeline-num">2</span></div>
+          <div class="timeline-content">
+            <h3>3D-модель</h3>
+            <p>Создаём фотореалистичный 3D-проект с учётом всех ваших пожеланий. Вы увидите, как будет выглядеть кухня до начала производства. Вносим правки до полного утверждения.</p>
+            <span class="timeline-duration">3–5 дней</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-marker"><span class="timeline-num">3</span></div>
+          <div class="timeline-content">
+            <h3>Материалы</h3>
+            <p>Помогаем выбрать фасады, столешницу, фурнитуру и технику под ваш бюджет. Готовим детальную смету с фиксированной стоимостью, которая не изменится.</p>
+            <span class="timeline-duration">2–3 дня</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-marker"><span class="timeline-num">4</span></div>
+          <div class="timeline-content">
+            <h3>Замер</h3>
+            <p>Выезжаем на объект в удобное время, делаем точные замеры помещения с учётом всех коммуникаций и особенностей планировки. Фиксируем каждую деталь для безупречного результата.</p>
+            <span class="timeline-duration">1 день</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-marker"><span class="timeline-num">5</span></div>
+          <div class="timeline-content">
+            <h3>Производство</h3>
+            <p>Изготовление на собственном производстве под постоянным контролем качества. Высылаем фото-отчёты о ходе работ. Все материалы сертифицированы.</p>
+            <span class="timeline-duration">14–30 дней</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-marker"><span class="timeline-num">6</span></div>
+          <div class="timeline-content">
+            <h3>Установка</h3>
+            <p>Профессиональный монтаж, подключение техники и уборка. Вы получаете готовую кухню в день установки. Принимаем работу по акту.</p>
+            <span class="timeline-duration">1–3 дня</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-surface);color:var(--color-text)">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section-title">Гарантии и сертификаты</h2>
+        <p class="section-desc">Ваша кухня защищена на всех этапах</p>
+      </div>
+      <div class="guarantees">
+        <div class="guarantee-card">
+          <div style="margin-bottom:12px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <h3 style="color:var(--color-text)">Официальный договор</h3>
+          <p style="color:var(--color-text-secondary)">Прозрачные условия, фиксированная стоимость</p>
+        </div>
+        <div class="guarantee-card">
+          <div style="margin-bottom:12px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <h3 style="color:var(--color-text)">Гарантия 2 года</h3>
+          <p style="color:var(--color-text-secondary)">На мебель, фурнитуру и монтаж</p>
+        </div>
+        <div class="guarantee-card">
+          <div style="margin-bottom:12px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M12 2v6l3 3"/><path d="M6.5 13.5L3 21l3-1 2 3 2-3 3 1-3.5-7.5"/></svg></div>
+          <h3 style="color:var(--color-text)">Сертификаты качества</h3>
+          <p style="color:var(--color-text-secondary)">Экологичные материалы, европейские стандарты</p>
+        </div>
+        <div class="guarantee-card">
+          <div style="margin-bottom:12px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3 style="color:var(--color-text)">Страхование доставки</h3>
+          <p style="color:var(--color-text-secondary)">Ответственность за целостность изделий</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align:center;display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+      <h2 class="section-title" style="flex:0 0 100%">Готовы начать?</h2>
+      <p class="section-desc" style="margin-bottom:24px;flex:0 0 100%">Оставьте заявку на бесплатный замер — мы перезвоним в течение 30 минут</p>
+      <a href="calculator.html" class="btn btn--lg btn--primary">Рассчитать стоимость</a>
+      <a href="contact.html" class="btn btn--lg btn--outline" style="margin-left:0;border-color:var(--color-border);color:var(--color-text)">Связаться с нами</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer"><div class="container footer__grid">
+  <div class="footer__col">
+    <img src="images/logobd.png" alt="Дом кухни" class="footer__logo" width="140" height="34" loading="lazy" />
+    <p class="footer__about">Индивидуальные кухни под ключ. Собственное производство в Гомеле. 25+ лет опыта.</p>
+    <div class="footer__social">
+              <a href="https://www.instagram.com/gomel_kuhni" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="tel:+375445842233" aria-label="Phone"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer__col">
+    <h3 class="footer__title">Разделы</h4>
+    <nav class="footer__nav">
+      <a href="portfolio.html">Проекты</a>
+      <a href="process.html">Этапы работы</a>
+      <a href="materials.html">Материалы</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="reviews.html">Отзывы</a>
+      <a href="contact.html">Контакты</a>
+    </nav>
+  </div>
+  <div class="footer__col">
+    <h3 class="footer__title">Услуги</h4>
+    <nav class="footer__nav">
+      <a href="process.html">Дизайн-проект</a>
+      <a href="calculator.html">Изготовление кухонь</a>
+      <a href="process.html">Установка под ключ</a>
+      <a href="contact.html">Ремонт и реставрация</a>
+    </nav>
+  </div>
+  <div class="footer__col">
+    <h3 class="footer__title">Контакты</h4>
+    <p class="footer__contact">+375 (44) 584-22-33</p>
+    <p class="footer__contact">+375 (29) 373-84-85</p>
+    <p class="footer__contact">Domkuhny.by@yandex.by</p>
+    <p class="footer__contact">г. Гомель, пр-т Ленина 30</p>
+  </div>
+</div>
+<div class="footer__bottom container">
+  <p>© 2026 Дом кухни. Все права защищены.</p>
+  <div class="footer__legal"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></div>
+</div></footer>
+<script defer src="main.js"></script>
+</body>
+</html>

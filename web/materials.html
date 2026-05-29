@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>" />
+  <title>Материалы и фурнитура — Дом кухни</title>
+  <meta name="description" content="Премиальные материалы для кухонь: фасады МДФ, акрил, Fenix, массив. Столешницы из кварца. Фурнитура Blum, Hettich, Grass." />
+  <meta name="keywords" content="материалы для кухни, фасады для кухни, столешницы, фурнитура blum, акриловые фасады, массив дерева, кухонные гарнитуры" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')</script>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-header { background: var(--color-dark-bg); color: var(--color-dark-text); padding: 120px 0 48px; text-align: center; }
+    [data-theme="light"] .page-header { background: var(--color-surface); color: var(--color-text); }
+    .page-header h1 { font-family: 'Cormorant Garamond',serif; font-size: clamp(2rem,4vw,3rem); margin-bottom: 8px; }
+    .page-header p { color: rgba(255,255,255,.6); }
+    [data-theme="light"] .page-header p { color: var(--color-text-secondary); }
+    .materials-tabs { display: flex; gap: 4px; justify-content: center; margin-bottom: 36px; background: var(--color-border-light); border-radius: 12px; padding: 4px; width: fit-content; margin-left: auto; margin-right: auto; }
+    .materials-tab { padding: 10px 24px; border-radius: 8px; font-weight: 500; font-size: .9rem; color: var(--color-text-secondary); transition: .3s; cursor: pointer; border: none; background: none; font-family: inherit; }
+    .materials-tab.active { background: var(--color-surface); color: var(--color-text); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .materials-content { display: none; }
+    .materials-content.active { display: block; animation: fadeUp .4s ease; }
+    .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .material-card { background: var(--color-surface); border-radius: 12px; padding: 24px; border: 1px solid var(--color-border); transition: .3s; }
+    .material-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .material-visual { height: 120px; border-radius: 8px; margin-bottom: 16px; }
+    .material-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+    .material-card p { color: var(--color-text-secondary); font-size: .85rem; line-height: 1.6; margin-bottom: 12px; }
+    .material-tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: .75rem; font-weight: 600; }
+    .tag-premium { background: var(--color-accent-light); color: var(--color-accent); }
+    .tag-standard { background: var(--color-primary-light); color: var(--color-primary); }
+    .tag-econom { background: var(--color-border-light); color: var(--color-text-secondary); }
+    .tag-elite { background: rgba(200,169,110,.2); color: var(--color-accent-hover); }
+
+    .brands { display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; padding: 32px 0; }
+    .brands span { font-size: 1.4rem; font-weight: 600; color: #9CA3AF; font-family: serif; }
+    @media(max-width:768px) { .materials-grid { grid-template-columns: 1fr 1fr; } .materials-tabs { width: 100%; } .materials-tab { flex: 1; text-align: center; } }
+    @media(max-width:480px) { .materials-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header"><div class="header__inner container">
+  <button class="theme-toggle" aria-label="Переключить тему"></button>
+  <a href="index.html" class="header__logo"><img src="images/logobd.png" alt="Дом кухни" class="header__logo-img" width="160" height="36" /></a>
+  <nav class="header__nav" id="nav">
+    <a href="portfolio.html" class="header__nav-link">Проекты</a>
+    <a href="process.html" class="header__nav-link">Этапы</a>
+    <a href="materials.html" class="header__nav-link active">Материалы</a>
+    <a href="calculator.html" class="header__nav-link">Калькулятор</a>
+    <a href="reviews.html" class="header__nav-link">Отзывы</a>
+    <a href="contact.html" class="header__nav-link">Контакты</a>
+  </nav>
+  <div class="header__actions">
+    <a href="https://wa.me/375445842233" target="_blank" class="header__social" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+    <a href="https://t.me/domkuhni" target="_blank" class="header__social" aria-label="Telegram"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+      <span class="header__address">г. Гомель, пр-т Ленина 30</span>
+      <a href="tel:+375445842233" class="header__phone">+375 (44) 584-22-33</a>
+    <button class="header__burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</div></header>
+
+<main>
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumbs" style="justify-content:center;margin-bottom:16px">
+        <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span>Материалы</span>
+      </div>
+      <h1>Материалы и фурнитура</h1>
+      <p>Только проверенные бренды с официальной гарантией</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="brands">
+        <span>Blum</span><span>Hettich</span><span>Grass</span><span>Caesarstone</span><span>Fenix</span>
+      </div>
+
+      <div class="materials-tabs" id="materialsTabs">
+        <button class="materials-tab active" data-tab="facades">Фасады</button>
+        <button class="materials-tab" data-tab="countertops">Столешницы</button>
+        <button class="materials-tab" data-tab="fittings">Фурнитура</button>
+      </div>
+
+      <div class="materials-content active" data-tab="facades">
+        <div class="materials-grid">
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-cabinet-white.jpg') center/cover;background-color:#e8dcc8"></div><h3>МДФ крашеный</h3><p>Любой цвет RAL, стойкое покрытие, матовый/глянцевый. Рекомендуем для классических и современных интерьеров.</p><span class="material-tag tag-standard">Стандарт</span></div>
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-kitchen-dark.jpg') center/cover;background-color:#2a2a2a"></div><h3>Fenix (суперматовый)</h3><p>Итальянский нано-ламинат. Устойчив к отпечаткам пальцев, царапинам и химическому воздействию. Топ-выбор 2026.</p><span class="material-tag tag-premium">Премиум</span></div>
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-cabinet-modern.jpg') center/cover;background-color:#c9a96e"></div><h3>Акрил глянцевый</h3><p>Глубокий блеск, эффект зеркала, ударопрочный. Идеален для современных интерьеров с островом.</p><span class="material-tag tag-premium">Премиум</span></div>
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-wood.jpg') center/cover;background-color:#8b6f47"></div><h3>Массив дерева</h3><p>Дуб, ясень, орех. Натуральное дерево премиум-класса с ручной обработкой. Срок службы — 50+ лет.</p><span class="material-tag tag-elite">Элит</span></div>
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-mdf-texture.jpg') center/cover;background-color:#8a8a9a"></div><h3>ЛДСП</h3><p>Бюджетное решение с хорошей влагостойкостью. Большой выбор декоров — от дерева до бетона.</p><span class="material-tag tag-econom">Эконом</span></div>
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-furniture.jpg') center/cover;background-color:#8B7355"></div><h3>МДФ пленочный</h3><p>Оптимальное соотношение цены и качества. Влагостойкий, стабильный, большой выбор цветов.</p><span class="material-tag tag-standard">Стандарт</span></div>
+        </div>
+      </div>
+
+      <div class="materials-content" data-tab="countertops">
+        <div class="materials-grid">
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-quartz-stone.jpg') center/cover;background-color:#d4c5b9"></div><h3>Кварцевый агломерат</h3><p>Caesarstone, Samsung. Прочный, бесшовный, термостойкий. Не впитывает влагу и жир. 15+ цветов.</p><span class="material-tag tag-premium">Премиум</span></div>
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-marble.jpg') center/cover;background-color:#5a5a5a"></div><h3>Компакт-плита</h3><p>Влагостойкая, лёгкая, толщина 12 мм. Выдерживает высокие нагрузки. Рекомендуем для небольших кухонь.</p><span class="material-tag tag-standard">Стандарт</span></div>
+          <div class="material-card"><div class="material-visual" style="background:url('images/materials/material-marble.jpg') center/cover;background-color:#a08060"></div><h3>Постформинг</h3><p>Ламинированная HPL-плита. Бюджетное решение с отличной влагостойкостью. Большой выбор декоров.</p><span class="material-tag tag-econom">Эконом</span></div>
+        </div>
+      </div>
+
+      <div class="materials-content" data-tab="fittings">
+        <div class="materials-grid">
+          <div class="material-card"><div class="material-visual" style="background:linear-gradient(135deg,#c0c0c0,#a0a0a0)"></div><h3>Blum (Австрия)</h3><p>Плавное закрывание, системы хранения, сервис на 20+ лет. Легендарное качество. Устанавливаем на все премиум-проекты.</p><span class="material-tag tag-premium">Премиум</span></div>
+          <div class="material-card"><div class="material-visual" style="background:linear-gradient(135deg,#b8b0a0,#a09080)"></div><h3>Hettich (Германия)</h3><p>Надёжные направляющие, петли, подъёмные механизмы. Немецкая точность и долговечность.</p><span class="material-tag tag-premium">Премиум</span></div>
+          <div class="material-card"><div class="material-visual" style="background:linear-gradient(135deg,#d0c8b8,#c0b8a8)"></div><h3>Grass (Австрия)</h3><p>Эргономичные системы выдвижения. Плавный ход, динамическая нагрузка до 70 кг.</p><span class="material-tag tag-standard">Стандарт+</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark" style="text-align:center">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom:16px">Не знаете, что выбрать?</h2>
+      <p style="margin-bottom:24px">Наш дизайнер поможет подобрать материалы под ваш бюджет и стиль</p>
+      <a href="calculator.html" class="btn btn--lg btn--primary">Получить консультацию</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer"><div class="container footer__grid">
+  <div class="footer__col">
+    <img src="images/logobd.png" alt="Дом кухни" class="footer__logo" width="140" height="34" loading="lazy" />
+    <p class="footer__about">Индивидуальные кухни под ключ. Собственное производство в Гомеле. 25+ лет опыта.</p>
+    <div class="footer__social">
+              <a href="https://www.instagram.com/gomel_kuhni" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="tel:+375445842233" aria-label="Phone"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer__col">
+    <h3 class="footer__title">Разделы</h4>
+    <nav class="footer__nav">
+      <a href="portfolio.html">Проекты</a>
+      <a href="process.html">Этапы работы</a>
+      <a href="materials.html">Материалы</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="reviews.html">Отзывы</a>
+      <a href="contact.html">Контакты</a>
+    </nav>
+  </div>
+  <div class="footer__col">
+    <h3 class="footer__title">Услуги</h4>
+    <nav class="footer__nav">
+      <a href="process.html">Дизайн-проект</a>
+      <a href="calculator.html">Изготовление кухонь</a>
+      <a href="process.html">Установка под ключ</a>
+      <a href="contact.html">Ремонт и реставрация</a>
+    </nav>
+  </div>
+  <div class="footer__col">
+    <h3 class="footer__title">Контакты</h4>
+    <p class="footer__contact">+375 (44) 584-22-33</p>
+    <p class="footer__contact">+375 (29) 373-84-85</p>
+    <p class="footer__contact">Domkuhny.by@yandex.by</p>
+    <p class="footer__contact">г. Гомель, пр-т Ленина 30</p>
+  </div>
+</div>
+<div class="footer__bottom container">
+  <p>© 2026 Дом кухни. Все права защищены.</p>
+  <div class="footer__legal"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></div>
+</div></footer>
+
+<script defer src="main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.materials-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.materials-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.materials-content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`.materials-content[data-tab="${tab.dataset.tab}"]`).classList.add('active');
+    });
+  });
+});
+</script>
+</body>
+</html>
