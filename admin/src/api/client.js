@@ -45,4 +45,8 @@ export const exportOrders = (filters) =>
 export const getStats = () =>
   api.get('/admin/stats');
 
+// Analytics
+export const getAnalytics = () =>
+  api.get('/admin/analytics');
+
 export default api;

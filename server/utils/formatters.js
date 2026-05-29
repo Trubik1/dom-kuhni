@@ -1,6 +1,6 @@
 export function formatOrderText(order) {
   return [
-    `🆕 <b>Новая заявка #${order.orderId}</b>`,
+    `🆕 <b>Заявка #${order.orderId}</b>`,
     ``,
     `👤 <b>Имя:</b> ${escapeHtml(order.name)}`,
     `📞 <b>Телефон:</b> ${escapeHtml(order.phone)}`,
@@ -8,9 +8,12 @@ export function formatOrderText(order) {
     order.comment ? `💬 <b>Комментарий:</b> ${escapeHtml(order.comment)}` : null,
     `🍳 <b>Тип кухни:</b> ${escapeHtml(order.kitchenType || 'Не указан')}`,
     `💰 <b>Бюджет:</b> ${escapeHtml(order.budget || 'Не указан')}`,
-    `🌐 <b>Источник:</b> ${escapeHtml(order.source || 'Сайт')}`,
     `🕐 <b>Дата:</b> ${new Date(order.createdAt).toLocaleString('ru-RU')}`,
   ].filter(Boolean).join('\n');
+}
+
+export function formatOrderAlert(order) {
+  return `🔔 <b>Новая заявка!</b>\n👤 ${escapeHtml(order.name)}  |  📞 ${escapeHtml(order.phone)}`;
 }
 
 export function formatOrderShort(order) {
@@ -45,5 +48,14 @@ export function getInlineKeyboard(orderId) {
         { text: '💬 WhatsApp', callback_data: `whatsapp_${orderId}` },
       ],
     ],
+  };
+}
+
+export function getMainKeyboard() {
+  return {
+    keyboard: [
+      [{ text: '📊 Статистика' }, { text: '🆕 Новые заявки' }],
+    ],
+    resize_keyboard: true,
   };
 }

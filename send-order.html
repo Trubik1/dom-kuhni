@@ -424,6 +424,25 @@
             box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.2);
         }
 
+        .option-card .icon-box {
+            width: 100%;
+            height: 100px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .option-card .color-box {
+            width: 100%;
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
         .phone-input {
             font-family: monospace;
             font-size: 1.1rem;
@@ -893,7 +912,7 @@
                 </div>
             </div>
             <div class="footer__col">
-                <h3 class="footer__title">Разделы</h4>
+                <h3 class="footer__title">Разделы</h3>
                 <nav class="footer__nav">
                     <a href="portfolio.html">Проекты</a>
                     <a href="process.html">Этапы</a>
@@ -902,7 +921,7 @@
                 </nav>
             </div>
             <div class="footer__col">
-                <h3 class="footer__title">Услуги</h4>
+                <h3 class="footer__title">Услуги</h3>
                 <nav class="footer__nav">
                     <a href="calculator.html">Калькулятор</a>
                     <a href="catalog.html">Каталог</a>
@@ -911,7 +930,7 @@
                 </nav>
             </div>
             <div class="footer__col">
-                <h3 class="footer__title">Контакты</h4>
+                <h3 class="footer__title">Контакты</h3>
                 <nav class="footer__nav">
                     <a href="tel:+375445842233">+375 (44) 584-22-33</a>
                     <a href="mailto:info@domkuhni.by">info@domkuhni.by</a>
@@ -971,8 +990,38 @@
             });
         });
 
-        phoneInput.addEventListener('input', (e) => { calcData.phone = e.target.value; validateStep(); });
-        nameInput.addEventListener('input', (e) => calcData.name = e.target.value);
+        phoneInput.addEventListener('input', (e) => {
+            const pfix = '+375 ';
+            let pos = e.target.selectionStart;
+            let digits = e.target.value.replace(/\D/g, '');
+            if (digits.startsWith('375')) digits = digits.slice(3);
+            else if (digits.startsWith('80')) digits = digits.slice(1);
+            digits = digits.slice(0, 9);
+            let formatted = pfix;
+            if (digits.length > 0) formatted += '(' + digits.slice(0, 2);
+            if (digits.length >= 2) formatted += ') ' + digits.slice(2, 5);
+            if (digits.length >= 5) formatted += '-' + digits.slice(5, 7);
+            if (digits.length >= 7) formatted += '-' + digits.slice(7, 9);
+            e.target.value = formatted;
+            pos = Math.max(pfix.length, pos);
+            e.target.selectionStart = e.target.selectionEnd = Math.min(pos, formatted.length);
+            calcData.phone = e.target.value;
+            validateStep();
+        });
+        phoneInput.addEventListener('keydown', (e) => {
+            if ((e.key === 'Backspace' && e.target.selectionStart <= 5) ||
+                (e.key === 'Delete' && e.target.selectionStart < 5)) {
+                e.preventDefault();
+            }
+        });
+        phoneInput.addEventListener('focus', () => {
+            if (!phoneInput.value.startsWith('+375 ')) phoneInput.value = '+375 ';
+            setTimeout(() => { phoneInput.selectionStart = phoneInput.selectionEnd = 5; }, 0);
+        });
+        nameInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^а-яА-ЯёЁa-zA-Z\s\-]/g, '');
+            calcData.name = e.target.value;
+        });
         emailInput.addEventListener('input', (e) => calcData.email = e.target.value);
         commentInput.addEventListener('input', (e) => calcData.comment = e.target.value);
 
@@ -1012,8 +1061,13 @@
             const formData = { ...calcData, timestamp: new Date().toLocaleString('ru-RU') };
             try {
                 const r = await fetch('https://formspree.io/f/xnqevozy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
-                if (!r.ok && r.status !== 200) { alert('Ошибка отправки. Попробуйте позже.'); btn.disabled = false; btn.textContent = '📩 Отправить заявку'; return; }
-            } catch (_) {}
+                if (!r.ok) { alert('Ошибка отправки. Попробуйте позже.'); btn.disabled = false; btn.textContent = '📩 Отправить заявку'; return; }
+            } catch (_) {
+                alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+                btn.disabled = false;
+                btn.textContent = '📩 Отправить заявку';
+                return;
+            }
             document.querySelector('.calc-wrapper').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" style="margin:0 auto 20px;display:block"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h2 style="font-family:\'Cormorant Garamond\',serif;font-size:2rem;margin-bottom:12px">Спасибо за заявку!</h2><p style="color:var(--text-secondary);font-size:1.1rem">Перезвоним в течение 30 минут</p></div>';
         }
 

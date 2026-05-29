@@ -3,18 +3,20 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, ArcElement, T
 import { Bar, Doughnut } from 'react-chartjs-2';
 import StatsCards from '../components/StatsCards';
 import useSocket from '../hooks/useSocket';
-import { getStats } from '../api/client';
+import { getStats, getAnalytics } from '../api/client';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend);
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
+  const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchStats = async () => {
+  const fetchAll = async () => {
     try {
-      const { data } = await getStats();
-      setStats(data.data);
+      const [s, a] = await Promise.all([getStats(), getAnalytics()]);
+      setStats(s.data.data);
+      setAnalytics(a.data.data);
     } catch (err) {
       console.error(err);
     } finally {
@@ -22,11 +24,11 @@ export default function Dashboard() {
     }
   };
 
-  useEffect(() => { fetchStats(); }, []);
+  useEffect(() => { fetchAll(); }, []);
 
   useSocket({
-    onNewOrder: fetchStats,
-    onOrderUpdated: fetchStats,
+    onNewOrder: fetchAll,
+    onOrderUpdated: fetchAll,
   });
 
   if (loading) {
@@ -61,6 +63,28 @@ export default function Dashboard() {
 
       <StatsCards />
 
+      {/* Пульс посещаемости */}
+      {analytics && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+            <div className="text-2xl font-bold text-gray-900 dark:text-white">{analytics.today}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">👁 Сегодня</div>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+            <div className="text-2xl font-bold text-gray-900 dark:text-white">{analytics.week}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">📅 За неделю</div>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+            <div className="text-2xl font-bold text-gray-900 dark:text-white">{analytics.total}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">📊 Всего</div>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+            <div className="text-2xl font-bold text-green-600 dark:text-green-400">{analytics.activeNow}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">🔥 Сейчас на сайте</div>
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Заявки по дням (30 дней)</h3>
@@ -72,6 +96,39 @@ export default function Dashboard() {
           {statusChart && <Doughnut data={statusChart} options={{ responsive: true, plugins: { legend: { position: 'bottom' } } }} />}
         </div>
       </div>
+
+      {analytics?.topPages?.length > 0 && (
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">📄 Популярные страницы</h3>
+            <div className="space-y-2">
+              {analytics.topPages.map((p, i) => (
+                <div key={p.page} className="flex items-center justify-between py-1.5">
+                  <span className="text-sm text-gray-600 dark:text-gray-300">
+                    <span className="text-gray-400 mr-2">{i + 1}.</span>
+                    {p.page}
+                  </span>
+                  <span className="text-sm font-bold text-gray-900 dark:text-white">{p.count} 👁</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {analytics.referrers?.length > 0 && (
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">🔗 Источники трафика</h3>
+              <div className="space-y-2">
+                {analytics.referrers.map((r) => (
+                  <div key={r.source} className="flex items-center justify-between py-1.5">
+                    <span className="text-sm text-gray-600 dark:text-gray-300">{r.source}</span>
+                    <span className="text-sm font-bold text-gray-900 dark:text-white">{r.count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {stats?.byType?.length > 0 && (
         <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">

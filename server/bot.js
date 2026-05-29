@@ -14,7 +14,7 @@ import Order from './models/Order.js';
 import logger from './utils/logger.js';
 import {
   formatOrderText, formatOrderShort, statusEmoji,
-  getInlineKeyboard, escapeHtml,
+  getInlineKeyboard, getMainKeyboard, escapeHtml,
 } from './utils/formatters.js';
 
 // ====== Конфигурация ======
@@ -65,7 +65,6 @@ let bot = null;
 
 if (BOT_TOKEN) {
   if (NODE_ENV === 'production') {
-    // Webhook mode
     bot = new TelegramBot(BOT_TOKEN);
     bot.setWebHook(`${BASE_URL}/webhook/${BOT_TOKEN}`);
     app.post(`/webhook/${BOT_TOKEN}`, (req, res) => {
@@ -73,30 +72,36 @@ if (BOT_TOKEN) {
       res.sendStatus(200);
     });
   } else {
-    // Polling mode (dev)
     bot = new TelegramBot(BOT_TOKEN, { polling: true });
   }
 
   app.locals.bot = bot;
 
-  // ====== Команды бота ======
+  // Устанавливаем команды
+  bot.setMyCommands([
+    { command: 'start', description: 'Главное меню' },
+    { command: 'stats', description: '📊 Статистика' },
+    { command: 'new', description: '🆕 Новые заявки' },
+  ]);
 
   // /start
   bot.onText(/\/start/, async (msg) => {
     if (!isAdmin(msg.from?.id)) {
       return bot.sendMessage(msg.chat.id, '⛔ Доступ запрещён');
     }
-    const cmds = [
-      '👋 Привет! Я бот заявок "Дом кухни"',
+    const text = [
+      '👋 <b>Привет! Я бот заявок "Дом кухни"</b>',
       '',
-      '/new — новые заявки',
-      '/stats — статистика',
-      '/export_csv — экспорт в CSV',
+      '🆕 <b>Новые заявки</b> — показать новые',
+      '📊 <b>Статистика</b> — общая статистика',
     ].join('\n');
-    await bot.sendMessage(msg.chat.id, cmds);
+    await bot.sendMessage(msg.chat.id, text, {
+      parse_mode: 'HTML',
+      reply_markup: getMainKeyboard(),
+    });
   });
 
-  // /new — показать новые заявки
+  // /new
   bot.onText(/\/new/, async (msg) => {
     if (!isAdmin(msg.from?.id)) return;
     try {
@@ -137,7 +142,7 @@ if (BOT_TOKEN) {
         '',
       ];
       byStatus.forEach(s => {
-        lines.push(`${statusEmoji(s._id)} ${statusLabel(s._id)}: <b>${s.count}</b>`);
+        lines.push(`${statusEmoji(s._id)} ${s._id}: <b>${s.count}</b>`);
       });
 
       await bot.sendMessage(msg.chat.id, lines.join('\n'), { parse_mode: 'HTML' });
@@ -147,23 +152,54 @@ if (BOT_TOKEN) {
     }
   });
 
-  // /export_csv
-  bot.onText(/\/export_csv/, async (msg) => {
-    if (!isAdmin(msg.from?.id)) return;
-    try {
-      const orders = await Order.find({}).sort({ createdAt: -1 }).lean();
-      const header = 'ID,Имя,Телефон,Email,Комментарий,Тип кухни,Бюджет,Источник,Статус,Комментарий менеджера,Дата\n';
-      const rows = orders.map(o =>
-        `"${o.orderId}","${o.name}","${o.phone}","${o.email || ''}","${(o.comment || '').replace(/"/g, '""')}","${o.kitchenType || ''}","${o.budget || ''}","${o.source || ''}","${o.status}","${(o.managerComment || '').replace(/"/g, '""')}","${new Date(o.createdAt).toISOString()}"`
-      ).join('\n');
+  // Обработка текстовых кнопок клавиатуры
+  bot.on('message', async (msg) => {
+    if (msg.text?.startsWith('/')) return; // команды обрабатываются выше
+    if (!msg.text || !isAdmin(msg.from?.id)) return;
 
-      await bot.sendDocument(msg.chat.id, Buffer.from('\uFEFF' + header + rows, 'utf-8'), {
-        filename: `orders-${Date.now()}.csv`,
-        caption: '📊 Экспорт заявок',
-      });
-    } catch (err) {
-      logger.error('/export_csv error', { error: err.message });
-      bot.sendMessage(msg.chat.id, '❌ Ошибка экспорта');
+    const chatId = msg.chat.id;
+
+    if (msg.text === '📊 Статистика') {
+      try {
+        const [total, byStatus, today] = await Promise.all([
+          Order.countDocuments(),
+          Order.aggregate([{ $group: { _id: '$status', count: { $sum: 1 } } }]),
+          Order.countDocuments({
+            createdAt: { $gte: new Date(new Date().setHours(0, 0, 0, 0)) },
+          }),
+        ]);
+        const lines = [
+          '📊 <b>Статистика</b>',
+          '',
+          `📦 Всего: <b>${total}</b>`,
+          `📅 Сегодня: <b>${today}</b>`,
+          '',
+        ];
+        byStatus.forEach(s => {
+          lines.push(`${statusEmoji(s._id)} ${s._id}: <b>${s.count}</b>`);
+        });
+        await bot.sendMessage(chatId, lines.join('\n'), { parse_mode: 'HTML' });
+      } catch (err) {
+        logger.error('Stats button error', { error: err.message });
+        bot.sendMessage(chatId, '❌ Ошибка статистики');
+      }
+    } else if (msg.text === '🆕 Новые заявки') {
+      try {
+        const orders = await Order.find({ status: 'new' }).sort({ createdAt: -1 }).limit(10);
+        if (!orders.length) {
+          return bot.sendMessage(chatId, '✅ Новых заявок нет');
+        }
+        for (const order of orders) {
+          await bot.sendMessage(
+            chatId,
+            formatOrderText(order),
+            { parse_mode: 'HTML', reply_markup: getInlineKeyboard(order.orderId) }
+          );
+        }
+      } catch (err) {
+        logger.error('New button error', { error: err.message });
+        bot.sendMessage(chatId, '❌ Ошибка загрузки заявок');
+      }
     }
   });
 
@@ -228,7 +264,6 @@ if (BOT_TOKEN) {
     }
   });
 
-  // Обработка ошибок Telegram
   bot.on('polling_error', (err) => {
     logger.error('Telegram polling error', { error: err.message });
   });

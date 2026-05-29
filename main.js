@@ -19,39 +19,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Format phone helper
+  // ====== Phone inputs: фиксированный префикс +375 ======
+  const PREFIX = '+375 ';
+
   function formatPhone(input) {
-    let v = input.value.replace(/\D/g, '');
-    if (v.startsWith('375')) v = v.slice(3);
-    else if (v.startsWith('80')) v = v.slice(1);
-    const prevLen = v.length;
-    let f = '+375';
-    if (v.length > 0) f += ' (' + v.slice(0, 2);
-    if (v.length >= 2) f += ') ' + v.slice(2, 5);
-    if (v.length >= 5) f += '-' + v.slice(5, 7);
-    if (v.length >= 7) f += '-' + v.slice(7, 9);
-    if (input.value !== f) input.value = f;
+    let pos = input.selectionStart;
+    let digits = input.value.replace(/\D/g, '');
+    if (digits.startsWith('375')) digits = digits.slice(3);
+    else if (digits.startsWith('80')) digits = digits.slice(1);
+    digits = digits.slice(0, 9);
+
+    let formatted = PREFIX;
+    if (digits.length > 0) formatted += '(' + digits.slice(0, 2);
+    if (digits.length >= 2) formatted += ') ' + digits.slice(2, 5);
+    if (digits.length >= 5) formatted += '-' + digits.slice(5, 7);
+    if (digits.length >= 7) formatted += '-' + digits.slice(7, 9);
+
+    input.value = formatted;
+    pos = Math.max(PREFIX.length, pos);
+    input.selectionStart = input.selectionEnd = Math.min(pos, formatted.length);
   }
 
-  // Phone inputs
   document.querySelectorAll('input[type="tel"]').forEach(el => {
-    const separators = ['-', ' ', '(', ')'];
-    el.addEventListener('keydown', e => {
-      if (e.key === 'Backspace') {
-        const pos = el.selectionStart;
-        if (pos > 0 && separators.includes(el.value[pos - 1])) {
-          e.preventDefault();
-          const newVal = el.value.slice(0, pos - 1) + el.value.slice(pos);
-          el.value = newVal;
-          el.selectionStart = el.selectionEnd = pos - 1;
-          formatPhone(el);
-        }
+    if (!el.value || el.value === '+') el.value = PREFIX;
+
+    el.addEventListener('focus', function () {
+      if (this.value === PREFIX || this.value.length < 5) this.value = PREFIX;
+      setTimeout(() => { this.selectionStart = this.selectionEnd = PREFIX.length; }, 0);
+    });
+
+    el.addEventListener('input', function () { formatPhone(this); });
+
+    el.addEventListener('keydown', function (e) {
+      if ((e.key === 'Backspace' && this.selectionStart <= PREFIX.length) ||
+          (e.key === 'Delete' && this.selectionStart < PREFIX.length)) {
+        e.preventDefault();
+      }
+      if (e.key === 'Home') {
+        setTimeout(() => { this.selectionStart = this.selectionEnd = PREFIX.length; }, 0);
       }
     });
-    el.addEventListener('input', e => {
-      const pos = el.selectionStart;
-      formatPhone(e.target);
-      if (el.selectionStart !== undefined) el.selectionStart = el.selectionEnd = Math.min(pos, el.value.length);
+  });
+
+  // ====== Name inputs: запрет цифр и спецсимволов ======
+  document.querySelectorAll('input[type="text"]').forEach(el => {
+    const isName = (el.id || '').toLowerCase().includes('name') ||
+      (el.placeholder || '').toLowerCase().includes('обращаться') ||
+      (el.placeholder || '').toLowerCase().includes('имя');
+    if (!isName) return;
+    el.addEventListener('input', function () {
+      this.value = this.value.replace(/[^а-яА-ЯёЁa-zA-Z\s\-]/g, '');
     });
   });
 
@@ -196,6 +213,63 @@ document.addEventListener('DOMContentLoaded', () => {
   // Dynamic copyright year
   document.querySelectorAll('.footer__bottom p').forEach(el => {
     el.textContent = el.textContent.replace(/\d{4}/, new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Minsk' })).getFullYear());
+  });
+
+  // ====== Аналитика просмотров ======
+  const API_ANALYTICS = 'https://api-production-d59b.up.railway.app/api/analytics';
+
+  function getSessionId() {
+    let sid = sessionStorage.getItem('analytics_sid');
+    if (!sid) {
+      sid = 's_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+      sessionStorage.setItem('analytics_sid', sid);
+    }
+    return sid;
+  }
+
+  function sendPageview() {
+    const utm = getUTM();
+    fetch(`${API_ANALYTICS}/pageview`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        page: location.pathname,
+        referrer: document.referrer || '',
+        utm_source: utm.utm_source || '',
+        utm_medium: utm.utm_medium || '',
+        sessionId: getSessionId(),
+      }),
+    }).catch(() => {});
+  }
+
+  let heartbeatTimer;
+
+  function startHeartbeat() {
+    const sid = getSessionId();
+    const start = Date.now();
+    heartbeatTimer = setInterval(() => {
+      const duration = Math.round((Date.now() - start) / 1000);
+      fetch(`${API_ANALYTICS}/heartbeat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: sid, duration }),
+      }).catch(() => {});
+    }, 15000);
+  }
+
+  function stopHeartbeat() {
+    if (heartbeatTimer) {
+      clearInterval(heartbeatTimer);
+      heartbeatTimer = null;
+    }
+  }
+
+  sendPageview();
+  startHeartbeat();
+  window.addEventListener('beforeunload', () => {
+    stopHeartbeat();
+    const duration = Math.round((Date.now() - parseInt(getSessionId().split('_')[1])) / 1000);
+    navigator.sendBeacon(`${API_ANALYTICS}/heartbeat`, JSON.stringify({ sessionId: getSessionId(), duration }));
   });
 
   console.log('[Дом кухни] Site initialized');

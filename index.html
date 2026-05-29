@@ -26,9 +26,8 @@
 
   <link rel="preload" href="images/logobd-148.webp" as="image" type="image/webp" fetchpriority="high" />
   <link rel="preload" href="images/kitchen-02-741.webp" as="image" type="image/webp" fetchpriority="high" />
-  <link rel="preload" as="style" href="styles.css" />
 
-  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')</script>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')}catch(e){}</script>
   <style>
     /* === CRITICAL: above-fold === */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -335,15 +334,15 @@
       </div>
       <form class="contact-form" id="homeForm" style="max-width:520px;margin:0 auto;background:var(--color-surface);padding:32px;border-radius:16px;border:1px solid var(--color-border);box-shadow:0 4px 12px rgba(0,0,0,.08)" novalidate>
         <div style="margin-bottom:20px">
-          <label style="display:block;font-weight:500;margin-bottom:6px;font-size:.9rem">Ваше имя</label>
+          <label for="homeName" style="display:block;font-weight:500;margin-bottom:6px;font-size:.9rem">Ваше имя</label>
           <input type="text" id="homeName" placeholder="Как к вам обращаться?" pattern="[A-Za-zА-Яа-яЁё\s\-]+" oninput="this.value=this.value.replace(/[^A-Za-zА-Яа-яЁё\s\-]/g,'')" style="width:100%;padding:12px 16px;font-size:1rem;border:2px solid var(--color-border);border-radius:8px;outline:none;transition:.3s" />
         </div>
         <div style="margin-bottom:20px">
-          <label style="display:block;font-weight:500;margin-bottom:6px;font-size:.9rem">Телефон *</label>
+          <label for="homePhone" style="display:block;font-weight:500;margin-bottom:6px;font-size:.9rem">Телефон *</label>
           <input type="tel" id="homePhone" placeholder="+375 (__) ___-__-__" required style="width:100%;padding:12px 16px;font-size:1rem;border:2px solid var(--color-border);border-radius:8px;outline:none;transition:.3s" />
         </div>
         <div style="margin-bottom:20px">
-          <label style="display:block;font-weight:500;margin-bottom:6px;font-size:.9rem">Комментарий</label>
+          <label for="homeComment" style="display:block;font-weight:500;margin-bottom:6px;font-size:.9rem">Комментарий</label>
           <textarea id="homeComment" rows="3" placeholder="Тип кухни, площадь, пожелания..." style="width:100%;padding:12px 16px;font-size:1rem;border:2px solid var(--color-border);border-radius:8px;outline:none;transition:.3s;resize:vertical;min-height:80px;font-family:inherit"></textarea>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px">

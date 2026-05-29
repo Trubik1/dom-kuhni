@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import Order from '../models/Order.js';
+import PageView from '../models/PageView.js';
 import { validateOrder, validateStatusUpdate } from '../middleware/validation.js';
 import { emitNewOrder, emitOrderUpdated } from '../socket.js';
 import logger from '../utils/logger.js';
-import { formatOrderText, getInlineKeyboard } from '../utils/formatters.js';
+import { formatOrderText, formatOrderAlert, getInlineKeyboard } from '../utils/formatters.js';
 
 const router = Router();
 
@@ -16,12 +17,15 @@ router.post('/submit-order', validateOrder, async (req, res) => {
       name, phone, email, comment, kitchenType, budget, source,
     });
 
-    // Отправка в Telegram
+    // Отправка в Telegram (два сообщения)
     const bot = req.app.locals.bot;
     const notifyChatId = process.env.GROUP_CHAT_ID || process.env.ADMIN_CHAT_ID;
 
     if (bot && notifyChatId) {
       try {
+        // 1. Короткий алерт
+        await bot.sendMessage(notifyChatId, formatOrderAlert(order), { parse_mode: 'HTML' });
+        // 2. Детали + кнопки
         const sent = await bot.sendMessage(
           notifyChatId,
           formatOrderText(order),
@@ -169,6 +173,98 @@ router.get('/admin/stats', async (req, res) => {
   }
 });
 
+// GET /api/admin/analytics — статистика просмотров
+router.get('/admin/analytics', async (req, res) => {
+  try {
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const weekStart = new Date(todayStart);
+    weekStart.setDate(weekStart.getDate() - 6);
+
+    const [today, week, total, topPages, referrers, activeNow] = await Promise.all([
+      PageView.countDocuments({ createdAt: { $gte: todayStart } }),
+      PageView.countDocuments({ createdAt: { $gte: weekStart } }),
+      PageView.countDocuments(),
+      PageView.aggregate([
+        { $group: { _id: '$page', count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+        { $limit: 10 },
+      ]),
+      PageView.aggregate([
+        { $match: { referrer: { $ne: '' } } },
+        { $group: { _id: '$referrer', count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+        { $limit: 5 },
+      ]),
+      PageView.getActiveNow(),
+    ]);
+
+    res.json({
+      success: true,
+      data: {
+        today,
+        week,
+        total,
+        activeNow: activeNow.length,
+        topPages: topPages.map(p => ({ page: p._id, count: p.count })),
+        referrers: referrers.map(r => ({ source: r._id, count: r.count })),
+      },
+    });
+  } catch (err) {
+    logger.error('Analytics error', { error: err.message });
+    res.status(500).json({ success: false, error: 'Ошибка сервера' });
+  }
+});
+
+// POST /api/analytics/pageview — запись просмотра
+router.post('/analytics/pageview', async (req, res) => {
+  try {
+    const { page, referrer, utm_source, utm_medium, sessionId } = req.body;
+    if (!page || !sessionId) {
+      return res.status(400).json({ success: false, error: 'Missing page or sessionId' });
+    }
+
+    const ua = req.headers['user-agent'] || '';
+    const device = /mobile|android|iphone|ipad/i.test(ua) ? 'mobile' : 'desktop';
+    const ipHash = PageView.hashIp(req.ip);
+
+    await PageView.create({
+      sessionId,
+      page,
+      referrer: referrer || '',
+      utm_source: utm_source || '',
+      utm_medium: utm_medium || '',
+      device,
+      ipHash,
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    logger.error('Pageview error', { error: err.message });
+    res.status(500).json({ success: false, error: 'Ошибка сервера' });
+  }
+});
+
+// POST /api/analytics/heartbeat — обновление длительности сессии
+router.post('/analytics/heartbeat', async (req, res) => {
+  try {
+    const { sessionId, duration } = req.body;
+    if (!sessionId || duration == null) {
+      return res.status(400).json({ success: false, error: 'Missing sessionId or duration' });
+    }
+
+    await PageView.updateMany(
+      { sessionId },
+      { $set: { duration, updatedAt: new Date() } }
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    logger.error('Heartbeat error', { error: err.message });
+    res.status(500).json({ success: false, error: 'Ошибка сервера' });
+  }
+});
+
 // POST /api/admin/orders/export — экспорт CSV
 router.post('/admin/orders/export', async (req, res) => {
   try {
@@ -183,9 +279,9 @@ router.post('/admin/orders/export', async (req, res) => {
 
     const orders = await Order.find(filter).sort({ createdAt: -1 }).lean();
 
-    const header = 'ID,Имя,Телефон,Email,Комментарий,Тип кухни,Бюджет,Источник,Статус,Комментарий менеджера,Дата\n';
+    const header = 'ID,Имя,Телефон,Email,Комментарий,Тип кухни,Бюджет,Статус,Комментарий менеджера,Дата\n';
     const rows = orders.map(o =>
-      `"${o.orderId}","${o.name}","${o.phone}","${o.email || ''}","${(o.comment || '').replace(/"/g, '""')}","${o.kitchenType || ''}","${o.budget || ''}","${o.source || ''}","${o.status}","${(o.managerComment || '').replace(/"/g, '""')}","${new Date(o.createdAt).toISOString()}"`
+      `"${o.orderId}","${o.name}","${o.phone}","${o.email || ''}","${(o.comment || '').replace(/"/g, '""')}","${o.kitchenType || ''}","${o.budget || ''}","${o.status}","${(o.managerComment || '').replace(/"/g, '""')}","${new Date(o.createdAt).toISOString()}"`
     ).join('\n');
 
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');

@@ -958,7 +958,7 @@
             </div>
         </div>
         <div class="footer__col">
-            <h3 class="footer__title">Разделы</h4>
+            <h3 class="footer__title">Разделы</h3>
             <nav class="footer__nav">
                 <a href="portfolio.html">Проекты</a>
                 <a href="process.html">Этапы</a>
@@ -967,7 +967,7 @@
             </nav>
         </div>
         <div class="footer__col">
-            <h3 class="footer__title">Услуги</h4>
+            <h3 class="footer__title">Услуги</h3>
             <nav class="footer__nav">
                 <a href="calculator.html">Калькулятор</a>
                 <a href="catalog.html">Каталог</a>
@@ -976,7 +976,7 @@
             </nav>
         </div>
         <div class="footer__col">
-            <h3 class="footer__title">Контакты</h4>
+            <h3 class="footer__title">Контакты</h3>
             <nav class="footer__nav">
                 <a href="tel:+375445842233">+375 (44) 584-22-33</a>
                 <a href="mailto:info@domkuhni.by">info@domkuhni.by</a>
@@ -1148,22 +1148,46 @@
             validateStep();
         });
 
-        nameInput.addEventListener('input', (e) => updateCalcData('name', e.target.value));
+        nameInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^а-яА-ЯёЁa-zA-Z\s\-]/g, '');
+            updateCalcData('name', e.target.value);
+        });
+
+        modalName.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^а-яА-ЯёЁa-zA-Z\s\-]/g, '');
+        });
+
+        modalPhone.addEventListener('input', () => formatPhone(modalPhone));
+        modalPhone.addEventListener('keydown', (e) => {
+            if ((e.key === 'Backspace' && modalPhone.selectionStart <= 5) ||
+                (e.key === 'Delete' && modalPhone.selectionStart < 5)) {
+                e.preventDefault();
+            }
+        });
+        modalPhone.addEventListener('focus', () => {
+            if (!modalPhone.value.startsWith('+375 ')) modalPhone.value = '+375 ';
+            setTimeout(() => { modalPhone.selectionStart = modalPhone.selectionEnd = 5; }, 0);
+        });
         emailInput.addEventListener('input', (e) => updateCalcData('email', e.target.value));
         commentInput.addEventListener('input', (e) => updateCalcData('comment', e.target.value));
 
         function formatPhone(input) {
-            let value = input.value.replace(/\D/g, '');
-            if (value.startsWith('375')) value = value.slice(3);
-            else if (value.startsWith('80')) value = value.slice(1);
+            const pfix = '+375 ';
+            let pos = input.selectionStart;
+            let digits = input.value.replace(/\D/g, '');
+            if (digits.startsWith('375')) digits = digits.slice(3);
+            else if (digits.startsWith('80')) digits = digits.slice(1);
+            digits = digits.slice(0, 9);
 
-            let formattedValue = '+375';
-            if (value.length > 0) formattedValue += ' (' + value.slice(0, 2);
-            if (value.length >= 2) formattedValue += ') ' + value.slice(2, 5);
-            if (value.length >= 5) formattedValue += '-' + value.slice(5, 7);
-            if (value.length >= 7) formattedValue += '-' + value.slice(7, 9);
+            let formatted = pfix;
+            if (digits.length > 0) formatted += '(' + digits.slice(0, 2);
+            if (digits.length >= 2) formatted += ') ' + digits.slice(2, 5);
+            if (digits.length >= 5) formatted += '-' + digits.slice(5, 7);
+            if (digits.length >= 7) formatted += '-' + digits.slice(7, 9);
 
-            input.value = formattedValue;
+            input.value = formatted;
+            pos = Math.max(pfix.length, pos);
+            input.selectionStart = input.selectionEnd = Math.min(pos, formatted.length);
         }
 
         function updateAreaDisplay() {
@@ -1229,7 +1253,8 @@
             <div class="result-item"><span class="result-label">Бюджет:</span><span class="result-value">${getBudgetName()}</span></div>
             <div class="result-item"><span class="result-label">Рассрочка:</span><span class="result-value">${getInstallmentName()}</span></div>
         `;
-            modalPhone.value = calcData.phone;
+            modalPhone.value = calcData.phone || '+375 ';
+            if (!modalPhone.value.startsWith('+375 ')) modalPhone.value = '+375 ';
             modalName.value = calcData.name;
             modalEmail.value = calcData.email;
             resultModal.classList.add('active');
@@ -1293,8 +1318,9 @@
                     sendBtn.textContent = '📤 Отправить заявку';
                 }
             } catch (error) {
-                document.getElementById('resultForm').style.display = 'none';
-                document.getElementById('successMessage').classList.add('active');
+                alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+                sendBtn.disabled = false;
+                sendBtn.textContent = '📤 Отправить заявку';
             }
         });
 
