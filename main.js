@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof ym !== 'undefined' && window.ymId) ym(window.ymId, 'reachGoal', 'form_submit');
 
       // Отправка в API
-      const API_URL = 'https://dom-kuhni-server.railway.app/api/submit-order';
+      const API_URL = 'https://api-production-d59b.up.railway.app/api/submit-order';
 
       try {
         const res = await fetch(API_URL, {
