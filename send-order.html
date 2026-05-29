@@ -991,33 +991,9 @@
             });
         });
 
-        phoneInput.addEventListener('input', (e) => {
-            const pfix = '+375 ';
-            let pos = e.target.selectionStart;
-            let digits = e.target.value.replace(/\D/g, '');
-            if (digits.startsWith('375')) digits = digits.slice(3);
-            else if (digits.startsWith('80')) digits = digits.slice(1);
-            digits = digits.slice(0, 9);
-            let formatted = pfix;
-            if (digits.length > 0) formatted += '(' + digits.slice(0, 2);
-            if (digits.length >= 2) formatted += ') ' + digits.slice(2, 5);
-            if (digits.length >= 5) formatted += '-' + digits.slice(5, 7);
-            if (digits.length >= 7) formatted += '-' + digits.slice(7, 9);
-            e.target.value = formatted;
-            pos = Math.max(pfix.length, pos);
-            e.target.selectionStart = e.target.selectionEnd = Math.min(pos, formatted.length);
-            calcData.phone = e.target.value;
+        phoneInput.addEventListener('input', () => {
+            calcData.phone = phoneInput.value;
             validateStep();
-        });
-        phoneInput.addEventListener('keydown', (e) => {
-            if ((e.key === 'Backspace' && e.target.selectionStart <= 5) ||
-                (e.key === 'Delete' && e.target.selectionStart < 5)) {
-                e.preventDefault();
-            }
-        });
-        phoneInput.addEventListener('focus', () => {
-            if (!phoneInput.value.startsWith('+375 ')) phoneInput.value = '+375 ';
-            setTimeout(() => { phoneInput.selectionStart = phoneInput.selectionEnd = 5; }, 0);
         });
         nameInput.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^а-яА-ЯёЁa-zA-Z\s\-]/g, '');
@@ -1057,6 +1033,10 @@
 
         async function submitForm() {
             const btn = nextBtn;
+            if (calcData.email && (!calcData.email.includes('@') || !calcData.email.includes('.'))) {
+                alert('Введите корректный email (должен содержать @ и .)');
+                return;
+            }
             btn.disabled = true;
             btn.textContent = '⏳ Отправка...';
             const formData = { ...calcData, timestamp: new Date().toLocaleString('ru-RU') };

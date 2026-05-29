@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function formatPhone(input) {
     let pos = input.selectionStart;
+    if (pos == null) pos = 0;
     let digits = input.value.replace(/\D/g, '');
     if (digits.startsWith('375')) digits = digits.slice(3);
     else if (digits.startsWith('80')) digits = digits.slice(1);
@@ -36,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (digits.length >= 7) formatted += '-' + digits.slice(7, 9);
 
     input.value = formatted;
-    pos = Math.max(PREFIX.length, pos);
-    input.selectionStart = input.selectionEnd = Math.min(pos, formatted.length);
+    if (pos < PREFIX.length) pos = PREFIX.length;
+    input.setSelectionRange(pos, pos);
   }
 
   document.querySelectorAll('input[type="tel"]').forEach(el => {
@@ -72,7 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
+  // ====== Email inputs: только латиница + цифры + спецсимволы ======
+  document.querySelectorAll('input[type="email"]').forEach(el => {
+    el.addEventListener('input', function () {
+      this.value = this.value.replace(/[^a-zA-Z0-9@._\-+~]/g, '');
+    });
+  });
 
   // UTM parser
   function getUTM() {
