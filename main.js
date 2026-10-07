@@ -1,21 +1,50 @@
 /* =========================================
-   ДОМ КУХНИ — SHARED: header, burger, cookie, exit popup, analytics, forms
+   ДОМ КУХНИ — SHARED: header, video, burger, theme, analytics, forms
    ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Header scroll
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('header--scrolled', window.scrollY > 50);
-  }, { passive: true });
+  // Video Autoplay & Low Power Mode fallback
+  const heroVideo = document.querySelector('.hero__video');
+  if (heroVideo) {
+    heroVideo.muted = true;
+    heroVideo.playsInline = true;
+    const playPromise = heroVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay prevented by browser power saving mode: play on first touch/click
+        const startVideoOnTouch = () => {
+          heroVideo.play().catch(() => {});
+          window.removeEventListener('touchstart', startVideoOnTouch);
+          window.removeEventListener('click', startVideoOnTouch);
+        };
+        window.addEventListener('touchstart', startVideoOnTouch, { passive: true });
+        window.addEventListener('click', startVideoOnTouch, { passive: true });
+      });
+    }
+  }
 
-  // Mobile burger
+  // Header scroll shadow
+  const header = document.getElementById('header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('header--scrolled', window.scrollY > 30);
+    }, { passive: true });
+  }
+
+  // Mobile burger & Body scroll lock
   const burger = document.getElementById('burger');
   const nav = document.getElementById('nav');
   if (burger && nav) {
-    burger.addEventListener('click', () => nav.classList.toggle('header__nav--open'));
+    burger.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('header__nav--open');
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+
     document.querySelectorAll('.header__nav-link').forEach(link => {
-      link.addEventListener('click', () => nav.classList.remove('header__nav--open'));
+      link.addEventListener('click', () => {
+        nav.classList.remove('header__nav--open');
+        document.body.classList.remove('menu-open');
+      });
     });
   }
 
@@ -23,8 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const PREFIX = '+375 ';
 
   function formatPhone(input) {
-    let pos = input.selectionStart;
-    if (pos == null) pos = 0;
+    let pos = input.selectionStart || 0;
     let digits = input.value.replace(/\D/g, '');
     if (digits.startsWith('375')) digits = digits.slice(3);
     else if (digits.startsWith('80')) digits = digits.slice(1);
@@ -62,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ====== Name inputs: запрет цифр и спецсимволов ======
+  // ====== Name inputs ======
   document.querySelectorAll('input[type="text"]').forEach(el => {
     const isName = (el.id || '').toLowerCase().includes('name') ||
       (el.placeholder || '').toLowerCase().includes('обращаться') ||
@@ -73,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ====== Email inputs: только латиница + цифры + спецсимволы ======
+  // ====== Email inputs ======
   document.querySelectorAll('input[type="email"]').forEach(el => {
     el.addEventListener('input', function () {
       this.value = this.value.replace(/[^a-zA-Z0-9@._\-+~]/g, '');
@@ -97,61 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Scroll depth (throttled, cached layout reads)
-  let tracked = new Set();
-  let depthBody, depthWin;
-  const updateDepthCache = () => { depthBody = document.body.scrollHeight; depthWin = window.innerHeight; };
-  updateDepthCache();
-  const depthOnScroll = () => {
-    const pct = Math.round((window.scrollY / (depthBody - depthWin)) * 100);
-    [25,50,75,90,100].forEach(d => { if (pct >= d && !tracked.has(d)) { tracked.add(d); if (typeof gtag !== 'undefined') gtag('event', 'scroll_depth', { depth: d+'%' }); } });
-  };
-  window.addEventListener('scroll', depthOnScroll, { passive: true });
-  window.addEventListener('resize', updateDepthCache, { passive: true });
-
-  // Count-up animation
-  const countEls = document.querySelectorAll('.count-up');
-  let counted = false;
-  function doCountUp() {
-    if (counted) return;
-    countEls.forEach(el => {
-      const target = parseInt(el.dataset.target);
-      if (!target) return;
-      let cur = 0;
-      const step = Math.ceil(target / 40);
-      const t = setInterval(() => {
-        cur += step;
-        if (cur >= target) { el.textContent = target + '+'; clearInterval(t); }
-        else el.textContent = cur;
-      }, 30);
-    });
-    counted = true;
-  }
-  if (countEls.length > 0) {
-    const countObs = new IntersectionObserver((entries, obs) => {
-      if (entries.some(e => e.isIntersecting)) { doCountUp(); obs.disconnect(); }
-    }, { rootMargin: '0px 0px -100px 0px' });
-    countObs.observe(countEls[0]);
-  }
-
-  // Scroll reveal (all variants)
-  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .card-premium').forEach(el => {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          if (el.classList.contains('card-premium')) {
-            el.style.opacity = '1'; el.style.transform = 'none';
-          } else {
-            e.target.classList.add('visible');
-          }
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    obs.observe(el);
-  });
-
-  // Contact form (on index.html and contact.html)
+  // Contact form handler
   const contactForm = document.getElementById('contactForm') || document.getElementById('homeForm');
   if (contactForm) {
     contactForm.addEventListener('submit', async e => {
@@ -161,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof gtag !== 'undefined') gtag('event', 'form_submit', { form_name: 'contact' });
       if (typeof ym !== 'undefined' && window.ymId) ym(window.ymId, 'reachGoal', 'form_submit');
 
-      // Отправка в API
       const API_URL = 'https://api-production-d59b.up.railway.app/api/submit-order';
 
       try {
@@ -185,17 +158,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (result.success) {
           contactForm.innerHTML = `
-            <div style="text-align:center;padding:20px">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" style="margin:0 auto 16px;display:block"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px">Спасибо за заявку!</h3>
-              <p style="color:var(--color-text-secondary)">Заявка #${result.orderId}. Перезвоним в течение 30 минут</p>
+            <div style="text-align:center;padding:24px">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#B8934C" stroke-width="2" style="margin:0 auto 16px;display:block"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:8px">Спасибо за заявку!</h3>
+              <p style="color:var(--color-text-secondary)">Заявка принята. Дизайнер свяжется с вами в течение 30 минут.</p>
             </div>`;
         } else {
-          alert('Ошибка отправки. Попробуйте ещё раз.');
+          alert('Ошибка отправки. Пожалуйста, позвоните нам напрямую: +375 (44) 584-22-33');
         }
       } catch (err) {
         console.error('Submit error:', err);
-        alert('Ошибка соединения. Проверьте подключение к интернету.');
+        alert('Ошибка соединения. Проверьте подключение к интернету или позвоните: +375 (44) 584-22-33');
       }
     });
   }
@@ -218,65 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Dynamic copyright year
   document.querySelectorAll('.footer__bottom p').forEach(el => {
-    el.textContent = el.textContent.replace(/\d{4}/, new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Minsk' })).getFullYear());
+    el.textContent = el.textContent.replace(/\d{4}/, new Date().getFullYear());
   });
 
-  // ====== Аналитика просмотров ======
-  const API_ANALYTICS = 'https://api-production-d59b.up.railway.app/api/analytics';
-
-  function getSessionId() {
-    let sid = sessionStorage.getItem('analytics_sid');
-    if (!sid) {
-      sid = 's_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
-      sessionStorage.setItem('analytics_sid', sid);
-    }
-    return sid;
-  }
-
-  function sendPageview() {
-    const utm = getUTM();
-    fetch(`${API_ANALYTICS}/pageview`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        page: location.pathname,
-        referrer: document.referrer || '',
-        utm_source: utm.utm_source || '',
-        utm_medium: utm.utm_medium || '',
-        sessionId: getSessionId(),
-      }),
-    }).catch(() => {});
-  }
-
-  let heartbeatTimer;
-
-  function startHeartbeat() {
-    const sid = getSessionId();
-    const start = Date.now();
-    heartbeatTimer = setInterval(() => {
-      const duration = Math.round((Date.now() - start) / 1000);
-      fetch(`${API_ANALYTICS}/heartbeat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId: sid, duration }),
-      }).catch(() => {});
-    }, 15000);
-  }
-
-  function stopHeartbeat() {
-    if (heartbeatTimer) {
-      clearInterval(heartbeatTimer);
-      heartbeatTimer = null;
-    }
-  }
-
-  sendPageview();
-  startHeartbeat();
-  window.addEventListener('beforeunload', () => {
-    stopHeartbeat();
-    const duration = Math.round((Date.now() - parseInt(getSessionId().split('_')[1])) / 1000);
-    navigator.sendBeacon(`${API_ANALYTICS}/heartbeat`, JSON.stringify({ sessionId: getSessionId(), duration }));
-  });
-
-  console.log('[Дом кухни] Site initialized');
+  console.log('[Дом кухни] Initialized successfully');
 });
