@@ -173,21 +173,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Theme toggle
+  // Animated Pill Theme toggle
+  function renderThemeToggle(btn) {
+    btn.innerHTML = `
+      <span class="theme-toggle__track-icons">
+        <svg class="theme-toggle__icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="theme-toggle__icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </span>
+      <span class="theme-toggle__thumb">
+        <svg class="theme-toggle__thumb-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="theme-toggle__thumb-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </span>
+    `;
+  }
+
   function getTheme() { return localStorage.getItem('theme') || 'light'; }
   function setTheme(t) {
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('theme', t);
     document.querySelectorAll('.theme-toggle').forEach(btn => {
-      btn.innerHTML = t === 'dark'
-        ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
-        : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>';
+      btn.setAttribute('aria-checked', t === 'dark' ? 'true' : 'false');
+      btn.setAttribute('title', t === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему');
     });
   }
-  setTheme(getTheme());
+
   document.querySelectorAll('.theme-toggle').forEach(btn => {
+    renderThemeToggle(btn);
+    btn.setAttribute('role', 'switch');
     btn.addEventListener('click', () => setTheme(getTheme() === 'dark' ? 'light' : 'dark'));
   });
+  setTheme(getTheme());
 
   // Dynamic copyright year
   document.querySelectorAll('.footer__bottom p').forEach(el => {

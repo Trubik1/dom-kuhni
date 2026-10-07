@@ -176,6 +176,39 @@
             margin-bottom: 10px;
         }
 
+        .option-card .material-img {
+            width: 100%;
+            height: 95px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .option-card:hover .material-img {
+            transform: scale(1.03);
+        }
+
+        .option-card .material-placeholder {
+            width: 100%;
+            height: 95px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: var(--bg-primary);
+            border: 2px dashed var(--accent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            gap: 4px;
+        }
+
         .option-card h4 {
             color: var(--accent);
             margin: 0 0 8px 0;
@@ -722,73 +755,59 @@
                 </div>
 
                 <!-- Шаг 3: Материалы -->
-                <!-- Шаг 3: Материалы -->
                 <div class="calc-step" data-step="3">
-                    <h2 class="step-title">🎨 Выберите материалы</h2>
+                    <h2 class="step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:6px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Выберите материалы</h2>
 
                     <div class="input-group">
                         <label>Материал фасадов:</label>
                         <div class="options-grid" style="grid-template-columns: repeat(4, 1fr);">
                             <div class="option-card" data-value="ldsp" onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: linear-gradient(135deg, #8a8a9a 0%, #9a9aaa 100%);"></div>
+                                <img src="images/materials/ldsp.jpg" alt="ЛДСП Egger" class="material-img" loading="lazy">
                                 <h4>ЛДСП</h4>
                                 <p>Эконом</p>
                             </div>
 
-                            <div class="option-card" data-value="mdf_film"
-                                onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: linear-gradient(135deg, #8B7355 0%, #A0826D 100%);"></div>
+                            <div class="option-card" data-value="mdf_film" onclick="selectOption(this, 'facadeMaterial')">
+                                <img src="images/materials/mdf_film.jpg" alt="МДФ пленочный" class="material-img" loading="lazy">
                                 <h4>МДФ пленочный</h4>
                                 <p>Стандарт</p>
                             </div>
 
-                            <div class="option-card" data-value="plastic"
-                                onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: linear-gradient(135deg, #4A90A4 0%, #6BA3B5 100%);"></div>
+                            <div class="option-card" data-value="plastic" onclick="selectOption(this, 'facadeMaterial')">
+                                <img src="images/materials/plastic.jpg" alt="Пластик HPL" class="material-img" loading="lazy">
                                 <h4>Пластик</h4>
                                 <p>Практично</p>
                             </div>
 
-                            <div class="option-card" data-value="acrylic"
-                                onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: linear-gradient(135deg, #2C3E50 0%, #4A6FA5 100%); box-shadow: inset 0 0 10px rgba(255,255,255,0.3);">
-                                </div>
+                            <div class="option-card" data-value="acrylic" onclick="selectOption(this, 'facadeMaterial')">
+                                <img src="images/materials/acrylic.jpg" alt="Акрил глянцевый" class="material-img" loading="lazy">
                                 <h4>Акрил глянцевый</h4>
-                                <p>Премиум</p>
+                                <p>Премиум глянец</p>
                             </div>
 
-                            <div class="option-card" data-value="mdf_painted"
-                                onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);"></div>
+                            <div class="option-card" data-value="mdf_painted" onclick="selectOption(this, 'facadeMaterial')">
+                                <img src="images/materials/mdf_painted.jpg" alt="МДФ крашеный" class="material-img" loading="lazy">
                                 <h4>МДФ крашеный</h4>
-                                <p>Любой цвет</p>
+                                <p>Эмаль, любой цвет</p>
                             </div>
 
                             <div class="option-card" data-value="fenix" onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);"></div>
+                                <img src="images/materials/fenix.jpg" alt="Fenix матовый" class="material-img" loading="lazy">
                                 <h4>Fenix матовый</h4>
                                 <p>Суперматовый</p>
                             </div>
 
-                            <div class="option-card" data-value="massive"
-                                onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: linear-gradient(135deg, #8B6F47 0%, #A67B5B 100%);"></div>
-                                <h4>Массив</h4>
-                                <p>Натуральное дерево</p>
+                            <div class="option-card" data-value="massive" onclick="selectOption(this, 'facadeMaterial')">
+                                <img src="images/materials/massive.jpg" alt="Массив дерева" class="material-img" loading="lazy">
+                                <h4>Массив дерева</h4>
+                                <p>Дуб / ясень</p>
                             </div>
 
-                            <div class="option-card" data-value="unknown"
-                                onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="color-box"
-                                    style="background: var(--bg-card); border: 2px dashed var(--accent); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 2.5rem; font-weight: bold;">
-                                    ?</div>
+                            <div class="option-card" data-value="unknown" onclick="selectOption(this, 'facadeMaterial')">
+                                <div class="material-placeholder">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                    <span>Консультация</span>
+                                </div>
                                 <h4>Не знаю</h4>
                                 <p>Поможем выбрать</p>
                             </div>
@@ -798,36 +817,22 @@
                     <div class="input-group" style="margin-top:30px;">
                         <label>Тип столешницы:</label>
                         <div class="options-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="option-card" data-value="postforming"
-                                onclick="selectOption(this, 'countertopType')">
-                                <div class="color-box"
-                                    style="background: #8B7355; min-height: 100px; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                                    <svg width="80" height="60" viewBox="0 0 80 60" fill="none" style="opacity:0.6"><rect x="5" y="20" width="70" height="20" rx="2" fill="#A0896A"/><rect x="5" y="20" width="70" height="20" rx="2" stroke="var(--color-accent)" stroke-width="1" fill="none"/><line x1="15" y1="20" x2="15" y2="40" stroke="var(--color-accent)" stroke-width="0.5" opacity="0.5"/><line x1="35" y1="20" x2="35" y2="40" stroke="var(--color-accent)" stroke-width="0.5" opacity="0.5"/><line x1="55" y1="20" x2="55" y2="40" stroke="var(--color-accent)" stroke-width="0.5" opacity="0.5"/></svg>
-                                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: var(--color-accent); padding: 8px; font-weight: 600; text-align: center; border-radius: 0 0 8px 8px;">Постформинг</div>
-                                </div>
-                                <h4 style="margin-top: 15px;">Постформинг</h4>
-                                <p>Ламинированная</p>
+                            <div class="option-card" data-value="postforming" onclick="selectOption(this, 'countertopType')">
+                                <img src="images/postforming.jpg" alt="Столешница Постформинг HPL" class="material-img" loading="lazy">
+                                <h4>Постформинг</h4>
+                                <p>HPL ламинат 38мм</p>
                             </div>
 
-                            <div class="option-card" data-value="compact"
-                                onclick="selectOption(this, 'countertopType')">
-                                <div class="color-box"
-                                    style="background: #4A4A4A; min-height: 100px; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                                    <svg width="80" height="60" viewBox="0 0 80 60" fill="none" style="opacity:0.6"><rect x="5" y="10" width="70" height="40" rx="3" fill="#5A5A5A"/><rect x="8" y="13" width="14" height="14" rx="2" fill="#6A6A6A"/><rect x="28" y="13" width="14" height="14" rx="2" fill="#6A6A6A"/><rect x="48" y="13" width="14" height="14" rx="2" fill="#6A6A6A"/></svg>
-                                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: var(--color-accent); padding: 8px; font-weight: 600; text-align: center; border-radius: 0 0 8px 8px;">Компакт-плита</div>
-                                </div>
-                                <h4 style="margin-top: 15px;">Компакт-плита</h4>
-                                <p>Влагостойкая</p>
+                            <div class="option-card" data-value="compact" onclick="selectOption(this, 'countertopType')">
+                                <img src="images/compact.jpg" alt="Компакт-плита 12мм" class="material-img" loading="lazy">
+                                <h4>Компакт-плита</h4>
+                                <p>12мм влагостойкая</p>
                             </div>
 
                             <div class="option-card" data-value="quartz" onclick="selectOption(this, 'countertopType')">
-                                <div class="color-box"
-                                    style="background: #D4C5B9; min-height: 100px; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                                    <svg width="80" height="60" viewBox="0 0 80 60" fill="none" style="opacity:0.7"><rect x="5" y="15" width="70" height="30" rx="2" fill="#E8DCD0"/><circle cx="20" cy="30" r="4" fill="var(--color-accent)" opacity="0.4"/><circle cx="40" cy="25" r="3" fill="var(--color-accent)" opacity="0.3"/><circle cx="60" cy="35" r="5" fill="var(--color-accent)" opacity="0.3"/><circle cx="30" cy="40" r="2" fill="var(--color-accent)" opacity="0.4"/></svg>
-                                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: var(--color-accent); padding: 8px; font-weight: 600; text-align: center; border-radius: 0 0 8px 8px;">Кварцевый камень</div>
-                                </div>
-                                <h4 style="margin-top: 15px;">Камень кварцевый</h4>
-                                <p>Премиум</p>
+                                <img src="images/quartz.jpg" alt="Кварцевый камень Calacatta" class="material-img" loading="lazy">
+                                <h4>Кварцевый камень</h4>
+                                <p>Агломерат Calacatta</p>
                             </div>
                         </div>
                     </div>
@@ -842,63 +847,63 @@
                     <div class="radio-group">
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="urgency" value="urgent">
-                            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:4px"><polyline points="11 17 10 13 13 13 12 9"/><path d="M8.5 5.5A7 7 0 1112 19a7 7 0 01-3.5-13.5z"/></svg> Срочно (в течение 2 недель)</span>
+                            <span>Срочно (в течение 2 недель)</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="urgency" value="month">
-                            <span>📅 Через месяц</span>
+                            <span>В течение 1 месяца</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="urgency" value="halfyear">
-                            <span>🗓️ Через 6 месяцев</span>
+                            <span>В течение 2-6 месяцев</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="urgency" value="browsing">
-                            <span>👀 Просто прицениваюсь</span>
+                            <span>Прицениваюсь / планирую ремонт</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="input-group">
-                    <label>💰 Ваш бюджет (рублей):</label>
+                    <label>Ориентировочный бюджет (BYN):</label>
                     <div class="radio-group">
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="budget" value="to2k">
-                            <span>До 2 000 </span>
+                            <span>До 2 000 руб.</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="budget" value="2k-3k">
-                            <span>2 000 - 3 000 </span>
+                            <span>2 000 - 3 500 руб.</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="budget" value="3k-5k">
-                            <span>3 000 - 5 000 </span>
+                            <span>3 500 - 6 000 руб.</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="budget" value="5k-10k">
-                            <span>5 000 - 10 000 </span>
+                            <span>От 6 000 руб. (Премиум)</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="input-group">
-                    <label>💳 Нужна ли рассрочка?</label>
+                    <label>Нужна ли рассрочка?</label>
                     <div class="radio-group">
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="installment" value="no">
-                            <span>❌ Не нужна</span>
+                            <span>Не требуется (полная оплата)</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="installment" value="1-3">
-                            <span>1-3 месяца</span>
+                            <span>Рассрочка на 3 месяца</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="installment" value="3-6">
-                            <span>3-6 месяцев</span>
+                            <span>Рассрочка на 6 месяцев</span>
                         </label>
                         <label class="radio-item" onclick="selectRadio(this)">
                             <input type="radio" name="installment" value="6-12">
-                            <span>6-12 месяцев</span>
+                            <span>Кредит/рассрочка до 12 месяцев</span>
                         </label>
                     </div>
                 </div>
@@ -906,29 +911,29 @@
 
             <!-- Шаг 5: Контакты -->
             <div class="calc-step" data-step="5">
-                <h2 class="step-title">📞 Контактная информация</h2>
+                <h2 class="step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:6px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Контактная информация</h2>
 
                 <div class="input-group">
-                    <label for="phone">📱 Номер телефона *</label>
+                    <label for="phone">Номер телефона *</label>
                     <input type="tel" id="phone" class="phone-input" placeholder="+375 (__) ___-__-__" required>
                     <small style="color:var(--text-secondary);display:block;margin-top:8px;">
-                        * Мы перезвоним вам для уточнения деталей
+                        * Мы перезвоним вам в течение 15 минут для согласования деталей
                     </small>
                 </div>
 
                 <div class="input-group">
-                    <label for="name">👤 Ваше имя (необязательно)</label>
+                    <label for="name">Ваше имя (необязательно)</label>
                     <input type="text" id="name" placeholder="Как к вам обращаться?">
                 </div>
 
                 <div class="input-group">
-                    <label for="email">📧 Email (для отправки расчета)</label>
+                    <label for="email">Email (для отправки PDF расчета)</label>
                     <input type="email" id="email" placeholder="your@email.com">
                 </div>
 
                 <div class="input-group">
-                    <label for="comment">💬 Комментарий (необязательно)</label>
-                    <textarea id="comment" rows="4" placeholder="Дополнительные пожелания..."></textarea>
+                    <label for="comment">Пожелания или комментарий (необязательно)</label>
+                    <textarea id="comment" rows="3" placeholder="Особые пожелания, удобное время для звонка..."></textarea>
                 </div>
 
                 <div
@@ -1000,34 +1005,34 @@
         <div class="modal-content">
             <div id="resultForm">
                 <div class="modal-header">
-                    <h2>🎉 Расчет готов!</h2>
-                    <p style="color:var(--text-secondary);margin:0;">Заполните форму для отправки заявки</p>
+                    <h2>Предварительный расчет готов</h2>
+                    <p style="color:var(--text-secondary);margin:0;">Заполните контактные данные для получения детального расчета и дизайн-проекта</p>
                 </div>
 
                 <div class="modal-body">
                     <div class="result-price">
-                        <div style="color:var(--text-secondary);margin-bottom:10px;">Примерная стоимость:</div>
-                        <div class="price" id="totalPrice">0 br</div>
+                        <div style="color:var(--text-secondary);margin-bottom:10px;">Ориентировочная стоимость:</div>
+                        <div class="price" id="totalPrice">0 BYN</div>
                     </div>
 
                     <div id="resultDetails"></div>
 
                     <div style="margin-top:30px;">
-                        <h3 style="color:var(--accent);margin-bottom:15px;">📩 Отправить заявку</h3>
+                        <h3 style="color:var(--accent);margin-bottom:15px;">Получить консультацию и 3D-проект</h3>
 
                         <div class="form-group">
-                            <label for="modalPhone">📱 Телефон *</label>
+                            <label for="modalPhone">Номер телефона *</label>
                             <input type="tel" id="modalPhone" class="phone-input" placeholder="+375 (__) ___-__-__"
                                 required>
                         </div>
 
                         <div class="form-group">
-                            <label for="modalName">👤 Имя</label>
+                            <label for="modalName">Ваше имя</label>
                             <input type="text" id="modalName" placeholder="Ваше имя">
                         </div>
 
                         <div class="form-group">
-                            <label for="modalEmail">📧 Email</label>
+                            <label for="modalEmail">Email (необязательно)</label>
                             <input type="email" id="modalEmail" placeholder="your@email.com">
                         </div>
                     </div>
@@ -1035,15 +1040,15 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn-close" id="closeModal">Закрыть</button>
-                    <button type="button" class="btn-send" id="sendOrder">📤 Отправить заявку</button>
+                    <button type="button" class="btn-send" id="sendOrder">Отправить заявку</button>
                 </div>
             </div>
 
             <div class="success-message" id="successMessage">
                 <div class="success-icon">✓</div>
-                <h3>Заявка отправлена!</h3>
-                <p>Мы получили вашу заявку и перезвоним вам в ближайшее время.</p>
-                <p style="margin-top:15px;color:var(--accent);">📞 Ожидайте звонка!</p>
+                <h3>Заявка успешно отправлена!</h3>
+                <p>Мы получили ваши параметры и свяжемся с вами в течение 15 минут.</p>
+                <p style="margin-top:15px;color:var(--accent);">Дизайнер подготовит расчет со скидкой.</p>
                 <button type="button" class="btn-close" id="closeSuccess" style="margin-top:20px;">Закрыть</button>
             </div>
         </div>
@@ -1200,7 +1205,7 @@
             });
             currentStep = step;
             prevBtn.style.visibility = step === 1 ? 'hidden' : 'visible';
-            nextBtn.textContent = step === totalSteps ? '📊 Рассчитать' : 'Далее →';
+            nextBtn.textContent = step === totalSteps ? 'Рассчитать стоимость' : 'Далее →';
             validateStep();
         }
 
@@ -1213,7 +1218,7 @@
 
         function showResult() {
             const price = calculatePrice();
-            document.getElementById('totalPrice').textContent = price.toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('totalPrice').textContent = price.toLocaleString('ru-RU') + ' BYN';
             document.getElementById('resultDetails').innerHTML = `
             <div class="result-item"><span class="result-label">Тип кухни:</span><span class="result-value">${getKitchenTypeName()}</span></div>
             <div class="result-item"><span class="result-label">Размеры:</span><span class="result-value">${calcData.width}м × ${calcData.length}м</span></div>
@@ -1234,15 +1239,15 @@
             return {
                 'straight': 'Прямая',
                 'corner': 'Угловая',
-                'p-shape': 'П-образная',  // Добавлено
+                'p-shape': 'П-образная',
                 'island': 'С островом'
             }[calcData.kitchenType] || calcData.kitchenType;
         }
         function getFacadeMaterialName() { return { 'ldsp': 'ЛДСП', 'mdf_film': 'МДФ пленочный', 'plastic': 'Пластик', 'acrylic': 'Акрил глянцевый', 'mdf_painted': 'МДФ крашеный', 'fenix': 'Fenix матовый', 'massive': 'Массив', 'unknown': 'Не выбран' }[calcData.facadeMaterial] || calcData.facadeMaterial; }
         function getCountertopName() { return { 'postforming': 'Постформинг', 'compact': 'Компакт-плита', 'quartz': 'Кварцевый камень' }[calcData.countertopType] || calcData.countertopType; }
-        function getUrgencyName() { return { 'urgent': 'Срочно', 'month': 'Через месяц', 'halfyear': 'Через 6 месяцев', 'browsing': 'Прицениваюсь' }[document.querySelector('input[name="urgency"]:checked')?.value] || ''; }
-        function getBudgetName() { return { 'to2k': 'До 2 000 ', '2k-3k': '2 000 - 3 000 ', '3k-5k': '3 000 - 5 000 ', '5k-10k': '5 000 - 10 000 ' }[document.querySelector('input[name="budget"]:checked')?.value] || ''; }
-        function getInstallmentName() { return { 'no': 'Не нужна', '1-3': '1-3 месяца', '3-6': '3-6 месяцев', '6-12': '6-12 месяцев' }[document.querySelector('input[name="installment"]:checked')?.value] || ''; }
+        function getUrgencyName() { return { 'urgent': 'Срочно', 'month': 'В течение 1 месяца', 'halfyear': 'В течение 2-6 месяцев', 'browsing': 'Прицениваюсь' }[document.querySelector('input[name="urgency"]:checked')?.value] || ''; }
+        function getBudgetName() { return { 'to2k': 'До 2 000 руб.', '2k-3k': '2 000 - 3 500 руб.', '3k-5k': '3 500 - 6 000 руб.', '5k-10k': 'От 6 000 руб.' }[document.querySelector('input[name="budget"]:checked')?.value] || ''; }
+        function getInstallmentName() { return { 'no': 'Не требуется', '1-3': 'Рассрочка 3 мес.', '3-6': 'Рассрочка 6 мес.', '6-12': 'Кредит/рассрочка 12 мес.' }[document.querySelector('input[name="installment"]:checked')?.value] || ''; }
 
         document.getElementById('closeModal').addEventListener('click', () => resultModal.classList.remove('active'));
         document.getElementById('closeSuccess').addEventListener('click', () => { resultModal.classList.remove('active'); location.reload(); });
@@ -1275,7 +1280,7 @@
 
             const sendBtn = document.getElementById('sendOrder');
             sendBtn.disabled = true;
-            sendBtn.textContent = '⏳ Отправка...';
+            sendBtn.textContent = 'Отправка...';
 
             try {
                 const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
@@ -1290,12 +1295,12 @@
                 } else {
                     alert('Ошибка отправки. Попробуйте позже.');
                     sendBtn.disabled = false;
-                    sendBtn.textContent = '📤 Отправить заявку';
+                    sendBtn.textContent = 'Отправить заявку';
                 }
             } catch (error) {
                 alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
                 sendBtn.disabled = false;
-                sendBtn.textContent = '📤 Отправить заявку';
+                sendBtn.textContent = 'Отправить заявку';
             }
         });
 
