@@ -35,18 +35,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const burger = document.getElementById('burger');
   const nav = document.getElementById('nav');
   if (burger && nav) {
-    burger.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('header__nav--open');
+    const toggleMenu = (open) => {
+      const isOpen = open !== undefined ? open : !nav.classList.contains('header__nav--open');
+      nav.classList.toggle('header__nav--open', isOpen);
+      burger.classList.toggle('active', isOpen);
+      if (header) header.classList.toggle('header--menu-open', isOpen);
       document.body.classList.toggle('menu-open', isOpen);
+    };
+
+    burger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
     });
 
-    document.querySelectorAll('.header__nav-link').forEach(link => {
+    document.querySelectorAll('.header__nav-link, .mobile-social-btn, .mobile-menu-contacts a').forEach(link => {
       link.addEventListener('click', () => {
-        nav.classList.remove('header__nav--open');
-        document.body.classList.remove('menu-open');
+        toggleMenu(false);
       });
     });
+
+    // Close when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (nav.classList.contains('header__nav--open') && !nav.contains(e.target) && !burger.contains(e.target)) {
+        toggleMenu(false);
+      }
+    });
   }
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    });
+  });
 
   // ====== Phone inputs: фиксированный префикс +375 ======
   const PREFIX = '+375 ';
