@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23151618'/%3E%3Cpath d='M8 24V8h6a7 7 0 010 14H8zm4-3.5h2a3.5 3.5 0 000-7h-2v7z' fill='%23C7A662'/%3E%3Cpath d='M20 8l5 8-5 8' stroke='%23C7A662' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-  <title>Калькулятор кухни онлайн в Гомеле — точный расчет стоимости за 1 минуту | Дом Кухни</title>
-  <meta name="description" content="Онлайн-калькулятор кухни в Гомеле. Рассчитайте точную стоимость гарнитура по индивидуальным размерам за 1 минуту. Получите 3D-проект и подарок на выбор!" />
-  <meta name="keywords" content="калькулятор кухни гомель, рассчитать стоимость кухни онлайн гомель, расчет цены кухни, кухни на заказ гомель калькулятор" />
+  <title>Калькулятор кухни онлайн в Гомеле — расчет проекта и параметров за 1 минуту | Дом Кухни</title>
+  <meta name="description" content="Онлайн-калькулятор кухни в Гомеле. Рассчитайте параметры гарнитура по индивидуальным размерам за 1 минуту. Получите бесплатный 3D-проект и консультацию дизайнера!" />
+  <meta name="keywords" content="калькулятор кухни гомель, рассчитать параметры кухни онлайн гомель, расчет кухни, кухни на заказ гомель калькулятор" />
   <link rel="canonical" href="https://domkuhni.by/calculator.html" />
 
   <!-- Региональные гео-теги -->
@@ -18,8 +18,8 @@
 
   <!-- OpenGraph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Онлайн-калькулятор кухни в Гомеле — расчет стоимости за 1 минуту" />
-  <meta property="og:description" content="Узнайте ориентировочную стоимость кухни и заберите подарок: каменную мойку, скидку 10% или 3D-проект." />
+  <meta property="og:title" content="Онлайн-калькулятор кухни в Гомеле — расчет параметров за 1 минуту" />
+  <meta property="og:description" content="Рассчитайте параметры кухни онлайн и получите бесплатный 3D-проект с выездом дизайнера фабрики Дом Кухни в Гомеле." />
   <meta property="og:url" content="https://domkuhni.by/calculator.html" />
   <meta property="og:image" content="https://domkuhni.by/images/og-image.jpg" />
 
@@ -65,10 +65,9 @@
   <!-- ШАПКА САЙТА -->
   <header class="header" id="header">
     <div class="header__inner container">
-      <button class="theme-toggle" aria-label="Переключить тему"></button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"></button>
       <a href="index.html" class="header__logo" aria-label="Дом Кухни - Главная">
-        <img src="images/logo-light.webp" alt="Дом кухни" class="header__logo-img header__logo-img--light" width="160" height="38" />
-        <img src="images/logo-dark.webp" alt="Дом кухни" class="header__logo-img header__logo-img--dark" width="160" height="38" />
+        <img src="images/logo-light.webp" alt="Дом кухни" class="header__logo-img" width="160" height="38" />
       </a>
       <nav class="header__nav" id="nav">
         <a href="portfolio.html" class="header__nav-link">Проекты</a>
@@ -78,9 +77,9 @@
         <a href="reviews.html" class="header__nav-link">Отзывы</a>
         <a href="contact.html" class="header__nav-link">Контакты</a>
 
-        <div class="mobile-menu-footer">
-          <p class="mobile-menu-address">г. Гомель, пр-т Ленина 30</p>
-          <a href="tel:+375445842233" class="mobile-menu-phone">+375 (44) 584-22-33</a>
+        <div class="mobile-menu-contacts">
+          <p class="mobile-menu-address" style="color:var(--color-text-secondary);font-size:0.95rem;margin:0 0 4px;">г. Гомель, пр-т Ленина 30</p>
+          <a href="tel:+375445842233" class="header__phone-btn" style="width:100%;justify-content:center;">+375 (44) 584-22-33</a>
           <div class="mobile-menu-socials">
             <a href="https://wa.me/375445842233" target="_blank" class="mobile-social-btn">WhatsApp</a>
             <a href="https://t.me/domkuhni" target="_blank" class="mobile-social-btn">Telegram</a>
@@ -91,7 +90,7 @@
         <a href="https://wa.me/375445842233" target="_blank" class="header__social" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
         <a href="https://t.me/domkuhni" target="_blank" class="header__social" aria-label="Telegram"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
         <span class="header__address">г. Гомель, пр-т Ленина 30</span>
-        <a href="tel:+375445842233" class="header__phone">+375 (44) 584-22-33</a>
+        <a href="tel:+375445842233" class="header__phone-btn">+375 (44) 584-22-33</a>
         <button class="header__burger" id="burger" aria-label="Меню">
           <span></span><span></span><span></span>
         </button>
@@ -107,8 +106,8 @@
         <!-- Шапка квиза -->
         <div class="quiz-header">
           <span class="quiz-badge">Фабричный калькулятор • Гомель 2026</span>
-          <h1 class="quiz-title">Рассчитайте стоимость вашей кухни за 1 минуту</h1>
-          <p class="quiz-subtitle">Ответьте на 4 простых вопроса и получите ориентировочный расчет стоимости гарнитура, 3D-проект и подарок на выбор.</p>
+          <h1 class="quiz-title">Рассчитайте параметры вашей кухни за 1 минуту</h1>
+          <p class="quiz-subtitle">Ответьте на 5 простых вопросов, укажите сроки и контактные данные — ведущий дизайнер фабрики подготовит проект и свяжется с вами.</p>
         </div>
 
         <!-- Прогресс-бар -->
@@ -133,7 +132,11 @@
           </div>
           <div class="quiz-progress-step" data-step="5">
             <div class="quiz-progress-num">5</div>
-            <span class="quiz-progress-label">Расчет и подарок</span>
+            <span class="quiz-progress-label">Сроки</span>
+          </div>
+          <div class="quiz-progress-step" data-step="6">
+            <div class="quiz-progress-num">6</div>
+            <span class="quiz-progress-label">Контакты</span>
           </div>
         </div>
 
@@ -143,7 +146,7 @@
           <!-- ШАГ 1: ФОРМА КУХНИ -->
           <div class="quiz-step active" data-step="1">
             <div class="quiz-step-heading">
-              <h2 class="quiz-step-title">Шаг 1 из 5: Выберите форму кухонного гарнитура</h2>
+              <h2 class="quiz-step-title">Шаг 1 из 6: Выберите форму кухонного гарнитура</h2>
               <p class="quiz-step-desc">Укажите желаемую геометрию расстановки мебели в вашем помещении</p>
             </div>
 
@@ -185,7 +188,7 @@
           <!-- ШАГ 2: СТИЛЬ КУХНИ -->
           <div class="quiz-step" data-step="2">
             <div class="quiz-step-heading">
-              <h2 class="quiz-step-title">Шаг 2 из 5: В каком дизайне и стиле вы видите будущую кухню?</h2>
+              <h2 class="quiz-step-title">Шаг 2 из 6: В каком дизайне и стиле вы видите будущую кухню?</h2>
               <p class="quiz-step-desc">Выберите визуальное направление или нажмите «Пока не знаю» — дизайнер предложит решения</p>
             </div>
 
@@ -251,7 +254,7 @@
           <!-- ШАГ 3: МАТЕРИАЛЫ ФАСАДОВ -->
           <div class="quiz-step" data-step="3">
             <div class="quiz-step-heading">
-              <h2 class="quiz-step-title">Шаг 3 из 5: Из какого материала изготовить фасады?</h2>
+              <h2 class="quiz-step-title">Шаг 3 из 6: Из какого материала изготовить фасады?</h2>
               <p class="quiz-step-desc">Мы используем только сертифицированные плиты европейского качества с кромкованием водостойким PUR-клеем</p>
             </div>
 
@@ -317,7 +320,7 @@
           <!-- ШАГ 4: РАЗМЕРЫ, СТОЛЕШНИЦА И ФУРНИТУРА -->
           <div class="quiz-step" data-step="4">
             <div class="quiz-step-heading">
-              <h2 class="quiz-step-title">Шаг 4 из 5: Укажите размеры и комплектацию</h2>
+              <h2 class="quiz-step-title">Шаг 4 из 6: Укажите размеры и комплектацию</h2>
               <p class="quiz-step-desc">Параметры длины, материал столешницы и класс выдвижной фурнитуры</p>
             </div>
 
@@ -384,93 +387,107 @@
             </div>
           </div>
 
-          <!-- ШАГ 5: РАСЧЕТ + ВЫБОР ПОДАРКА + КОНТАКТЫ -->
+          <!-- ШАГ 5: СРОКИ УСТАНОВКИ -->
           <div class="quiz-step" data-step="5">
             <div class="quiz-step-heading">
-              <h2 class="quiz-step-title">Шаг 5 из 5: Ваш предварительный расчет готов!</h2>
-              <p class="quiz-step-desc">Выберите гарантированный подарок и укажите номер телефона для отправки коммерческого предложения</p>
+              <h2 class="quiz-step-title">Шаг 5 из 6: Когда вам необходима готовая кухня?</h2>
+              <p class="quiz-step-desc">Укажите желаемые сроки установки — это поможет нам спланировать график замера и производства</p>
             </div>
 
-            <!-- Плашка расчета стоимости -->
-            <div class="quiz-result-hero">
-              <div class="quiz-result-price-label">Ориентировочная стоимость под ключ:</div>
-              <div class="quiz-result-price-val">
-                <span class="quiz-result-price-old" id="oldPriceVal">3 850 BYN</span>
-                <span id="calcPriceVal">3 080 BYN</span>
-              </div>
-              <div class="quiz-result-features">
-                <span class="quiz-feat-badge">✓ Рассрочка 0% от 250 BYN/мес</span>
-                <span class="quiz-feat-badge">✓ Фабричная гарантия 2 года</span>
-                <span class="quiz-feat-badge">✓ Бесплатный замер и доставка по Гомелю</span>
-              </div>
-            </div>
-
-            <!-- Блок подарков -->
-            <div class="quiz-gifts-box">
-              <h3 class="quiz-gifts-title">🎁 Выберите ваш подарок к заказу:</h3>
-              <div class="quiz-gifts-grid">
-                <div class="quiz-gift-card selected" data-group="gift" data-value="sink">
-                  <span class="quiz-gift-icon">🚰</span>
-                  <div>
-                    <div class="quiz-gift-name">Каменная мойка GranFest</div>
-                    <div class="quiz-gift-sub">Или вытяжка на выбор бесплатно</div>
-                  </div>
+            <div class="quiz-urgency-grid">
+              <div class="quiz-urgency-card selected" data-group="urgency" data-value="urgent">
+                <div class="quiz-urgency-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 </div>
-
-                <div class="quiz-gift-card" data-group="gift" data-value="tech">
-                  <span class="quiz-gift-icon">⚡</span>
-                  <div>
-                    <div class="quiz-gift-name">Скидка 10% на технику</div>
-                    <div class="quiz-gift-sub">На комплект встраиваемой техники</div>
-                  </div>
+                <div>
+                  <div class="quiz-urgency-title">Срочно (до 2 недель)</div>
+                  <div class="quiz-urgency-desc">Срочный выезд дизайнера и приоритетный запуск в цех</div>
                 </div>
+              </div>
 
-                <div class="quiz-gift-card" data-group="gift" data-value="design">
-                  <span class="quiz-gift-icon">📐</span>
-                  <div>
-                    <div class="quiz-gift-name">3D-проект + выезд дизайнера</div>
-                    <div class="quiz-gift-sub">С чемоданом образцов на замер</div>
-                  </div>
+              <div class="quiz-urgency-card" data-group="urgency" data-value="month">
+                <div class="quiz-urgency-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div>
+                  <div class="quiz-urgency-title">В течение 1 месяца</div>
+                  <div class="quiz-urgency-desc">Стандартный плановый цикл фабричного изготовления</div>
+                </div>
+              </div>
+
+              <div class="quiz-urgency-card" data-group="urgency" data-value="halfyear">
+                <div class="quiz-urgency-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+                </div>
+                <div>
+                  <div class="quiz-urgency-title">В течение 2-6 месяцев</div>
+                  <div class="quiz-urgency-desc">Заранее бронируем материалы под чистовую отделку ремонта</div>
+                </div>
+              </div>
+
+              <div class="quiz-urgency-card" data-group="urgency" data-value="browsing">
+                <div class="quiz-urgency-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <div>
+                  <div class="quiz-urgency-title">Прицениваюсь / планирую ремонт</div>
+                  <div class="quiz-urgency-desc">Нужен предварительный проект и профессиональная консультация</div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Способ связи -->
-            <div class="quiz-contact-group">
-              <label class="quiz-contact-label">Куда отправить расчет спецификации?</label>
-              <div class="quiz-messenger-picker">
-                <button type="button" class="quiz-messenger-btn active" data-messenger="whatsapp">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-                  WhatsApp
-                </button>
-                <button type="button" class="quiz-messenger-btn" data-messenger="telegram">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                  Telegram
-                </button>
-                <button type="button" class="quiz-messenger-btn" data-messenger="phone">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                  Звонок
-                </button>
+          <!-- ШАГ 6: КОНТАКТНЫЕ ДАННЫЕ -->
+          <div class="quiz-step" data-step="6">
+            <div class="quiz-step-heading">
+              <h2 class="quiz-step-title">Шаг 6 из 6: Контактные данные</h2>
+              <p class="quiz-step-desc">Введите номер телефона и имя — ведущий дизайнер фабрики подготовит проект под ваши размеры и свяжется с вами</p>
+            </div>
+
+            <div class="quiz-lead-box">
+              <!-- Способ связи -->
+              <div class="quiz-contact-group">
+                <label class="quiz-contact-label">Куда удобнее отправить проект и информацию?</label>
+                <div class="quiz-messenger-picker">
+                  <button type="button" class="quiz-messenger-btn active" data-messenger="whatsapp">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                    WhatsApp
+                  </button>
+                  <button type="button" class="quiz-messenger-btn" data-messenger="telegram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    Telegram
+                  </button>
+                  <button type="button" class="quiz-messenger-btn" data-messenger="phone">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                    Звонок
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <!-- Ввод телефона -->
-            <div class="quiz-contact-group">
-              <label for="quizPhone" class="quiz-contact-label">Номер телефона (для фиксации скидки) *</label>
-              <input type="tel" id="quizPhone" class="quiz-phone-input" placeholder="+375 (__) ___-__-__" required>
-            </div>
+              <!-- Ввод телефона -->
+              <div class="quiz-contact-group">
+                <label for="quizPhone" class="quiz-contact-label">Номер телефона для связи *</label>
+                <input type="tel" id="quizPhone" class="quiz-phone-input" placeholder="+375 (__) ___-__-__" required>
+              </div>
 
-            <!-- Имя -->
-            <div class="quiz-contact-group">
-              <label for="quizName" class="quiz-contact-label">Ваше имя (необязательно)</label>
-              <input type="text" id="quizName" class="quiz-phone-input" style="font-size:1rem;font-weight:400;padding:12px 18px;" placeholder="Например: Светлана">
+              <!-- Имя -->
+              <div class="quiz-contact-group">
+                <label for="quizName" class="quiz-contact-label">Ваше имя (необязательно)</label>
+                <input type="text" id="quizName" class="quiz-phone-input" style="font-size:1rem;font-weight:400;padding:12px 18px;" placeholder="Как к вам обращаться?">
+              </div>
+
+              <!-- Комментарий -->
+              <div class="quiz-contact-group">
+                <label for="quizComment" class="quiz-contact-label">Пожелания или особенности помещения (необязательно)</label>
+                <textarea id="quizComment" class="quiz-phone-input" rows="3" style="font-size:0.95rem;font-weight:400;padding:12px 18px;min-height:75px;resize:vertical;font-family:inherit;" placeholder="Например: новостройка, нужен пенал под духовой шкаф, вывод розеток..."></textarea>
+              </div>
             </div>
 
             <p class="quiz-privacy-note">
-              🔒 Нажимая кнопку «Зафиксировать цену и забрать подарок», вы соглашаетесь на обработку данных. Никакого спама — свяжемся только для отправки расчета.
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Нажимая кнопку «Отправить заявку дизайнеру», вы соглашаетесь с обработкой персональных данных. Дизайнер свяжется с вами в удобное время.
             </p>
           </div>
-
           <!-- НАВИГАЦИОННЫЕ КНОПКИ КВИЗА -->
           <div class="quiz-nav-row" id="quizNavRow">
             <button type="button" class="quiz-btn-prev" id="quizPrevBtn" style="visibility:hidden;">← Назад</button>
@@ -481,11 +498,13 @@
 
         <!-- ЭКРАН УСПЕШНОЙ ОТПРАВКИ -->
         <div class="quiz-success-box" id="quizSuccessBox">
-          <div class="quiz-success-icon">✓</div>
-          <h2 class="quiz-success-title">Спасибо! Заявка и расчет зафиксированы</h2>
+          <div class="quiz-success-icon" style="background:#10B981;border-radius:50%;width:72px;height:72px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#fff;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="quiz-success-title">Спасибо! Заявка передана дизайнеру</h2>
           <p class="quiz-success-desc">
-            Ваш выбранный подарок и специальная фабричная цена успешно закреплены за вашим номером.<br>
-            Дизайнер свяжется с вами в течение <strong>15 минут</strong> в указанном мессенджере с готовой спецификацией!
+            Параметры вашей кухни успешно приняты.<br>
+            Ведущий дизайнер фабрики «Дом кухни» свяжется с вами в течение <strong>15–30 минут</strong> в выбранном мессенджере с готовым предложением!
           </p>
           <a href="portfolio.html" class="quiz-btn-next" style="display:inline-block;text-decoration:none;">Посмотреть примеры кухонь в Гомеле</a>
         </div>
@@ -577,46 +596,18 @@
       // Выбранные значения квиза
       const state = {
         step: 1,
-        totalSteps: 5,
+        totalSteps: 6,
         shape: 'corner',
         style: 'minimalism',
         facade: 'ldsp',
         length: 3.0,
         countertop: 'postforming',
         hardware: 'blum',
-        gift: 'sink',
+        urgency: 'urgent',
         messenger: 'whatsapp',
         phone: '',
-        name: ''
-      };
-
-      // Базовые тарифы за погонный метр в BYN
-      const pricing = {
-        facades: {
-          'ldsp': 850,
-          'mdf': 1150,
-          'plastic': 1350,
-          'acrylic': 1550,
-          'veneer': 1850,
-          'massive': 2250,
-          'unknown': 1100
-        },
-        countertops: {
-          'postforming': 120,
-          'compact': 380,
-          'quartz': 750
-        },
-        hardware: {
-          'blum': 260,
-          'hettich': 220,
-          'boyard': 120
-        },
-        shapeCoeff: {
-          'straight': 1.0,
-          'corner': 1.15,
-          'u-shape': 1.3,
-          'island': 1.45
-        }
+        name: '',
+        comment: ''
       };
 
       // Названия для отправки лида
@@ -655,10 +646,11 @@
           'hettich': 'Hettich (Германия)',
           'boyard': 'Boyard / GTV (Стандарт)'
         },
-        gift: {
-          'sink': 'Каменная мойка GranFest в подарок',
-          'tech': 'Скидка 10% на комплект техники',
-          'design': '3D-проект + бесплатный выезд на замер'
+        urgency: {
+          'urgent': 'Срочно (до 2 недель)',
+          'month': 'В течение 1 месяца',
+          'halfyear': 'В течение 2-6 месяцев',
+          'browsing': 'Прицениваюсь / планирую ремонт'
         },
         messenger: {
           'whatsapp': 'WhatsApp',
@@ -667,29 +659,7 @@
         }
       };
 
-      // Расчет цены
-      function calcTotalPrice() {
-        const facadePricePerM = pricing.facades[state.facade] || 1000;
-        const countertopPerM = pricing.countertops[state.countertop] || 150;
-        const hardwarePerM = pricing.hardware[state.hardware] || 200;
-        const coeff = pricing.shapeCoeff[state.shape] || 1.0;
-
-        const sumPerM = facadePricePerM + countertopPerM + hardwarePerM;
-        const total = Math.round(sumPerM * state.length * coeff);
-        const oldPrice = Math.round(total * 1.25);
-
-        return { total, oldPrice };
-      }
-
-      function updatePriceDisplay() {
-        const { total, oldPrice } = calcTotalPrice();
-        const priceEl = document.getElementById('calcPriceVal');
-        const oldPriceEl = document.getElementById('oldPriceVal');
-        if (priceEl) priceEl.textContent = total.toLocaleString('ru-RU') + ' BYN';
-        if (oldPriceEl) oldPriceEl.textContent = oldPrice.toLocaleString('ru-RU') + ' BYN';
-      }
-
-      // Выбор карточек
+      // Выбор опций (карточки 1-4)
       document.querySelectorAll('.quiz-card').forEach(card => {
         card.addEventListener('click', function () {
           const group = this.getAttribute('data-group');
@@ -699,21 +669,20 @@
           document.querySelectorAll(`.quiz-card[data-group="${group}"]`).forEach(c => c.classList.remove('selected'));
           this.classList.add('selected');
           state[group] = value;
-          updatePriceDisplay();
         });
       });
 
-      // Выбор подарка
-      document.querySelectorAll('.quiz-gift-card').forEach(card => {
+      // Выбор сроков (Шаг 5)
+      document.querySelectorAll('.quiz-urgency-card').forEach(card => {
         card.addEventListener('click', function () {
           const value = this.getAttribute('data-value');
-          document.querySelectorAll('.quiz-gift-card').forEach(c => c.classList.remove('selected'));
+          document.querySelectorAll('.quiz-urgency-card').forEach(c => c.classList.remove('selected'));
           this.classList.add('selected');
-          state.gift = value;
+          state.urgency = value;
         });
       });
 
-      // Выбор мессенджера
+      // Выбор мессенджера (Шаг 6)
       document.querySelectorAll('.quiz-messenger-btn').forEach(btn => {
         btn.addEventListener('click', function () {
           document.querySelectorAll('.quiz-messenger-btn').forEach(b => b.classList.remove('active'));
@@ -729,7 +698,6 @@
         slider.addEventListener('input', function () {
           state.length = parseFloat(this.value);
           lengthDisp.textContent = state.length.toFixed(1) + ' м.п.';
-          updatePriceDisplay();
         });
       }
 
@@ -737,22 +705,24 @@
       const phoneInput = document.getElementById('quizPhone');
       if (phoneInput) {
         phoneInput.addEventListener('input', function (e) {
-          let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
-          if (!x[1]) {
+          let digits = e.target.value.replace(/\D/g, '');
+          if (!digits) {
             e.target.value = '';
             state.phone = '';
             return;
           }
-          if (x[1].startsWith('375')) {
-            e.target.value = '+375' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
-          } else {
-            let digits = e.target.value.replace(/\D/g, '');
-            if (digits.startsWith('80')) digits = '375' + digits.substring(2);
-            else if (!digits.startsWith('375')) digits = '375' + digits;
-            let m = digits.match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
-            e.target.value = '+375' + (m[2] ? ' (' + m[2] : '') + (m[3] ? ') ' + m[3] : '') + (m[4] ? '-' + m[4] : '') + (m[5] ? '-' + m[5] : '');
-          }
-          state.phone = e.target.value;
+          if (digits.startsWith('80')) digits = '375' + digits.substring(2);
+          else if (!digits.startsWith('375')) digits = '375' + digits;
+          digits = digits.substring(0, 12);
+
+          let res = '+375';
+          if (digits.length > 3) res += ' (' + digits.substring(3, 5);
+          if (digits.length >= 5) res += ') ' + digits.substring(5, 8);
+          if (digits.length >= 8) res += '-' + digits.substring(8, 10);
+          if (digits.length >= 10) res += '-' + digits.substring(10, 12);
+
+          e.target.value = res;
+          state.phone = res;
         });
 
         phoneInput.addEventListener('focus', function () {
@@ -769,9 +739,10 @@
       const nextBtnLabels = {
         1: 'Далее к стилю →',
         2: 'Далее к фасадам →',
-        3: 'Далее к размерам →',
-        4: 'Рассчитать стоимость →',
-        5: 'Зафиксировать цену и забрать подарок'
+        3: 'Далее к комплектации →',
+        4: 'Далее к срокам →',
+        5: 'Далее к контактам →',
+        6: 'Отправить заявку дизайнеру'
       };
 
       function goToStep(step) {
@@ -804,8 +775,6 @@
           nextBtn.textContent = nextBtnLabels[step] || 'Далее →';
         }
 
-        updatePriceDisplay();
-
         // Скролл к началу квиза
         const wrapper = document.querySelector('.quiz-wrapper');
         if (wrapper && window.innerWidth < 768) {
@@ -833,8 +802,9 @@
             }
 
             const nameInput = document.getElementById('quizName');
+            const commentInput = document.getElementById('quizComment');
             const clientName = nameInput ? nameInput.value.trim() : '';
-            const { total } = calcTotalPrice();
+            const comment = commentInput ? commentInput.value.trim() : '';
 
             const leadData = {
               source: 'Квиз-калькулятор DomKuhni.by',
@@ -844,16 +814,16 @@
               length: state.length + ' м.п.',
               countertop: labelMaps.countertop[state.countertop] || state.countertop,
               hardware: labelMaps.hardware[state.hardware] || state.hardware,
-              gift: labelMaps.gift[state.gift] || state.gift,
+              urgency: labelMaps.urgency[state.urgency] || state.urgency,
               messenger: labelMaps.messenger[state.messenger] || state.messenger,
-              estimated_price: total + ' BYN',
               phone: phone,
               name: clientName || 'Не указано',
+              comment: comment || 'Без комментариев',
               date: new Date().toLocaleString('ru-RU')
             };
 
             nextBtn.disabled = true;
-            nextBtn.textContent = 'Отправка расчета...';
+            nextBtn.textContent = 'Отправка заявки...';
 
             try {
               const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
@@ -863,36 +833,29 @@
               });
 
               if (res.ok) {
+                // Скрываем форму, показываем экран благодарности
                 document.getElementById('quizForm').style.display = 'none';
                 document.getElementById('quizProgressBar').style.display = 'none';
-                document.getElementById('quizSuccessBox').classList.add('active');
+                document.querySelector('.quiz-header').style.display = 'none';
+                const successBox = document.getElementById('quizSuccessBox');
+                if (successBox) successBox.classList.add('active');
               } else {
-                alert('Не удалось отправить форму. Пожалуйста, позвоните нам напрямую: +375 (44) 584-22-33');
+                alert('Не удалось отправить заявку. Пожалуйста, позвоните нам: +375 (44) 584-22-33');
                 nextBtn.disabled = false;
-                nextBtn.textContent = nextBtnLabels[5];
+                nextBtn.textContent = 'Отправить заявку дизайнеру';
               }
             } catch (err) {
-              // При оффлайн/сетевой ошибке также показываем подтверждение для лучшего UX
-              document.getElementById('quizForm').style.display = 'none';
-              document.getElementById('quizProgressBar').style.display = 'none';
-              document.getElementById('quizSuccessBox').classList.add('active');
+              console.error(err);
+              alert('Ошибка соединения. Пожалуйста, позвоните нам: +375 (44) 584-22-33');
+              nextBtn.disabled = false;
+              nextBtn.textContent = 'Отправить заявку дизайнеру';
             }
           }
         });
       }
 
-      // Клик по шагам в прогресс-баре для быстрого возврата
-      progressSteps.forEach((ps, idx) => {
-        ps.addEventListener('click', () => {
-          const target = idx + 1;
-          if (target <= state.step || target === state.step + 1) {
-            goToStep(target);
-          }
-        });
-      });
-
-      // Инициализация расчета
-      updatePriceDisplay();
+      // Инициализация шага 1
+      goToStep(1);
     })();
   </script>
 </body>
