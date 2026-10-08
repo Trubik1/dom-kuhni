@@ -235,5 +235,178 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = el.textContent.replace(/\d{4}/, new Date().getFullYear());
   });
 
+  // ====== PORTFOLIO SLIDERS & LIGHTBOX (SHARED) ======
+  // Card sliders
+  document.querySelectorAll('.card-slider').forEach(slider => {
+    const track = slider.querySelector('.card-slider__track');
+    const slides = track ? track.querySelectorAll('.card-slider__slide') : [];
+    if (!slides.length) return;
+    const dots = slider.querySelectorAll('.card-slider__dot');
+    const prev = slider.querySelector('.card-slider__btn--prev');
+    const next = slider.querySelector('.card-slider__btn--next');
+    let idx = 0;
+    const go = i => {
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      dots.forEach((d, j) => d.classList.toggle('active', j === idx));
+    };
+    if (prev) prev.addEventListener('click', e => { e.stopPropagation(); go(idx - 1); });
+    if (next) next.addEventListener('click', e => { e.stopPropagation(); go(idx + 1); });
+    dots.forEach((d, i) => {
+      d.dataset.i = i;
+      d.addEventListener('click', e => { e.stopPropagation(); go(i); });
+    });
+
+    // Touch swipe
+    let touchData = {};
+    slider.addEventListener('touchstart', e => {
+      const t = e.changedTouches[0];
+      touchData = { startX: t.screenX, startY: t.screenY, moved: false };
+    }, { passive: true });
+    slider.addEventListener('touchmove', e => {
+      if (!touchData.startX) return;
+      const t = e.changedTouches[0];
+      const dx = Math.abs(t.screenX - touchData.startX);
+      const dy = Math.abs(t.screenY - touchData.startY);
+      if (dx > 10 && dx > dy) {
+        touchData.moved = true;
+        e.preventDefault();
+      }
+    }, { passive: false });
+    slider.addEventListener('touchend', e => {
+      if (!touchData.startX) return;
+      const dx = e.changedTouches[0].screenX - touchData.startX;
+      if (touchData.moved && Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
+      touchData = {};
+    }, { passive: true });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    const lbImg = document.getElementById('lightboxImg');
+    const lbTitle = document.getElementById('lightboxTitle');
+    const lbDesc = document.getElementById('lightboxDesc');
+    const lbClose = document.getElementById('lightboxClose');
+    const lbPrev = document.getElementById('lightboxPrev');
+    const lbNext = document.getElementById('lightboxNext');
+    const lbCalc = document.getElementById('lightboxCalcBtn');
+
+    let curPhotos = [];
+    let curIndex = 0;
+
+    function openLightboxFromBtn(btn, initialIdx = 0) {
+      try {
+        curPhotos = JSON.parse(btn.dataset.photos || '[]');
+      } catch (e) {
+        curPhotos = [];
+      }
+      if (!curPhotos.length) return;
+      curIndex = initialIdx;
+      if (lbTitle) lbTitle.textContent = btn.dataset.title || '';
+      if (lbDesc) lbDesc.textContent = btn.dataset.desc || '';
+      const card = btn.closest('.portfolio-card');
+      const pid = card ? card.dataset.id : '';
+      if (lbCalc) lbCalc.href = `calculator.html?project=${pid}`;
+      showLbPhoto(curIndex);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showLbPhoto(idx) {
+      if (!curPhotos.length) return;
+      curIndex = (idx + curPhotos.length) % curPhotos.length;
+      if (lbImg) lbImg.src = curPhotos[curIndex];
+      if (lbPrev && lbNext) {
+        lbPrev.style.display = curPhotos.length > 1 ? 'flex' : 'none';
+        lbNext.style.display = curPhotos.length > 1 ? 'flex' : 'none';
+      }
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.portfolio-card__zoom-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        openLightboxFromBtn(btn, 0);
+      });
+    });
+
+    document.querySelectorAll('.card-slider__slide').forEach((slide, sIdx) => {
+      slide.addEventListener('click', e => {
+        e.stopPropagation();
+        const card = slide.closest('.portfolio-card');
+        const zoomBtn = card ? card.querySelector('.portfolio-card__zoom-btn') : null;
+        if (zoomBtn) openLightboxFromBtn(zoomBtn, sIdx);
+      });
+    });
+
+    if (lbClose) lbClose.addEventListener('click', closeLightbox);
+    if (lbPrev) lbPrev.addEventListener('click', () => showLbPhoto(curIndex - 1));
+    if (lbNext) lbNext.addEventListener('click', () => showLbPhoto(curIndex + 1));
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showLbPhoto(curIndex - 1);
+      if (e.key === 'ArrowRight') showLbPhoto(curIndex + 1);
+    });
+  }
+
+  // Home page Show More button
+  const homeShowMoreBtn = document.getElementById('homeShowMoreBtn');
+  const homePortfolioGrid = document.getElementById('homePortfolioGrid');
+  if (homeShowMoreBtn && homePortfolioGrid) {
+    homeShowMoreBtn.addEventListener('click', () => {
+      const isCollapsed = homePortfolioGrid.classList.contains('portfolio-grid--collapsed');
+      if (isCollapsed) {
+        homePortfolioGrid.classList.remove('portfolio-grid--collapsed');
+        homeShowMoreBtn.textContent = 'Свернуть обратно ↑';
+      } else {
+        homePortfolioGrid.classList.add('portfolio-grid--collapsed');
+        homeShowMoreBtn.textContent = 'Показать ещё 6 проектов ↓';
+      }
+    });
+  }
+
+  // Home page Filter tabs
+  const homeFilterBtns = document.querySelectorAll('[data-home-filter]');
+  if (homeFilterBtns.length && homePortfolioGrid) {
+    const homeCards = homePortfolioGrid.querySelectorAll('.portfolio-card');
+    homeFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        homeFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const val = btn.dataset.homeFilter;
+        // Expand grid when filtering so matching cards are visible
+        if (val !== 'all') {
+          homePortfolioGrid.classList.remove('portfolio-grid--collapsed');
+          if (homeShowMoreBtn) homeShowMoreBtn.style.display = 'none';
+        } else {
+          if (homeShowMoreBtn) {
+            homeShowMoreBtn.style.display = '';
+            homeShowMoreBtn.textContent = 'Показать ещё 6 проектов ↓';
+          }
+          homePortfolioGrid.classList.add('portfolio-grid--collapsed');
+        }
+
+        homeCards.forEach(card => {
+          if (val === 'all') {
+            card.style.display = '';
+          } else if (card.dataset.category === val || card.dataset.layout === val) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
   console.log('[Дом кухни] Initialized successfully');
 });

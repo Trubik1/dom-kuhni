@@ -259,150 +259,438 @@
   </section>
 
   <!-- ИЗБРАННЫЕ РЕАЛЬНЫЕ ПРОЕКТЫ -->
-  <section class="section">
+  <section class="section" id="portfolio">
     <div class="container">
       <div class="section__header">
         <span class="quiz-teaser-badge" style="margin-bottom:12px;">Портфолио • Реальные объекты в Гомеле</span>
         <h2 class="section-title">Кухни, созданные нашими мастерами</h2>
-        <p class="section-desc">Каждый гарнитур спроектирован под точные размеры помещения и индивидуальные пожелания заказчика</p>
+        <p class="section-desc">Каждый гарнитур спроектирован под точные размеры помещения. Фотографии готовых кухонь из нашего Instagram @gomel_kuhni и архива салона</p>
       </div>
 
-      <div class="portfolio-grid">
-        <!-- Проект 1 -->
-        <article class="portfolio-card">
+      <!-- Быстрые фильтры на главной -->
+      <div class="filter-wrapper" id="homeFilterWrapper" style="margin-bottom:28px;">
+        <div class="filter-row">
+          <button class="filter-btn active" data-home-filter="all">Все проекты</button>
+          <button class="filter-btn" data-home-filter="corner">Угловые</button>
+          <button class="filter-btn" data-home-filter="island">С островом</button>
+          <button class="filter-btn" data-home-filter="straight">Прямые</button>
+          <button class="filter-btn" data-home-filter="modern">Современные</button>
+          <button class="filter-btn" data-home-filter="classic">Неоклассика</button>
+          <button class="filter-btn" data-home-filter="scandi">Сканди</button>
+        </div>
+      </div>
+
+      <div class="portfolio-grid portfolio-grid--collapsed" id="homePortfolioGrid">
+        <article class="portfolio-card" data-category="modern" data-layout="corner" data-id="gomel-insta-1">
           <div class="portfolio-card__img-wrap">
-            <img src="images/kitchen-02.jpg" alt="Кухня с островом и шпоном ореха" class="portfolio-card__img" loading="lazy" />
-            <span class="portfolio-card__badge">Флагманский проект</span>
+            <div class="card-slider" data-title="Угловая кухня Soft-Touch с подсветкой Gola" data-photos="[&quot;images/tg_kitchens/gomel_kuhni_15_img1.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_15_img2.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_15_img3.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_15_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_15_img1.jpg" alt="Угловая кухня Soft-Touch с подсветкой Gola — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_15_img2.jpg" alt="Угловая кухня Soft-Touch с подсветкой Gola — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_15_img3.jpg" alt="Угловая кухня Soft-Touch с подсветкой Gola — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_15_img4.jpg" alt="Угловая кухня Soft-Touch с подсветкой Gola — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Instagram @gomel_kuhni</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/gomel_kuhni_15_img1.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_15_img2.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_15_img3.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_15_img4.jpg&quot;]" data-title="Угловая кухня Soft-Touch с подсветкой Gola" data-desc="Скрытый профиль Gola, встроенная подсветка рабочей зоны, пеналы со встроенной духовкой и СВЧ.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
           </div>
           <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Кухня с островом и шпоном ореха</h3>
-            <p class="portfolio-card__desc">Матовый камень с белыми прожилками, скрытый профиль Gola, островная вытяжка цилиндр.</p>
+            <h3 class="portfolio-card__title">Угловая кухня Soft-Touch с подсветкой Gola</h3>
+            <p class="portfolio-card__desc">Скрытый профиль Gola, встроенная подсветка рабочей зоны, пеналы со встроенной духовкой и СВЧ.</p>
             <div class="portfolio-card__specs">
-              <span class="portfolio-card__spec-item">18 м²</span>
-              <span class="portfolio-card__spec-item">Срок: 24 дня</span>
+              <span class="portfolio-card__spec-item">16 м²</span>
+              <span class="portfolio-card__spec-item">МДФ Soft-Touch Графит</span>
+              <span class="portfolio-card__spec-item">Кварцевый агломерат 20мм</span>
               <span class="portfolio-card__spec-item">Blum Legrabox</span>
-              <span class="portfolio-card__spec-item">Кварц 20мм</span>
             </div>
             <div class="portfolio-card__meta">
               <span>Гомель, ул. Советская</span>
-              <a href="calculator.html" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+              <a href="calculator.html?project=gomel-insta-1" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
             </div>
           </div>
         </article>
 
-        <!-- Проект 2 -->
-        <article class="portfolio-card">
+        <article class="portfolio-card" data-category="modern" data-layout="island" data-id="gomel-insta-2">
           <div class="portfolio-card__img-wrap">
-            <img src="images/kitchen-05.jpg" alt="Классическая кухня с фрезеровкой" class="portfolio-card__img" loading="lazy" />
-            <span class="portfolio-card__badge">Неоклассика</span>
+            <div class="card-slider" data-title="Кухня с островом и черным матовым стеклом" data-photos="[&quot;images/tg_kitchens/gomel_kuhni_24_img1.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_24_img2.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_24_img3.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_24_img5.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_24_img1.jpg" alt="Кухня с островом и черным матовым стеклом — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_24_img2.jpg" alt="Кухня с островом и черным матовым стеклом — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_24_img3.jpg" alt="Кухня с островом и черным матовым стеклом — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_24_img5.jpg" alt="Кухня с островом и черным матовым стеклом — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Instagram-проект</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/gomel_kuhni_24_img1.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_24_img2.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_24_img3.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_24_img5.jpg&quot;]" data-title="Кухня с островом и черным матовым стеклом" data-desc="Островная зона с барной стойкой, витрины с графитовой тонировкой и внутренней LED-подсветкой.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
           </div>
           <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Неоклассика с витринами</h3>
-            <p class="portfolio-card__desc">Эмаль с шелковисто-матовым лаком, столешница кварц, декоративные молдинги и теплая подсветка витрин.</p>
+            <h3 class="portfolio-card__title">Кухня с островом и черным матовым стеклом</h3>
+            <p class="portfolio-card__desc">Островная зона с барной стойкой, витрины с графитовой тонировкой и внутренней LED-подсветкой.</p>
             <div class="portfolio-card__specs">
-              <span class="portfolio-card__spec-item">16 м²</span>
-              <span class="portfolio-card__spec-item">Срок: 28 дней</span>
-              <span class="portfolio-card__spec-item">МДФ Эмаль</span>
-              <span class="portfolio-card__spec-item">Blum Aventos</span>
-            </div>
-            <div class="portfolio-card__meta">
-              <span>Гомель, пр-т Победы</span>
-              <a href="calculator.html" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Проект 3 -->
-        <article class="portfolio-card">
-          <div class="portfolio-card__img-wrap">
-            <img src="images/kitchen-07.jpg" alt="Минималистичный барный остров" class="portfolio-card__img" loading="lazy" />
-            <span class="portfolio-card__badge">Современный стиль</span>
-          </div>
-          <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Интегрированная мойка & Барная зона</h3>
-            <p class="portfolio-card__desc">Эргономичное зонирование: подстольная мойка в каменной плите, плавный переход в обеденный полуостров.</p>
-            <div class="portfolio-card__specs">
-              <span class="portfolio-card__spec-item">14 м²</span>
-              <span class="portfolio-card__spec-item">Срок: 21 день</span>
-              <span class="portfolio-card__spec-item">Fenix NTM</span>
-              <span class="portfolio-card__spec-item">Hettich ArciTech</span>
+              <span class="portfolio-card__spec-item">22 м²</span>
+              <span class="portfolio-card__spec-item">Fenix NTM + Стекло в Z-профиле</span>
+              <span class="portfolio-card__spec-item">Искусственный камень Grandex</span>
+              <span class="portfolio-card__spec-item">Blum Aventos HK-S</span>
             </div>
             <div class="portfolio-card__meta">
               <span>Гомель, Шведская Горка</span>
-              <a href="calculator.html" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+              <a href="calculator.html?project=gomel-insta-2" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
             </div>
           </div>
         </article>
 
-        <!-- Проект 4 -->
-        <article class="portfolio-card">
+        <article class="portfolio-card" data-category="scandi" data-layout="corner" data-id="gomel-insta-3">
           <div class="portfolio-card__img-wrap">
-            <img src="images/kitchen-03.jpg" alt="Минималистичная кухня со скрытыми ручками" class="portfolio-card__img" loading="lazy" />
-            <span class="portfolio-card__badge">Минимализм</span>
+            <div class="card-slider" data-title="Светлая скандинавская кухня до потолка" data-photos="[&quot;images/tg_kitchens/gomel_kuhni_9_img1.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_9_img2.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_9_img3.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_9_img1.jpg" alt="Светлая скандинавская кухня до потолка — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_9_img2.jpg" alt="Светлая скандинавская кухня до потолка — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/gomel_kuhni_9_img3.jpg" alt="Светлая скандинавская кухня до потолка — фото 3" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Instagram @gomel_kuhni</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/gomel_kuhni_9_img1.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_9_img2.jpg&quot;, &quot;images/tg_kitchens/gomel_kuhni_9_img3.jpg&quot;]" data-title="Светлая скандинавская кухня до потолка" data-desc="Трехуровневая компоновка с антресолями, скрытая вытяжка, мойка подстольного монтажа.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
           </div>
           <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Трендовый минимализм без ручек</h3>
-            <p class="portfolio-card__desc">Скрытый черный профиль Gola, гладкие матовые фасады Soft-Touch без отпечатков, врезная подсветка фартука.</p>
+            <h3 class="portfolio-card__title">Светлая скандинавская кухня до потолка</h3>
+            <p class="portfolio-card__desc">Трехуровневая компоновка с антресолями, скрытая вытяжка, мойка подстольного монтажа.</p>
             <div class="portfolio-card__specs">
-              <span class="portfolio-card__spec-item">12 м²</span>
-              <span class="portfolio-card__spec-item">Срок: 19 дней</span>
-              <span class="portfolio-card__spec-item">МДФ Soft-Touch</span>
-              <span class="portfolio-card__spec-item">Blum Tip-On</span>
+              <span class="portfolio-card__spec-item">13 м²</span>
+              <span class="portfolio-card__spec-item">Egger Белый Альпийский & Дуб Галифакс</span>
+              <span class="portfolio-card__spec-item">Влагостойкий пластик Egger</span>
+              <span class="portfolio-card__spec-item">Hettich Sensys</span>
             </div>
             <div class="portfolio-card__meta">
               <span>Гомель, ул. Мазурова</span>
-              <a href="calculator.html" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+              <a href="calculator.html?project=gomel-insta-3" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
             </div>
           </div>
         </article>
 
-        <!-- Проект 5 -->
-        <article class="portfolio-card">
+        <article class="portfolio-card" data-category="modern" data-layout="island" data-id="gomel-insta-4">
           <div class="portfolio-card__img-wrap">
-            <img src="images/kitchen-06.jpg" alt="Скандинавская светлая кухня" class="portfolio-card__img" loading="lazy" />
-            <span class="portfolio-card__badge">Сканди</span>
+            <div class="card-slider" data-title="Премиальный островной гарнитур в частном доме" data-photos="[&quot;images/tg_kitchens/domkuhni_507_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_507_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_507_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_507_img5.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_507_img1.jpg" alt="Премиальный островной гарнитур в частном доме — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_507_img2.jpg" alt="Премиальный островной гарнитур в частном доме — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_507_img3.jpg" alt="Премиальный островной гарнитур в частном доме — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_507_img5.jpg" alt="Премиальный островной гарнитур в частном доме — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Премиум объект</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_507_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_507_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_507_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_507_img5.jpg&quot;]" data-title="Премиальный островной гарнитур в частном доме" data-desc="Масштабный проект с островом 2.4м, винным шкафом, встроенной колонной холодильников и тёплым светом.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
           </div>
           <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Скандинавский дуб & Белый акрил</h3>
-            <p class="portfolio-card__desc">Теплые древесные фактуры австрийского Egger в сочетании с шелковистым белым верхом до потолка.</p>
+            <h3 class="portfolio-card__title">Премиальный островной гарнитур в частном доме</h3>
+            <p class="portfolio-card__desc">Масштабный проект с островом 2.4м, винным шкафом, встроенной колонной холодильников и тёплым светом.</p>
+            <div class="portfolio-card__specs">
+              <span class="portfolio-card__spec-item">26 м²</span>
+              <span class="portfolio-card__spec-item">Эмаль шелковисто-матовая RAL 7044</span>
+              <span class="portfolio-card__spec-item">Кварц Calacatta 20мм</span>
+              <span class="portfolio-card__spec-item">Blum Legrabox Tip-On</span>
+            </div>
+            <div class="portfolio-card__meta">
+              <span>Гомельский район, Чёнки</span>
+              <a href="calculator.html?project=gomel-insta-4" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card" data-category="modern" data-layout="corner" data-id="gomel-insta-5">
+          <div class="portfolio-card__img-wrap">
+            <div class="card-slider" data-title="Графитовый минимализм с акцентным деревом" data-photos="[&quot;images/tg_kitchens/domkuhni_436_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_436_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_436_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_436_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_436_img1.jpg" alt="Графитовый минимализм с акцентным деревом — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_436_img2.jpg" alt="Графитовый минимализм с акцентным деревом — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_436_img3.jpg" alt="Графитовый минимализм с акцентным деревом — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_436_img4.jpg" alt="Графитовый минимализм с акцентным деревом — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Хит сезона</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_436_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_436_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_436_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_436_img4.jpg&quot;]" data-title="Графитовый минимализм с акцентным деревом" data-desc="Глубокий графитовый цвет, интеграция профиля Gola с подсветкой, бесшовный фартук.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+          <div class="portfolio-card__body">
+            <h3 class="portfolio-card__title">Графитовый минимализм с акцентным деревом</h3>
+            <p class="portfolio-card__desc">Глубокий графитовый цвет, интеграция профиля Gola с подсветкой, бесшовный фартук.</p>
+            <div class="portfolio-card__specs">
+              <span class="portfolio-card__spec-item">17 м²</span>
+              <span class="portfolio-card__spec-item">МДФ Эмаль Антрацит + Шпон ясеня</span>
+              <span class="portfolio-card__spec-item">Компакт-плита HPL 12мм</span>
+              <span class="portfolio-card__spec-item">Blum Tandembox antaro</span>
+            </div>
+            <div class="portfolio-card__meta">
+              <span>Гомель, пр-т Победы</span>
+              <a href="calculator.html?project=gomel-insta-5" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card" data-category="modern" data-layout="straight" data-id="gomel-insta-6">
+          <div class="portfolio-card__img-wrap">
+            <div class="card-slider" data-title="Кухня с витринами и подсветкой полок" data-photos="[&quot;images/tg_kitchens/domkuhni_538_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_538_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_538_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_538_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_538_img1.jpg" alt="Кухня с витринами и подсветкой полок — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_538_img2.jpg" alt="Кухня с витринами и подсветкой полок — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_538_img3.jpg" alt="Кухня с витринами и подсветкой полок — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_538_img4.jpg" alt="Кухня с витринами и подсветкой полок — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Instagram @gomel_kuhni</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_538_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_538_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_538_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_538_img4.jpg&quot;]" data-title="Кухня с витринами и подсветкой полок" data-desc="Стильные алюминиевые витрины с тонированным стеклом и вертикальной скрытой светодиодной лентой.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+          <div class="portfolio-card__body">
+            <h3 class="portfolio-card__title">Кухня с витринами и подсветкой полок</h3>
+            <p class="portfolio-card__desc">Стильные алюминиевые витрины с тонированным стеклом и вертикальной скрытой светодиодной лентой.</p>
             <div class="portfolio-card__specs">
               <span class="portfolio-card__spec-item">15 м²</span>
-              <span class="portfolio-card__spec-item">Срок: 22 дня</span>
-              <span class="portfolio-card__spec-item">Egger Дуб Галифакс</span>
-              <span class="portfolio-card__spec-item">Акрил Senosan</span>
+              <span class="portfolio-card__spec-item">МДФ Кашемир + Алюминиевый профиль</span>
+              <span class="portfolio-card__spec-item">Кварцевый агломерат 20мм</span>
+              <span class="portfolio-card__spec-item">Blum Aventos HF</span>
             </div>
             <div class="portfolio-card__meta">
               <span>Гомель, ул. Барыкина</span>
-              <a href="calculator.html" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+              <a href="calculator.html?project=gomel-insta-6" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
             </div>
           </div>
         </article>
 
-        <!-- Проект 6 -->
-        <article class="portfolio-card">
+        <article class="portfolio-card portfolio-card--extra" data-category="classic" data-layout="corner" data-id="gomel-insta-7">
           <div class="portfolio-card__img-wrap">
-            <img src="images/kitchen-08.jpg" alt="Угловая кухня с пеналами" class="portfolio-card__img" loading="lazy" />
-            <span class="portfolio-card__badge">Угловая кухня</span>
+            <div class="card-slider" data-title="Неоклассическая кухня в цвете Капучино" data-photos="[&quot;images/tg_kitchens/domkuhni_450_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_450_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_450_img3.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_450_img1.jpg" alt="Неоклассическая кухня в цвете Капучино — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_450_img2.jpg" alt="Неоклассическая кухня в цвете Капучино — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_450_img3.jpg" alt="Неоклассическая кухня в цвете Капучино — фото 3" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Неоклассика</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_450_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_450_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_450_img3.jpg&quot;]" data-title="Неоклассическая кухня в цвете Капучино" data-desc="Изящная тонкая фрезеровка рамочных фасадов, классический карниз в цвет гарнитура и дизайнерские ручки.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
           </div>
           <div class="portfolio-card__body">
-            <h3 class="portfolio-card__title">Угловой гарнитур с колонной под технику</h3>
-            <p class="portfolio-card__desc">Максимальная эргономика рабочего треугольника, встроенный пенал под духовку и СВЧ на уровне глаз.</p>
+            <h3 class="portfolio-card__title">Неоклассическая кухня в цвете Капучино</h3>
+            <p class="portfolio-card__desc">Изящная тонкая фрезеровка рамочных фасадов, классический карниз в цвет гарнитура и дизайнерские ручки.</p>
             <div class="portfolio-card__specs">
-              <span class="portfolio-card__spec-item">19 м²</span>
-              <span class="portfolio-card__spec-item">Срок: 26 дней</span>
-              <span class="portfolio-card__spec-item">Компакт-плита 12мм</span>
-              <span class="portfolio-card__spec-item">Blum Tandembox</span>
+              <span class="portfolio-card__spec-item">18 м²</span>
+              <span class="portfolio-card__spec-item">МДФ фрезерованный Эмаль</span>
+              <span class="portfolio-card__spec-item">Акриловый камень Samsung Staron</span>
+              <span class="portfolio-card__spec-item">Hettich InnoTech Atira</span>
             </div>
             <div class="portfolio-card__meta">
               <span>Гомель, пр-т Ленина</span>
-              <a href="calculator.html" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+              <a href="calculator.html?project=gomel-insta-7" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card portfolio-card--extra" data-category="modern" data-layout="u-shape" data-id="gomel-insta-8">
+          <div class="portfolio-card__img-wrap">
+            <div class="card-slider" data-title="П-образная кухня с барным полуостровом" data-photos="[&quot;images/tg_kitchens/domkuhni_465_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_465_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_465_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_465_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_465_img1.jpg" alt="П-образная кухня с барным полуостровом — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_465_img2.jpg" alt="П-образная кухня с барным полуостровом — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_465_img3.jpg" alt="П-образная кухня с барным полуостровом — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_465_img4.jpg" alt="П-образная кухня с барным полуостровом — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Популярный проект</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_465_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_465_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_465_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_465_img4.jpg&quot;]" data-title="П-образная кухня с барным полуостровом" data-desc="Идеальный рабочий треугольник с барной стойкой-полуостровом, переходящей в зону отдыха.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+          <div class="portfolio-card__body">
+            <h3 class="portfolio-card__title">П-образная кухня с барным полуостровом</h3>
+            <p class="portfolio-card__desc">Идеальный рабочий треугольник с барной стойкой-полуостровом, переходящей в зону отдыха.</p>
+            <div class="portfolio-card__specs">
+              <span class="portfolio-card__spec-item">19 м²</span>
+              <span class="portfolio-card__spec-item">Пластик Fenix NTM Grigio Bromo</span>
+              <span class="portfolio-card__spec-item">Влагостойкий пластик 38мм</span>
+              <span class="portfolio-card__spec-item">Blum Legrabox</span>
+            </div>
+            <div class="portfolio-card__meta">
+              <span>Гомель, ул. Косарева</span>
+              <a href="calculator.html?project=gomel-insta-8" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card portfolio-card--extra" data-category="scandi" data-layout="corner" data-id="gomel-insta-9">
+          <div class="portfolio-card__img-wrap">
+            <div class="card-slider" data-title="Уютная кухня в теплом дереве с белым верхом" data-photos="[&quot;images/tg_kitchens/domkuhni_417_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_417_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_417_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_417_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_417_img1.jpg" alt="Уютная кухня в теплом дереве с белым верхом — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_417_img2.jpg" alt="Уютная кухня в теплом дереве с белым верхом — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_417_img3.jpg" alt="Уютная кухня в теплом дереве с белым верхом — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_417_img4.jpg" alt="Уютная кухня в теплом дереве с белым верхом — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Фабричный проект</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_417_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_417_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_417_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_417_img4.jpg&quot;]" data-title="Уютная кухня в теплом дереве с белым верхом" data-desc="Контрастное сочетание матовых гладких фасадов и рельефной фактуры дуба. Встроенный скрытый профиль.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+          <div class="portfolio-card__body">
+            <h3 class="portfolio-card__title">Уютная кухня в теплом дереве с белым верхом</h3>
+            <p class="portfolio-card__desc">Контрастное сочетание матовых гладких фасадов и рельефной фактуры дуба. Встроенный скрытый профиль.</p>
+            <div class="portfolio-card__specs">
+              <span class="portfolio-card__spec-item">14 м²</span>
+              <span class="portfolio-card__spec-item">МДФ супермат + Синхронные поры ЛДСП</span>
+              <span class="portfolio-card__spec-item">Egger Дуб Небраска натуральный</span>
+              <span class="portfolio-card__spec-item">Blum Clip-Top Blumotion</span>
+            </div>
+            <div class="portfolio-card__meta">
+              <span>Гомель, ул. Ефремова</span>
+              <a href="calculator.html?project=gomel-insta-9" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card portfolio-card--extra" data-category="loft" data-layout="corner" data-id="gomel-insta-10">
+          <div class="portfolio-card__img-wrap">
+            <div class="card-slider" data-title="Стильный лофт с текстурой бетона и металла" data-photos="[&quot;images/tg_kitchens/domkuhni_481_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_481_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_481_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_481_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_481_img1.jpg" alt="Стильный лофт с текстурой бетона и металла — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_481_img2.jpg" alt="Стильный лофт с текстурой бетона и металла — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_481_img3.jpg" alt="Стильный лофт с текстурой бетона и металла — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_481_img4.jpg" alt="Стильный лофт с текстурой бетона и металла — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Лофт коллекция</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_481_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_481_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_481_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_481_img4.jpg&quot;]" data-title="Стильный лофт с текстурой бетона и металла" data-desc="Брутальный городской стиль, черная врезная мойка, открытые металлические стеллажи с подсветкой.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+          <div class="portfolio-card__body">
+            <h3 class="portfolio-card__title">Стильный лофт с текстурой бетона и металла</h3>
+            <p class="portfolio-card__desc">Брутальный городской стиль, черная врезная мойка, открытые металлические стеллажи с подсветкой.</p>
+            <div class="portfolio-card__specs">
+              <span class="portfolio-card__spec-item">20 м²</span>
+              <span class="portfolio-card__spec-item">Пластик HPL Бетон Чикаго & Черный матовый</span>
+              <span class="portfolio-card__spec-item">Компакт-ламинат 12мм</span>
+              <span class="portfolio-card__spec-item">Hettich ArciTech черные</span>
+            </div>
+            <div class="portfolio-card__meta">
+              <span>Гомель, ул. Кирова</span>
+              <a href="calculator.html?project=gomel-insta-10" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card portfolio-card--extra" data-category="modern" data-layout="corner" data-id="gomel-insta-11">
+          <div class="portfolio-card__img-wrap">
+            <div class="card-slider" data-title="Эргономичная кухня в новостройке с антресолями" data-photos="[&quot;images/tg_kitchens/domkuhni_584_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_584_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_584_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_584_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_584_img1.jpg" alt="Эргономичная кухня в новостройке с антресолями — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_584_img2.jpg" alt="Эргономичная кухня в новостройке с антресолями — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_584_img3.jpg" alt="Эргономичная кухня в новостройке с антресолями — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_584_img4.jpg" alt="Эргономичная кухня в новостройке с антресолями — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Instagram @gomel_kuhni</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_584_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_584_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_584_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_584_img4.jpg&quot;]" data-title="Эргономичная кухня в новостройке с антресолями" data-desc="Нежный шалфейный оттенок, продуманное хранение до потолка, встроенный винный отсек и посудомойка.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+          <div class="portfolio-card__body">
+            <h3 class="portfolio-card__title">Эргономичная кухня в новостройке с антресолями</h3>
+            <p class="portfolio-card__desc">Нежный шалфейный оттенок, продуманное хранение до потолка, встроенный винный отсек и посудомойка.</p>
+            <div class="portfolio-card__specs">
+              <span class="portfolio-card__spec-item">15 м²</span>
+              <span class="portfolio-card__spec-item">МДФ Эмаль Шалфей + Белый шелк</span>
+              <span class="portfolio-card__spec-item">Искусственный акриловый камень</span>
+              <span class="portfolio-card__spec-item">Blum Tandembox</span>
+            </div>
+            <div class="portfolio-card__meta">
+              <span>Гомель, 104 микрорайон</span>
+              <a href="calculator.html?project=gomel-insta-11" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card portfolio-card--extra" data-category="modern" data-layout="straight" data-id="gomel-insta-12">
+          <div class="portfolio-card__img-wrap">
+            <div class="card-slider" data-title="Двухцветная современная кухня с нишей под СВЧ" data-photos="[&quot;images/tg_kitchens/domkuhni_492_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_492_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_492_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_492_img4.jpg&quot;]">
+              <div class="card-slider__track">
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_492_img1.jpg" alt="Двухцветная современная кухня с нишей под СВЧ — фото 1" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_492_img2.jpg" alt="Двухцветная современная кухня с нишей под СВЧ — фото 2" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_492_img3.jpg" alt="Двухцветная современная кухня с нишей под СВЧ — фото 3" loading="lazy" width="400" height="300" />
+                <img class="card-slider__slide" src="images/tg_kitchens/domkuhni_492_img4.jpg" alt="Двухцветная современная кухня с нишей под СВЧ — фото 4" loading="lazy" width="400" height="300" />
+              </div>
+              <button class="card-slider__btn card-slider__btn--prev" type="button" aria-label="Предыдущее фото">‹</button>
+              <button class="card-slider__btn card-slider__btn--next" type="button" aria-label="Следующее фото">›</button>
+              <div class="card-slider__dots"><span class="card-slider__dot active" data-i="0"></span><span class="card-slider__dot" data-i="1"></span><span class="card-slider__dot" data-i="2"></span><span class="card-slider__dot" data-i="3"></span></div>
+            </div>
+            <span class="portfolio-card__badge">Instagram-проект</span>
+            <button class="portfolio-card__zoom-btn" type="button" title="Увеличить фото" aria-label="Увеличить фото" data-photos="[&quot;images/tg_kitchens/domkuhni_492_img1.jpg&quot;, &quot;images/tg_kitchens/domkuhni_492_img2.jpg&quot;, &quot;images/tg_kitchens/domkuhni_492_img3.jpg&quot;, &quot;images/tg_kitchens/domkuhni_492_img4.jpg&quot;]" data-title="Двухцветная современная кухня с нишей под СВЧ" data-desc="Удобная прямая конфигурация для евро-планировки с максимальным объемом полезного хранения.">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+          <div class="portfolio-card__body">
+            <h3 class="portfolio-card__title">Двухцветная современная кухня с нишей под СВЧ</h3>
+            <p class="portfolio-card__desc">Удобная прямая конфигурация для евро-планировки с максимальным объемом полезного хранения.</p>
+            <div class="portfolio-card__specs">
+              <span class="portfolio-card__spec-item">12 м²</span>
+              <span class="portfolio-card__spec-item">МДФ Кашемир Серый & Орех Аида</span>
+              <span class="portfolio-card__spec-item">Постформинг 38мм влагостойкий</span>
+              <span class="portfolio-card__spec-item">Blum Tip-On Blumotion</span>
+            </div>
+            <div class="portfolio-card__meta">
+              <span>Гомель, ул. Чечерская</span>
+              <a href="calculator.html?project=gomel-insta-12" class="text-accent" style="font-weight:600;">Рассчитать такую →</a>
             </div>
           </div>
         </article>
       </div>
 
       <div class="portfolio-cta-row">
-        <a href="portfolio.html" class="btn btn--lg btn--outline-dark">Посмотреть все 50+ работ в каталоге →</a>
+        <button type="button" class="btn btn--lg btn--outline-dark" id="homeShowMoreBtn">Показать ещё 6 проектов ↓</button>
+        <a href="portfolio.html" class="btn btn--lg btn--outline-dark">Все 36+ проектов в каталоге →</a>
         <a href="calculator.html" class="btn btn--lg btn--accent">Рассчитать свой проект за 1 минуту →</a>
       </div>
     </div>
@@ -873,5 +1161,25 @@
 </footer>
 
 <script src="main.js"></script>
+
+<!-- LIGHTBOX МОДАЛКА ПРОСМОТРА ФОТО -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фотографии кухни">
+  <div class="lightbox__content">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Закрыть">✕</button>
+    <div class="lightbox__img-wrap">
+      <img src="" alt="" class="lightbox__img" id="lightboxImg" />
+      <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Предыдущее фото">‹</button>
+      <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Следующее фото">›</button>
+    </div>
+    <div class="lightbox__info">
+      <div>
+        <h3 class="lightbox__title" id="lightboxTitle"></h3>
+        <p class="lightbox__desc" id="lightboxDesc"></p>
+      </div>
+      <a href="calculator.html" class="btn btn--primary" id="lightboxCalcBtn">Рассчитать такой проект →</a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
