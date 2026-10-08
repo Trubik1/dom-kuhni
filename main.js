@@ -23,12 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Header scroll shadow
+  // Header scroll shadow & theme transition
   const header = document.getElementById('header');
   if (header) {
-    window.addEventListener('scroll', () => {
+    const updateHeaderScroll = () => {
       header.classList.toggle('header--scrolled', window.scrollY > 30);
-    }, { passive: true });
+    };
+    updateHeaderScroll();
+    window.addEventListener('scroll', updateHeaderScroll, { passive: true });
   }
 
   // Mobile burger & Body scroll lock
