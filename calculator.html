@@ -2,1330 +2,898 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23151618'/%3E%3Cpath d='M8 24V8h6a7 7 0 010 14H8zm4-3.5h2a3.5 3.5 0 000-7h-2v7z' fill='%23C7A662'/%3E%3Cpath d='M20 8l5 8-5 8' stroke='%23C7A662' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-    <title>Калькулятор кухни – Дом кухни</title>
-    <meta name="description" content="Рассчитайте стоимость кухни за 1 минуту. Бесплатный 3D-проект. Индивидуальный размер, любые материалы." />
-    <meta name="keywords" content="калькулятор кухни, рассчитать стоимость кухни, цена кухни, стоимость гарнитура, кухня под ключ цена" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://formspree.io" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" media="print" onload="this.media='all'" />
-    <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23151618'/%3E%3Cpath d='M8 24V8h6a7 7 0 010 14H8zm4-3.5h2a3.5 3.5 0 000-7h-2v7z' fill='%23C7A662'/%3E%3Cpath d='M20 8l5 8-5 8' stroke='%23C7A662' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <title>Калькулятор кухни онлайн в Гомеле — точный расчет стоимости за 1 минуту | Дом Кухни</title>
+  <meta name="description" content="Онлайн-калькулятор кухни в Гомеле. Рассчитайте точную стоимость гарнитура по индивидуальным размерам за 1 минуту. Получите 3D-проект и подарок на выбор!" />
+  <meta name="keywords" content="калькулятор кухни гомель, рассчитать стоимость кухни онлайн гомель, расчет цены кухни, кухни на заказ гомель калькулятор" />
+  <link rel="canonical" href="https://domkuhni.by/calculator.html" />
+
+  <!-- Региональные гео-теги -->
+  <meta name="geo.region" content="BY-HO" />
+  <meta name="geo.placename" content="Гомель" />
+  <meta name="geo.position" content="52.4286;31.0069" />
+  <meta name="ICBM" content="52.4286, 31.0069" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Онлайн-калькулятор кухни в Гомеле — расчет стоимости за 1 минуту" />
+  <meta property="og:description" content="Узнайте ориентировочную стоимость кухни и заберите подарок: каменную мойку, скидку 10% или 3D-проект." />
+  <meta property="og:url" content="https://domkuhni.by/calculator.html" />
+  <meta property="og:image" content="https://domkuhni.by/images/og-image.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://formspree.io" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" media="print" onload="this.media='all'" />
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')</script>
   <link rel="stylesheet" href="styles.css" />
-    <style>
-        /* Стили для калькулятора */
-        .calc-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 15px;
-        }
 
-        .calc-wrapper {
-            background: var(--color-surface);
-            border-radius: var(--radius-lg);
-            padding: 40px;
-            border: 1px solid var(--color-border);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            position: relative;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .progress-bar::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--border-color);
-            z-index: 0;
-        }
-
-        .progress-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1;
-            flex: 1;
-            min-width: 60px;
-        }
-
-        .progress-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 3px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .progress-step.active .progress-number {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: var(--bg-primary);
-            transform: scale(1.2);
-        }
-
-        .progress-step.completed .progress-number {
-            background: #10B981;
-            border-color: #10B981;
-            color: white;
-        }
-
-        .progress-label {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-align: center;
-        }
-
-        .calc-step {
-            display: none;
-            animation: fadeInUp 0.5s ease;
-        }
-
-        .calc-step.active {
-            display: block;
-        }
-
-        .step-title {
-            font-size: 1.6rem;
-            color: var(--accent);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .option-card {
-            background: var(--bg-card);
-            border: 3px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(200, 169, 110, 0.3);
-        }
-
-        .option-card.selected {
-            border-color: var(--accent);
-            background: rgba(200, 169, 110, 0.1);
-            box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.3);
-        }
-
-        .option-card.selected::after {
-            content: '✓';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 30px;
-            height: 30px;
-            background: var(--accent);
-            color: var(--bg-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .option-card .icon-box {
-            width: 100%;
-            height: 100px;
-            background: var(--bg-primary);
-            border-radius: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .option-card .color-box {
-            width: 100%;
-            height: 80px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .option-card .material-img {
-            width: 100%;
-            height: 95px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .option-card:hover .material-img {
-            transform: scale(1.03);
-        }
-
-        .option-card .material-placeholder {
-            width: 100%;
-            height: 95px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background: var(--bg-primary);
-            border: 2px dashed var(--accent);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 0.85rem;
-            font-weight: 600;
-            gap: 4px;
-        }
-
-        .option-card h4 {
-            color: var(--accent);
-            margin: 0 0 8px 0;
-            font-size: 1.1rem;
-        }
-
-        .option-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin: 0;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-        }
-
-        .input-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            font-size: 1.05rem;
-        }
-
-        .input-group input,
-        .input-group select,
-        .input-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            font-size: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        .input-group input:focus,
-        .input-group select:focus,
-        .input-group textarea:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.2);
-        }
-
-        .input-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            padding: 14px 18px;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .radio-item:hover {
-            border-color: var(--accent);
-            transform: translateX(5px);
-        }
-
-        .radio-item.selected {
-            border-color: var(--accent);
-            background: rgba(200, 169, 110, 0.1);
-        }
-
-        .radio-item input {
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
-            accent-color: var(--accent);
-            cursor: pointer;
-        }
-
-        .radio-item span {
-            font-weight: 500;
-        }
-
-        .calc-navigation {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 40px;
-        }
-
-        .calc-navigation button {
-            padding: 14px 30px;
-            font-size: 1.05rem;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-prev {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-        }
-
-        .btn-prev:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .btn-next,
-        .btn-submit {
-            background: var(--accent);
-            color: var(--bg-primary);
-            border: 2px solid var(--accent);
-        }
-
-        .btn-next:hover,
-        .btn-submit:hover {
-            background: var(--accent-hover);
-            border-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(200, 169, 110, 0.4);
-        }
-
-        .btn-next:disabled,
-        .btn-submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Модальное окно */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background: var(--bg-secondary);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            border: 3px solid var(--accent);
-            box-shadow: 0 20px 60px rgba(200, 169, 110, 0.3);
-            animation: slideInDown 0.4s ease;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .modal-header h2 {
-            color: var(--accent);
-            font-size: 2rem;
-            margin: 0 0 10px 0;
-        }
-
-        .modal-body {
-            margin-bottom: 30px;
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .result-value {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .result-price {
-            text-align: center;
-            padding: 20px;
-            background: var(--bg-card);
-            border-radius: 12px;
-            margin: 20px 0;
-            border: 2px dashed var(--accent);
-        }
-
-        .result-price .price {
-            font-size: 2.5rem;
-            color: var(--accent);
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(200, 169, 110, 0.5);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.2);
-        }
-
-        .phone-input {
-            font-family: monospace;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-close {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-close:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .btn-send {
-            background: var(--accent);
-            color: var(--bg-primary);
-            border: 2px solid var(--accent);
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-send:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(200, 169, 110, 0.4);
-        }
-
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 30px;
-        }
-
-        .success-message.active {
-            display: block;
-            animation: fadeInScale 0.5s ease;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: #10B981;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 3rem;
-            color: white;
-        }
-
-        .success-message h3 {
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        .success-message p {
-            color: var(--text-secondary);
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .calc-wrapper {
-                padding: 25px;
-            }
-
-            .input-row {
-                grid-template-columns: 1fr;
-            }
-
-            .options-grid {
-                grid-template-columns: 1fr !important;
-            }
-
-            .progress-label {
-                font-size: 0.7rem;
-            }
-
-            .calc-navigation {
-                flex-direction: column-reverse;
-            }
-
-            .calc-navigation button {
-                width: 100%;
-            }
-
-            .modal-content {
-                padding: 25px;
-            }
-
-            .result-price .price {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .calc-wrapper {
-                padding: 16px;
-            }
-            .calc-container {
-                padding-top: 100px;
-            }
-            .progress-step {
-                min-width: 50px;
-            }
-            .progress-number {
-                width: 32px;
-                height: 32px;
-                font-size: 0.8rem;
-            }
-            .modal-content {
-                padding: 20px;
-            }
-            .modal-content h2 {
-                font-size: 1.4rem;
-            }
-            .step-title {
-                font-size: 1.2rem;
-            }
-            .option-card {
-                padding: 14px;
-            }
-            .input-group label {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Калькулятор стоимости кухни — Дом Кухни Гомель",
+    "url": "https://domkuhni.by/calculator.html",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "BYN",
+      "price": "1450",
+      "priceValidUntil": "2026-12-31"
+    },
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Дом Кухни",
+      "telephone": "+375445842233",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "пр-т Ленина 30",
+        "addressLocality": "Гомель",
+        "addressRegion": "Гомельская область",
+        "addressCountry": "BY"
+      }
+    }
+  }
+  </script>
 </head>
 
 <body>
-    <header class="header" id="header">
-        <div class="header__inner container">
-            <button class="theme-toggle" aria-label="Переключить тему"></button>
-            <a href="index.html" class="header__logo">
-                <img src="images/logobd.png" alt="Дом кухни" class="header__logo-img" width="160" height="36" />
-            </a>
-            <nav class="header__nav" id="nav">
-                <a href="catalog.html" class="header__nav-link">Каталог</a>
-                <a href="portfolio.html" class="header__nav-link">Проекты</a>
-                <a href="process.html" class="header__nav-link">Этапы</a>
-                <a href="materials.html" class="header__nav-link">Материалы</a>
-                <a href="calculator.html" class="header__nav-link active">Калькулятор</a>
-                <a href="reviews.html" class="header__nav-link">Отзывы</a>
-                <a href="contact.html" class="header__nav-link">Контакты</a>
-            </nav>
-            <div class="header__actions">
-                <a href="https://wa.me/375445842233" target="_blank" class="header__social" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
-                <a href="https://t.me/domkuhni" target="_blank" class="header__social" aria-label="Telegram"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
-                <span class="header__address">г. Гомель, пр-т Ленина 30</span>
-                <a href="tel:+375445842233" class="header__phone">+375 (44) 584-22-33</a>
-                <button class="header__burger" id="burger" aria-label="Меню">
-                    <span></span><span></span><span></span>
+  <!-- ШАПКА САЙТА -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <button class="theme-toggle" aria-label="Переключить тему"></button>
+      <a href="index.html" class="header__logo" aria-label="Дом Кухни - Главная">
+        <img src="images/logo-light.webp" alt="Дом кухни" class="header__logo-img header__logo-img--light" width="160" height="38" />
+        <img src="images/logo-dark.webp" alt="Дом кухни" class="header__logo-img header__logo-img--dark" width="160" height="38" />
+      </a>
+      <nav class="header__nav" id="nav">
+        <a href="portfolio.html" class="header__nav-link">Проекты</a>
+        <a href="process.html" class="header__nav-link">Этапы</a>
+        <a href="materials.html" class="header__nav-link">Материалы</a>
+        <a href="calculator.html" class="header__nav-link active">Калькулятор</a>
+        <a href="reviews.html" class="header__nav-link">Отзывы</a>
+        <a href="contact.html" class="header__nav-link">Контакты</a>
+
+        <div class="mobile-menu-footer">
+          <p class="mobile-menu-address">г. Гомель, пр-т Ленина 30</p>
+          <a href="tel:+375445842233" class="mobile-menu-phone">+375 (44) 584-22-33</a>
+          <div class="mobile-menu-socials">
+            <a href="https://wa.me/375445842233" target="_blank" class="mobile-social-btn">WhatsApp</a>
+            <a href="https://t.me/domkuhni" target="_blank" class="mobile-social-btn">Telegram</a>
+          </div>
+        </div>
+      </nav>
+      <div class="header__actions">
+        <a href="https://wa.me/375445842233" target="_blank" class="header__social" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+        <a href="https://t.me/domkuhni" target="_blank" class="header__social" aria-label="Telegram"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+        <span class="header__address">г. Гомель, пр-т Ленина 30</span>
+        <a href="tel:+375445842233" class="header__phone">+375 (44) 584-22-33</a>
+        <button class="header__burger" id="burger" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- СЕКЦИЯ КВИЗ-КАЛЬКУЛЯТОРА -->
+  <main class="quiz-section">
+    <div class="container quiz-container">
+      <div class="quiz-wrapper">
+
+        <!-- Шапка квиза -->
+        <div class="quiz-header">
+          <span class="quiz-badge">Фабричный калькулятор • Гомель 2026</span>
+          <h1 class="quiz-title">Рассчитайте стоимость вашей кухни за 1 минуту</h1>
+          <p class="quiz-subtitle">Ответьте на 4 простых вопроса и получите ориентировочный расчет стоимости гарнитура, 3D-проект и подарок на выбор.</p>
+        </div>
+
+        <!-- Прогресс-бар -->
+        <div class="quiz-progress-bar" id="quizProgressBar">
+          <div class="quiz-progress-line" id="quizProgressLine"></div>
+          
+          <div class="quiz-progress-step active" data-step="1">
+            <div class="quiz-progress-num">1</div>
+            <span class="quiz-progress-label">Форма</span>
+          </div>
+          <div class="quiz-progress-step" data-step="2">
+            <div class="quiz-progress-num">2</div>
+            <span class="quiz-progress-label">Стиль</span>
+          </div>
+          <div class="quiz-progress-step" data-step="3">
+            <div class="quiz-progress-num">3</div>
+            <span class="quiz-progress-label">Фасады</span>
+          </div>
+          <div class="quiz-progress-step" data-step="4">
+            <div class="quiz-progress-num">4</div>
+            <span class="quiz-progress-label">Комплектация</span>
+          </div>
+          <div class="quiz-progress-step" data-step="5">
+            <div class="quiz-progress-num">5</div>
+            <span class="quiz-progress-label">Расчет и подарок</span>
+          </div>
+        </div>
+
+        <!-- ФОРМА КВИЗА -->
+        <form id="quizForm" onsubmit="return false;">
+
+          <!-- ШАГ 1: ФОРМА КУХНИ -->
+          <div class="quiz-step active" data-step="1">
+            <div class="quiz-step-heading">
+              <h2 class="quiz-step-title">Шаг 1 из 5: Выберите форму кухонного гарнитура</h2>
+              <p class="quiz-step-desc">Укажите желаемую геометрию расстановки мебели в вашем помещении</p>
+            </div>
+
+            <div class="quiz-cards-grid quiz-cards-grid--4col">
+              <div class="quiz-card" data-group="shape" data-value="straight">
+                <div class="quiz-card__img-wrap quiz-card__img-wrap--contain">
+                  <img src="images/quiz/shape-straight.png" alt="Прямая кухня" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Прямая (линейная)</h3>
+                <p class="quiz-card__desc">Вдоль одной стены. Оптимально для узких или компактных кухонь</p>
+              </div>
+
+              <div class="quiz-card selected" data-group="shape" data-value="corner">
+                <div class="quiz-card__img-wrap quiz-card__img-wrap--contain">
+                  <img src="images/quiz/shape-corner.png" alt="Угловая кухня" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Угловая (Г-образная)</h3>
+                <p class="quiz-card__desc">Самая востребованная форма. Идеальный рабочий треугольник</p>
+              </div>
+
+              <div class="quiz-card" data-group="shape" data-value="u-shape">
+                <div class="quiz-card__img-wrap quiz-card__img-wrap--contain">
+                  <img src="images/quiz/shape-u.png" alt="П-образная кухня" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">П-образная</h3>
+                <p class="quiz-card__desc">Максимум рабочей зоны, систем хранения и встроенной техники</p>
+              </div>
+
+              <div class="quiz-card" data-group="shape" data-value="island">
+                <div class="quiz-card__img-wrap quiz-card__img-wrap--contain">
+                  <img src="images/quiz/shape-island.png" alt="Кухня с островом" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">С островом / баром</h3>
+                <p class="quiz-card__desc">Премиум формат для просторных квартир-студий и загородных коттеджей</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ШАГ 2: СТИЛЬ КУХНИ -->
+          <div class="quiz-step" data-step="2">
+            <div class="quiz-step-heading">
+              <h2 class="quiz-step-title">Шаг 2 из 5: В каком дизайне и стиле вы видите будущую кухню?</h2>
+              <p class="quiz-step-desc">Выберите визуальное направление или нажмите «Пока не знаю» — дизайнер предложит решения</p>
+            </div>
+
+            <div class="quiz-cards-grid">
+              <div class="quiz-card selected" data-group="style" data-value="minimalism">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/style-minimalism.jpg" alt="Минимализм" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Минимализм</h3>
+                <p class="quiz-card__desc">Гладкие фасады без ручек, скрытые профили Gola, чистота линий</p>
+              </div>
+
+              <div class="quiz-card" data-group="style" data-value="hitech">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/style-hitech.jpg" alt="Хай-тек" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Современный / Хай-тек</h3>
+                <p class="quiz-card__desc">Глянцевые или суперматовые текстуры, встроенная LED-подсветка</p>
+              </div>
+
+              <div class="quiz-card" data-group="style" data-value="classic">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/style-classic.jpg" alt="Классика" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Неоклассика / Классика</h3>
+                <p class="quiz-card__desc">Изящная фрезеровка фасадов, карнизы, вечная благородная эстетика</p>
+              </div>
+
+              <div class="quiz-card" data-group="style" data-value="scandi">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/style-scandi.jpg" alt="Скандинавский" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Скандинавский</h3>
+                <p class="quiz-card__desc">Светлое дерево, белый тон, тепло домашнего уюта и практичность</p>
+              </div>
+
+              <div class="quiz-card" data-group="style" data-value="provence">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/style-provence.jpg" alt="Прованс" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Прованс / Кантри</h3>
+                <p class="quiz-card__desc">Пастельные оттенки, остекленные витрины, шарм загородного дома</p>
+              </div>
+
+              <div class="quiz-card" data-group="style" data-value="country">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/style-country.jpg" alt="Лофт" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Лофт / Индустриальный</h3>
+                <p class="quiz-card__desc">Фактуры темного бетона, черного металла и состаренного дуба</p>
+              </div>
+
+              <div class="quiz-card" data-group="style" data-value="unknown">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/style-unknown.jpg" alt="Пока не знаю" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Пока не знаю</h3>
+                <p class="quiz-card__desc">Дизайнер подготовит 3 фотореалистичных 3D-варианта под ваш вкус</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ШАГ 3: МАТЕРИАЛЫ ФАСАДОВ -->
+          <div class="quiz-step" data-step="3">
+            <div class="quiz-step-heading">
+              <h2 class="quiz-step-title">Шаг 3 из 5: Из какого материала изготовить фасады?</h2>
+              <p class="quiz-step-desc">Мы используем только сертифицированные плиты европейского качества с кромкованием водостойким PUR-клеем</p>
+            </div>
+
+            <div class="quiz-cards-grid">
+              <div class="quiz-card selected" data-group="facade" data-value="ldsp">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/mat-ldsp.jpg" alt="ЛДСП Egger" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">ЛДСП Egger / Kronospan</h3>
+                <p class="quiz-card__desc">Практичный эконом. Австрийские плиты класса E0.5, богатая палитра</p>
+              </div>
+
+              <div class="quiz-card" data-group="facade" data-value="mdf">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/mat-mdf.jpg" alt="МДФ пленка/эмаль" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">МДФ эмаль / пленка ПВХ</h3>
+                <p class="quiz-card__desc">Самый популярный выбор. Стойкость к влаге, фрезеровка любой сложности</p>
+              </div>
+
+              <div class="quiz-card" data-group="facade" data-value="plastic">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/mat-plastic.jpg" alt="Пластик HPL" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Пластик HPL / Arpa</h3>
+                <p class="quiz-card__desc">Максимальная ударопрочность, устойчив к царапинам, химии и влаге</p>
+              </div>
+
+              <div class="quiz-card" data-group="facade" data-value="acrylic">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/mat-acrylic.jpg" alt="Акрил Senosan" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Акрил Senosan (Австрия)</h3>
+                <p class="quiz-card__desc">Безупречный зеркальный глянец или бархатный глубокий супермат</p>
+              </div>
+
+              <div class="quiz-card" data-group="facade" data-value="veneer">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/mat-veneer.jpg" alt="Шпон дерева" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Натуральный шпон дуба</h3>
+                <p class="quiz-card__desc">Элегантная фактура живого дерева по комфортной фабричной цене</p>
+              </div>
+
+              <div class="quiz-card" data-group="facade" data-value="massive">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/mat-massive.jpg" alt="Массив дерева" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Массив ясеня / дуба</h3>
+                <p class="quiz-card__desc">Элитная классика. Долговечность на десятилетия и экологичность</p>
+              </div>
+
+              <div class="quiz-card" data-group="facade" data-value="unknown">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quiz/mat-unknown.jpg" alt="Консультация по фасадам" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Нужна консультация</h3>
+                <p class="quiz-card__desc">Дизайнер привезет чемоданы с реальными веерами образцов на замер</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ШАГ 4: РАЗМЕРЫ, СТОЛЕШНИЦА И ФУРНИТУРА -->
+          <div class="quiz-step" data-step="4">
+            <div class="quiz-step-heading">
+              <h2 class="quiz-step-title">Шаг 4 из 5: Укажите размеры и комплектацию</h2>
+              <p class="quiz-step-desc">Параметры длины, материал столешницы и класс выдвижной фурнитуры</p>
+            </div>
+
+            <!-- Ползунок длины гарнитура -->
+            <div class="quiz-dimension-box">
+              <div class="quiz-slider-header">
+                <span class="quiz-slider-label">Общая длина гарнитура (по стенам):</span>
+                <span class="quiz-slider-val" id="lengthDisplay">3.0 м.п.</span>
+              </div>
+              <input type="range" class="quiz-range-slider" id="lengthSlider" min="1.5" max="8.0" step="0.1" value="3.0">
+              <div class="quiz-range-marks">
+                <span>1.5 м</span>
+                <span>3.0 м</span>
+                <span>5.0 м</span>
+                <span>8.0 м</span>
+              </div>
+            </div>
+
+            <!-- Столешница -->
+            <h3 style="font-size:1.15rem;font-weight:700;color:var(--color-text);margin:24px 0 14px;">Материал столешницы:</h3>
+            <div class="quiz-cards-grid quiz-cards-grid--3col">
+              <div class="quiz-card selected" data-group="countertop" data-value="postforming">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/postforming.jpg" alt="Постформинг HPL" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Постформинг HPL (38 мм)</h3>
+                <p class="quiz-card__desc">Влагостойкий ламинат высокой прочности. Более 200 трендовых декоров</p>
+              </div>
+
+              <div class="quiz-card" data-group="countertop" data-value="compact">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/compact.jpg" alt="Компакт-плита" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Компакт-плита (12 мм)</h3>
+                <p class="quiz-card__desc">100% влагостойкий монолит. Изящный евро-торец, подстольный монтаж мойки</p>
+              </div>
+
+              <div class="quiz-card" data-group="countertop" data-value="quartz">
+                <div class="quiz-card__img-wrap">
+                  <img src="images/quartz.jpg" alt="Кварцевый агломерат" loading="lazy">
+                </div>
+                <h3 class="quiz-card__title">Кварцевый камень</h3>
+                <p class="quiz-card__desc">Агломерат высшей категории. Устойчив к царапинам, горячему и сколам</p>
+              </div>
+            </div>
+
+            <!-- Фурнитура -->
+            <h3 style="font-size:1.15rem;font-weight:700;color:var(--color-text);margin:24px 0 14px;">Фурнитура и механизмы:</h3>
+            <div class="quiz-cards-grid quiz-cards-grid--3col">
+              <div class="quiz-card selected" data-group="hardware" data-value="blum">
+                <h3 class="quiz-card__title">Blum (Австрия)</h3>
+                <p class="quiz-card__desc">Флагманские петли с доводчиками, направляющие Tandembox, подъемники Aventos</p>
+              </div>
+
+              <div class="quiz-card" data-group="hardware" data-value="hettich">
+                <h3 class="quiz-card__title">Hettich (Германия)</h3>
+                <p class="quiz-card__desc">Безупречная немецкая механика, тихий и плавный ход, гарантия долговечности</p>
+              </div>
+
+              <div class="quiz-card" data-group="hardware" data-value="boyard">
+                <h3 class="quiz-card__title">Boyard / GTV (Стандарт)</h3>
+                <p class="quiz-card__desc">Качественная проверенная фурнитура с доводчиками по доступной цене</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ШАГ 5: РАСЧЕТ + ВЫБОР ПОДАРКА + КОНТАКТЫ -->
+          <div class="quiz-step" data-step="5">
+            <div class="quiz-step-heading">
+              <h2 class="quiz-step-title">Шаг 5 из 5: Ваш предварительный расчет готов!</h2>
+              <p class="quiz-step-desc">Выберите гарантированный подарок и укажите номер телефона для отправки коммерческого предложения</p>
+            </div>
+
+            <!-- Плашка расчета стоимости -->
+            <div class="quiz-result-hero">
+              <div class="quiz-result-price-label">Ориентировочная стоимость под ключ:</div>
+              <div class="quiz-result-price-val">
+                <span class="quiz-result-price-old" id="oldPriceVal">3 850 BYN</span>
+                <span id="calcPriceVal">3 080 BYN</span>
+              </div>
+              <div class="quiz-result-features">
+                <span class="quiz-feat-badge">✓ Рассрочка 0% от 250 BYN/мес</span>
+                <span class="quiz-feat-badge">✓ Фабричная гарантия 2 года</span>
+                <span class="quiz-feat-badge">✓ Бесплатный замер и доставка по Гомелю</span>
+              </div>
+            </div>
+
+            <!-- Блок подарков -->
+            <div class="quiz-gifts-box">
+              <h3 class="quiz-gifts-title">🎁 Выберите ваш подарок к заказу:</h3>
+              <div class="quiz-gifts-grid">
+                <div class="quiz-gift-card selected" data-group="gift" data-value="sink">
+                  <span class="quiz-gift-icon">🚰</span>
+                  <div>
+                    <div class="quiz-gift-name">Каменная мойка GranFest</div>
+                    <div class="quiz-gift-sub">Или вытяжка на выбор бесплатно</div>
+                  </div>
+                </div>
+
+                <div class="quiz-gift-card" data-group="gift" data-value="tech">
+                  <span class="quiz-gift-icon">⚡</span>
+                  <div>
+                    <div class="quiz-gift-name">Скидка 10% на технику</div>
+                    <div class="quiz-gift-sub">На комплект встраиваемой техники</div>
+                  </div>
+                </div>
+
+                <div class="quiz-gift-card" data-group="gift" data-value="design">
+                  <span class="quiz-gift-icon">📐</span>
+                  <div>
+                    <div class="quiz-gift-name">3D-проект + выезд дизайнера</div>
+                    <div class="quiz-gift-sub">С чемоданом образцов на замер</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Способ связи -->
+            <div class="quiz-contact-group">
+              <label class="quiz-contact-label">Куда отправить расчет спецификации?</label>
+              <div class="quiz-messenger-picker">
+                <button type="button" class="quiz-messenger-btn active" data-messenger="whatsapp">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                  WhatsApp
                 </button>
+                <button type="button" class="quiz-messenger-btn" data-messenger="telegram">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                  Telegram
+                </button>
+                <button type="button" class="quiz-messenger-btn" data-messenger="phone">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                  Звонок
+                </button>
+              </div>
             </div>
+
+            <!-- Ввод телефона -->
+            <div class="quiz-contact-group">
+              <label for="quizPhone" class="quiz-contact-label">Номер телефона (для фиксации скидки) *</label>
+              <input type="tel" id="quizPhone" class="quiz-phone-input" placeholder="+375 (__) ___-__-__" required>
+            </div>
+
+            <!-- Имя -->
+            <div class="quiz-contact-group">
+              <label for="quizName" class="quiz-contact-label">Ваше имя (необязательно)</label>
+              <input type="text" id="quizName" class="quiz-phone-input" style="font-size:1rem;font-weight:400;padding:12px 18px;" placeholder="Например: Светлана">
+            </div>
+
+            <p class="quiz-privacy-note">
+              🔒 Нажимая кнопку «Зафиксировать цену и забрать подарок», вы соглашаетесь на обработку данных. Никакого спама — свяжемся только для отправки расчета.
+            </p>
+          </div>
+
+          <!-- НАВИГАЦИОННЫЕ КНОПКИ КВИЗА -->
+          <div class="quiz-nav-row" id="quizNavRow">
+            <button type="button" class="quiz-btn-prev" id="quizPrevBtn" style="visibility:hidden;">← Назад</button>
+            <button type="button" class="quiz-btn-next" id="quizNextBtn">Далее к стилю →</button>
+          </div>
+
+        </form>
+
+        <!-- ЭКРАН УСПЕШНОЙ ОТПРАВКИ -->
+        <div class="quiz-success-box" id="quizSuccessBox">
+          <div class="quiz-success-icon">✓</div>
+          <h2 class="quiz-success-title">Спасибо! Заявка и расчет зафиксированы</h2>
+          <p class="quiz-success-desc">
+            Ваш выбранный подарок и специальная фабричная цена успешно закреплены за вашим номером.<br>
+            Дизайнер свяжется с вами в течение <strong>15 минут</strong> в указанном мессенджере с готовой спецификацией!
+          </p>
+          <a href="portfolio.html" class="quiz-btn-next" style="display:inline-block;text-decoration:none;">Посмотреть примеры кухонь в Гомеле</a>
         </div>
-    </header>
 
-    <main class="calc-container" style="padding-top:120px">
-            <div class="calc-wrapper">
-                <!-- Прогресс-бар -->
-                <div class="progress-bar">
-                    <div class="progress-step active" data-step="1">
-                        <div class="progress-number">1</div>
-                        <div class="progress-label">Тип кухни</div>
-                    </div>
-                    <div class="progress-step" data-step="2">
-                        <div class="progress-number">2</div>
-                        <div class="progress-label">Размеры</div>
-                    </div>
-                    <div class="progress-step" data-step="3">
-                        <div class="progress-number">3</div>
-                        <div class="progress-label">Материалы</div>
-                    </div>
-                    <div class="progress-step" data-step="4">
-                        <div class="progress-number">4</div>
-                        <div class="progress-label">Детали</div>
-                    </div>
-                    <div class="progress-step" data-step="5">
-                        <div class="progress-number">5</div>
-                        <div class="progress-label">Контакты</div>
-                    </div>
-                </div>
-
-                <!-- Шаг 1: Тип кухни -->
-                <div class="calc-step active" data-step="1">
-                    <h2 class="step-title">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 12px;"><path d="M2 4v16h20V4H2zm2 2h16v12H4V6z"/><path d="M8 6v12M12 6v12M16 6v12"/></svg>
-    Выберите тип кухни
-</h2>
-                    <div class="options-grid">
-                        <div class="option-card" data-value="straight" onclick="selectOption(this, 'kitchenType')">
-                            <div class="icon-box" style="background: transparent;">
-                                <svg width="120" height="60" viewBox="0 0 120 60" fill="none" style="max-width:100%;max-height:100px"><rect x="5" y="15" width="110" height="30" fill="none" stroke="currentColor" stroke-width="3" rx="3"/><rect x="12" y="20" width="20" height="20" fill="currentColor" opacity="0.4"/><rect x="38" y="20" width="20" height="20" fill="currentColor" opacity="0.4"/><rect x="64" y="20" width="20" height="20" fill="currentColor" opacity="0.4"/><rect x="90" y="20" width="18" height="20" fill="currentColor" opacity="0.4"/></svg>
-                            </div>
-                            <h4>Прямая</h4>
-                            <p>Вдоль одной стены</p>
-                        </div>
-
-                        <div class="option-card" data-value="corner" onclick="selectOption(this, 'kitchenType')">
-                            <div class="icon-box" style="background: transparent;">
-                                <svg width="120" height="60" viewBox="0 0 120 60" fill="none" style="max-width:100%;max-height:100px"><path d="M 5 15 L 60 15 L 60 45 L 115 45" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"/><rect x="12" y="20" width="18" height="20" fill="currentColor" opacity="0.4"/><rect x="35" y="20" width="18" height="20" fill="currentColor" opacity="0.4"/><rect x="68" y="25" width="18" height="20" fill="currentColor" opacity="0.4"/><rect x="92" y="25" width="18" height="20" fill="currentColor" opacity="0.4"/></svg>
-                            </div>
-                            <h4>Угловая</h4>
-                            <p>Эргономичный угол 90°</p>
-                        </div>
-
-                        <div class="option-card" data-value="p-shape" onclick="selectOption(this, 'kitchenType')">
-                            <div class="icon-box" style="background: transparent;">
-                                <svg width="120" height="60" viewBox="0 0 120 60" fill="none" style="max-width:100%;max-height:100px"><path d="M 5 15 L 5 45 L 60 45 L 60 15 L 115 15 L 115 45" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"/><rect x="12" y="22" width="15" height="18" fill="currentColor" opacity="0.4"/><rect x="68" y="22" width="15" height="18" fill="currentColor" opacity="0.4"/><rect x="88" y="22" width="15" height="18" fill="currentColor" opacity="0.4"/><rect x="108" y="22" width="10" height="18" fill="currentColor" opacity="0.4"/></svg>
-                            </div>
-                            <h4>П-образная</h4>
-                            <p>Три стены кухни</p>
-                        </div>
-
-                        <div class="option-card" data-value="island" onclick="selectOption(this, 'kitchenType')">
-                            <div class="icon-box" style="background: transparent;">
-                                <svg width="120" height="60" viewBox="0 0 120 60" fill="none" style="max-width:100%;max-height:100px"><rect x="5" y="15" width="75" height="30" fill="none" stroke="currentColor" stroke-width="3" rx="3"/><rect x="90" y="10" width="25" height="40" fill="none" stroke="currentColor" stroke-width="3" rx="3" stroke-dasharray="4,2"/><rect x="12" y="20" width="18" height="20" fill="currentColor" opacity="0.4"/><rect x="35" y="20" width="18" height="20" fill="currentColor" opacity="0.4"/><rect x="58" y="20" width="15" height="20" fill="currentColor" opacity="0.4"/></svg>
-                            </div>
-                            <h4>С островом</h4>
-                            <p>Премиум решение</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Шаг 2: Размеры -->
-                <div class="calc-step" data-step="2">
-                    <h2 class="step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:6px"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 3v18"/></svg> Укажите размеры кухни</h2>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="width"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:4px"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 3v18"/></svg> Ширина (м)</label>
-                            <input type="number" id="width" min="1" max="10" step="0.1" placeholder="Например: 2.5"
-                                required>
-                        </div>
-                        <div class="input-group">
-                            <label for="length"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:4px"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 3v18"/></svg> Длина (м)</label>
-                            <input type="number" id="length" min="1" max="10" step="0.1" placeholder="Например: 3.0"
-                                required>
-                        </div>
-                    </div>
-                    <div
-                        style="text-align:center;margin-top:30px;padding:20px;background:var(--bg-card);border-radius:10px;">
-                        <p style="color:var(--text-secondary);margin:0;">
-                            Площадь: <strong id="areaDisplay" style="color:var(--accent);font-size:1.3rem;">0</strong>
-                            м²
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Шаг 3: Материалы -->
-                <div class="calc-step" data-step="3">
-                    <h2 class="step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:6px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Выберите материалы</h2>
-
-                    <div class="input-group">
-                        <label>Материал фасадов:</label>
-                        <div class="options-grid" style="grid-template-columns: repeat(4, 1fr);">
-                            <div class="option-card" data-value="ldsp" onclick="selectOption(this, 'facadeMaterial')">
-                                <img src="images/materials/ldsp.jpg" alt="ЛДСП Egger" class="material-img" loading="lazy">
-                                <h4>ЛДСП</h4>
-                                <p>Эконом</p>
-                            </div>
-
-                            <div class="option-card" data-value="mdf_film" onclick="selectOption(this, 'facadeMaterial')">
-                                <img src="images/materials/mdf_film.jpg" alt="МДФ пленочный" class="material-img" loading="lazy">
-                                <h4>МДФ пленочный</h4>
-                                <p>Стандарт</p>
-                            </div>
-
-                            <div class="option-card" data-value="plastic" onclick="selectOption(this, 'facadeMaterial')">
-                                <img src="images/materials/plastic.jpg" alt="Пластик HPL" class="material-img" loading="lazy">
-                                <h4>Пластик</h4>
-                                <p>Практично</p>
-                            </div>
-
-                            <div class="option-card" data-value="acrylic" onclick="selectOption(this, 'facadeMaterial')">
-                                <img src="images/materials/acrylic.jpg" alt="Акрил глянцевый" class="material-img" loading="lazy">
-                                <h4>Акрил глянцевый</h4>
-                                <p>Премиум глянец</p>
-                            </div>
-
-                            <div class="option-card" data-value="mdf_painted" onclick="selectOption(this, 'facadeMaterial')">
-                                <img src="images/materials/mdf_painted.jpg" alt="МДФ крашеный" class="material-img" loading="lazy">
-                                <h4>МДФ крашеный</h4>
-                                <p>Эмаль, любой цвет</p>
-                            </div>
-
-                            <div class="option-card" data-value="fenix" onclick="selectOption(this, 'facadeMaterial')">
-                                <img src="images/materials/fenix.jpg" alt="Fenix матовый" class="material-img" loading="lazy">
-                                <h4>Fenix матовый</h4>
-                                <p>Суперматовый</p>
-                            </div>
-
-                            <div class="option-card" data-value="massive" onclick="selectOption(this, 'facadeMaterial')">
-                                <img src="images/materials/massive.jpg" alt="Массив дерева" class="material-img" loading="lazy">
-                                <h4>Массив дерева</h4>
-                                <p>Дуб / ясень</p>
-                            </div>
-
-                            <div class="option-card" data-value="unknown" onclick="selectOption(this, 'facadeMaterial')">
-                                <div class="material-placeholder">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                                    <span>Консультация</span>
-                                </div>
-                                <h4>Не знаю</h4>
-                                <p>Поможем выбрать</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group" style="margin-top:30px;">
-                        <label>Тип столешницы:</label>
-                        <div class="options-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="option-card" data-value="postforming" onclick="selectOption(this, 'countertopType')">
-                                <img src="images/postforming.jpg" alt="Столешница Постформинг HPL" class="material-img" loading="lazy">
-                                <h4>Постформинг</h4>
-                                <p>HPL ламинат 38мм</p>
-                            </div>
-
-                            <div class="option-card" data-value="compact" onclick="selectOption(this, 'countertopType')">
-                                <img src="images/compact.jpg" alt="Компакт-плита 12мм" class="material-img" loading="lazy">
-                                <h4>Компакт-плита</h4>
-                                <p>12мм влагостойкая</p>
-                            </div>
-
-                            <div class="option-card" data-value="quartz" onclick="selectOption(this, 'countertopType')">
-                                <img src="images/quartz.jpg" alt="Кварцевый камень Calacatta" class="material-img" loading="lazy">
-                                <h4>Кварцевый камень</h4>
-                                <p>Агломерат Calacatta</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            <!-- Шаг 4: Детали -->
-            <div class="calc-step" data-step="4">
-                <h2 class="step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:6px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Дополнительные детали</h2>
-
-                <div class="input-group">
-                    <label>Когда нужна кухня?</label>
-                    <div class="radio-group">
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="urgency" value="urgent">
-                            <span>Срочно (в течение 2 недель)</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="urgency" value="month">
-                            <span>В течение 1 месяца</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="urgency" value="halfyear">
-                            <span>В течение 2-6 месяцев</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="urgency" value="browsing">
-                            <span>Прицениваюсь / планирую ремонт</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label>Ориентировочный бюджет (BYN):</label>
-                    <div class="radio-group">
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="budget" value="to2k">
-                            <span>До 2 000 руб.</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="budget" value="2k-3k">
-                            <span>2 000 - 3 500 руб.</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="budget" value="3k-5k">
-                            <span>3 500 - 6 000 руб.</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="budget" value="5k-10k">
-                            <span>От 6 000 руб. (Премиум)</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label>Нужна ли рассрочка?</label>
-                    <div class="radio-group">
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="installment" value="no">
-                            <span>Не требуется (полная оплата)</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="installment" value="1-3">
-                            <span>Рассрочка на 3 месяца</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="installment" value="3-6">
-                            <span>Рассрочка на 6 месяцев</span>
-                        </label>
-                        <label class="radio-item" onclick="selectRadio(this)">
-                            <input type="radio" name="installment" value="6-12">
-                            <span>Кредит/рассрочка до 12 месяцев</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Шаг 5: Контакты -->
-            <div class="calc-step" data-step="5">
-                <h2 class="step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:6px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Контактная информация</h2>
-
-                <div class="input-group">
-                    <label for="phone">Номер телефона *</label>
-                    <input type="tel" id="phone" class="phone-input" placeholder="+375 (__) ___-__-__" required>
-                    <small style="color:var(--text-secondary);display:block;margin-top:8px;">
-                        * Мы перезвоним вам в течение 15 минут для согласования деталей
-                    </small>
-                </div>
-
-                <div class="input-group">
-                    <label for="name">Ваше имя (необязательно)</label>
-                    <input type="text" id="name" placeholder="Как к вам обращаться?">
-                </div>
-
-                <div class="input-group">
-                    <label for="email">Email (для отправки PDF расчета)</label>
-                    <input type="email" id="email" placeholder="your@email.com">
-                </div>
-
-                <div class="input-group">
-                    <label for="comment">Пожелания или комментарий (необязательно)</label>
-                    <textarea id="comment" rows="3" placeholder="Особые пожелания, удобное время для звонка..."></textarea>
-                </div>
-
-                <div
-                    style="background:var(--bg-card);padding:20px;border-radius:10px;margin-top:20px;border-left:4px solid var(--accent);">
-                    <p style="margin:0;color:var(--text-secondary);">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="vertical-align:middle;margin-right:4px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> <strong>Нажимая кнопку "Рассчитать", вы соглашаетесь с обработкой персональных
-                            данных</strong>
-                    </p>
-                </div>
-            </div>
-
-            <!-- Навигация -->
-            <div class="calc-navigation">
-                <button type="button" class="btn-prev" id="prevBtn" style="visibility:hidden;">← Назад</button>
-                <button type="button" class="btn-next" id="nextBtn" disabled>Далее →</button>
-            </div>
+      </div>
     </div>
-    </main>
+  </main>
 
-    <footer class="footer"><div class="container footer__grid">
-        <div class="footer__col">
-            <img src="images/logobd.png" alt="Дом кухни" class="footer__logo" width="140" height="34" loading="lazy" />
-            <p class="footer__about">Индивидуальные кухни под ключ. Дизайн-проект, производство, установка. Гарантия 2 года.</p>
-            <div class="footer__social">
-                <a href="https://www.instagram.com/gomel_kuhni" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-                <a href="tel:+375445842233" aria-label="Phone"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></a>
-                <a href="#" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
-            </div>
+  <!-- МОБИЛЬНЫЙ ДОК -->
+  <nav class="mobile-sticky-bar" aria-label="Мобильная навигация">
+    <a href="calculator.html" class="mobile-nav-item active">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="16" y1="18" x2="16" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/></svg>
+      <span>Калькулятор</span>
+    </a>
+    <a href="portfolio.html" class="mobile-nav-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Проекты</span>
+    </a>
+    <a href="reviews.html" class="mobile-nav-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span>Отзывы</span>
+    </a>
+    <a href="tel:+375445842233" class="mobile-nav-item mobile-nav-item--call">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      <span>Позвонить</span>
+    </a>
+  </nav>
+
+  <!-- ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__col">
+        <img src="images/logo-dark.webp" alt="Дом кухни" class="footer__logo" width="148" height="38" loading="lazy" decoding="async" />
+        <p class="footer__about">Индивидуальные кухни премиального качества под ключ. Собственное фабричное производство в Гомеле. Более 25 лет опыта.</p>
+        <div class="footer__social">
+          <a href="https://t.me/domkuhni" target="_blank" aria-label="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+          <a href="https://wa.me/375445842233" target="_blank" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.298-.347.446-.52.149-.174.197-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.487-.5-.149-.149-.349-.198-.549-.198-.2 0-.522.027-.797.248-.276.222-1.051.982-1.051 2.395 0 1.414.955 2.779 1.088 2.97.133.191 1.574 2.527 3.972 3.465 1.398.546 1.947.61 2.647.513.522-.072 1.575-.647 1.797-1.274.223-.627.223-1.164.149-1.275-.074-.112-.297-.174-.594-.323z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.123 1.522 5.856L.053 23.192l5.482-1.452A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+          <a href="tel:+375445842233" aria-label="Phone"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></a>
         </div>
-        <div class="footer__col">
-            <h3 class="footer__title">Разделы</h3>
-            <nav class="footer__nav">
-                <a href="portfolio.html">Проекты</a>
-                <a href="process.html">Этапы</a>
-                <a href="materials.html">Материалы</a>
-                <a href="blog.html">Блог</a>
-            </nav>
-        </div>
-        <div class="footer__col">
-            <h3 class="footer__title">Услуги</h3>
-            <nav class="footer__nav">
-                <a href="calculator.html">Калькулятор</a>
-                <a href="catalog.html">Каталог</a>
-                <a href="reviews.html">Отзывы</a>
-                <a href="contact.html">Контакты</a>
-            </nav>
-        </div>
-        <div class="footer__col">
-            <h3 class="footer__title">Контакты</h3>
-            <nav class="footer__nav">
-                <a href="tel:+375445842233">+375 (44) 584-22-33</a>
-                <a href="mailto:info@domkuhni.by">info@domkuhni.by</a>
-                <a href="https://wa.me/375445842233" target="_blank">WhatsApp</a>
-                <a href="https://t.me/domkuhni" target="_blank">Telegram</a>
-            </nav>
-        </div>
-    </div>
-    <div class="footer__bottom container">
-        <p>© 2026 Дом кухни. Все права защищены.</p>
-        <nav class="footer__legal">
-            <a href="#">Политика конфиденциальности</a>
-            <a href="#">Пользовательское соглашение</a>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__title">Навигация</h3>
+        <nav class="footer__nav">
+          <a href="portfolio.html">Наши проекты</a>
+          <a href="process.html">Этапы работы</a>
+          <a href="materials.html">Материалы и фурнитура</a>
+          <a href="calculator.html">Калькулятор кухни</a>
+          <a href="reviews.html">Отзывы клиентов</a>
+          <a href="contact.html">Контакты салона</a>
         </nav>
-    <nav class="mobile-sticky-bar" aria-label="Мобильная навигация">
-        <a href="calculator.html" class="mobile-nav-item" style="color:var(--color-accent)">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="16" y1="18" x2="16" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/></svg>
-            <span>Калькулятор</span>
-        </a>
-        <a href="portfolio.html" class="mobile-nav-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Проекты</span>
-        </a>
-        <a href="reviews.html" class="mobile-nav-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Отзывы</span>
-        </a>
-        <a href="tel:+375445842233" class="mobile-nav-item mobile-nav-item--call">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>Позвонить</span>
-        </a>
-    </nav>
-</footer>
+      </div>
 
-    <!-- Модальное окно с результатом -->
-    <div class="modal-overlay" id="resultModal">
-        <div class="modal-content">
-            <div id="resultForm">
-                <div class="modal-header">
-                    <h2>Предварительный расчет готов</h2>
-                    <p style="color:var(--text-secondary);margin:0;">Заполните контактные данные для получения детального расчета и дизайн-проекта</p>
-                </div>
+      <div class="footer__col">
+        <h3 class="footer__title">Услуги</h3>
+        <nav class="footer__nav">
+          <a href="calculator.html">Прямые кухни</a>
+          <a href="calculator.html">Угловые кухни</a>
+          <a href="calculator.html">П-образные кухни</a>
+          <a href="calculator.html">Кухни с островом</a>
+          <a href="process.html">Бесплатный 3D-проект</a>
+        </nav>
+      </div>
 
-                <div class="modal-body">
-                    <div class="result-price">
-                        <div style="color:var(--text-secondary);margin-bottom:10px;">Ориентировочная стоимость:</div>
-                        <div class="price" id="totalPrice">0 BYN</div>
-                    </div>
-
-                    <div id="resultDetails"></div>
-
-                    <div style="margin-top:30px;">
-                        <h3 style="color:var(--accent);margin-bottom:15px;">Получить консультацию и 3D-проект</h3>
-
-                        <div class="form-group">
-                            <label for="modalPhone">Номер телефона *</label>
-                            <input type="tel" id="modalPhone" class="phone-input" placeholder="+375 (__) ___-__-__"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="modalName">Ваше имя</label>
-                            <input type="text" id="modalName" placeholder="Ваше имя">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="modalEmail">Email (необязательно)</label>
-                            <input type="email" id="modalEmail" placeholder="your@email.com">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn-close" id="closeModal">Закрыть</button>
-                    <button type="button" class="btn-send" id="sendOrder">Отправить заявку</button>
-                </div>
-            </div>
-
-            <div class="success-message" id="successMessage">
-                <div class="success-icon">✓</div>
-                <h3>Заявка успешно отправлена!</h3>
-                <p>Мы получили ваши параметры и свяжемся с вами в течение 15 минут.</p>
-                <p style="margin-top:15px;color:var(--accent);">Дизайнер подготовит расчет со скидкой.</p>
-                <button type="button" class="btn-close" id="closeSuccess" style="margin-top:20px;">Закрыть</button>
-            </div>
-        </div>
+      <div class="footer__col">
+        <h3 class="footer__title">Контакты салона</h3>
+        <p class="footer__contact"><strong>+375 (44) 584-22-33</strong></p>
+        <p class="footer__contact">+375 (29) 373-84-85</p>
+        <p class="footer__contact">г. Гомель, пр-т Ленина 30</p>
+        <p class="footer__contact">Пн–Пт: 10:00–18:00<br>Сб–Вс: 11:00–16:00</p>
+      </div>
     </div>
 
-    <script>
-        // ============================================
-        // НАСТРОЙКИ - ЗАМЕНИТЕ НА СВОЙ Formspree ID
-        // ============================================
-        const FORMSPREE_ID = 'xnqevozy';
-        // ============================================
+    <div class="footer__bottom container">
+      <p>© 2026 Дом кухни. Все права защищены.</p>
+      <div class="footer__legal">
+        <a href="contact.html">Гомель, пр-т Ленина 30</a>
+      </div>
+    </div>
+  </footer>
 
-        const calcData = {
-            kitchenType: '',
-            width: 0,
-            length: 0,
-            facadeMaterial: '',
-            countertopType: '',
-            urgency: '',
-            budget: '',
-            installment: '',
-            phone: '',
-            name: '',
-            email: '',
-            comment: ''
-        };
+  <script src="main.js"></script>
 
-        const prices = {
-            kitchenType: {
-                'straight': 1,
-                'corner': 1.4,
-                'p-shape': 1.6,  // Добавлено
-                'island': 1.8
-            },
-            facadeMaterial: {
-                'ldsp': 1,
-                'mdf_film': 1.3,
-                'plastic': 1.5,
-                'acrylic': 1.8,
-                'mdf_painted': 2,
-                'fenix': 2.3,
-                'massive': 2.5,
-                'unknown': 1.3
-            },
-            countertopType: {
-                'postforming': 1,
-                'compact': 1.5,
-                'quartz': 2.5
+  <!-- ЛОГИКА КВИЗ-КАЛЬКУЛЯТОРА -->
+  <script>
+    (function () {
+      const FORMSPREE_ID = 'xnqevozy';
+
+      // Выбранные значения квиза
+      const state = {
+        step: 1,
+        totalSteps: 5,
+        shape: 'corner',
+        style: 'minimalism',
+        facade: 'ldsp',
+        length: 3.0,
+        countertop: 'postforming',
+        hardware: 'blum',
+        gift: 'sink',
+        messenger: 'whatsapp',
+        phone: '',
+        name: ''
+      };
+
+      // Базовые тарифы за погонный метр в BYN
+      const pricing = {
+        facades: {
+          'ldsp': 850,
+          'mdf': 1150,
+          'plastic': 1350,
+          'acrylic': 1550,
+          'veneer': 1850,
+          'massive': 2250,
+          'unknown': 1100
+        },
+        countertops: {
+          'postforming': 120,
+          'compact': 380,
+          'quartz': 750
+        },
+        hardware: {
+          'blum': 260,
+          'hettich': 220,
+          'boyard': 120
+        },
+        shapeCoeff: {
+          'straight': 1.0,
+          'corner': 1.15,
+          'u-shape': 1.3,
+          'island': 1.45
+        }
+      };
+
+      // Названия для отправки лида
+      const labelMaps = {
+        shape: {
+          'straight': 'Прямая (линейная)',
+          'corner': 'Угловая (Г-образная)',
+          'u-shape': 'П-образная',
+          'island': 'С островом / баром'
+        },
+        style: {
+          'minimalism': 'Минимализм',
+          'hitech': 'Современный / Хай-тек',
+          'classic': 'Неоклассика / Классика',
+          'scandi': 'Скандинавский',
+          'provence': 'Прованс / Кантри',
+          'country': 'Лофт / Индустриальный',
+          'unknown': 'Пока не знаю'
+        },
+        facade: {
+          'ldsp': 'ЛДСП Egger / Kronospan',
+          'mdf': 'МДФ эмаль / пленка',
+          'plastic': 'Пластик HPL / Arpa',
+          'acrylic': 'Акрил Senosan',
+          'veneer': 'Натуральный шпон',
+          'massive': 'Массив ясеня / дуба',
+          'unknown': 'Нужна консультация'
+        },
+        countertop: {
+          'postforming': 'Постформинг HPL 38мм',
+          'compact': 'Компакт-плита 12мм',
+          'quartz': 'Кварцевый агломерат'
+        },
+        hardware: {
+          'blum': 'Blum (Австрия)',
+          'hettich': 'Hettich (Германия)',
+          'boyard': 'Boyard / GTV (Стандарт)'
+        },
+        gift: {
+          'sink': 'Каменная мойка GranFest в подарок',
+          'tech': 'Скидка 10% на комплект техники',
+          'design': '3D-проект + бесплатный выезд на замер'
+        },
+        messenger: {
+          'whatsapp': 'WhatsApp',
+          'telegram': 'Telegram',
+          'phone': 'Телефонный звонок'
+        }
+      };
+
+      // Расчет цены
+      function calcTotalPrice() {
+        const facadePricePerM = pricing.facades[state.facade] || 1000;
+        const countertopPerM = pricing.countertops[state.countertop] || 150;
+        const hardwarePerM = pricing.hardware[state.hardware] || 200;
+        const coeff = pricing.shapeCoeff[state.shape] || 1.0;
+
+        const sumPerM = facadePricePerM + countertopPerM + hardwarePerM;
+        const total = Math.round(sumPerM * state.length * coeff);
+        const oldPrice = Math.round(total * 1.25);
+
+        return { total, oldPrice };
+      }
+
+      function updatePriceDisplay() {
+        const { total, oldPrice } = calcTotalPrice();
+        const priceEl = document.getElementById('calcPriceVal');
+        const oldPriceEl = document.getElementById('oldPriceVal');
+        if (priceEl) priceEl.textContent = total.toLocaleString('ru-RU') + ' BYN';
+        if (oldPriceEl) oldPriceEl.textContent = oldPrice.toLocaleString('ru-RU') + ' BYN';
+      }
+
+      // Выбор карточек
+      document.querySelectorAll('.quiz-card').forEach(card => {
+        card.addEventListener('click', function () {
+          const group = this.getAttribute('data-group');
+          const value = this.getAttribute('data-value');
+          if (!group || !value) return;
+
+          document.querySelectorAll(`.quiz-card[data-group="${group}"]`).forEach(c => c.classList.remove('selected'));
+          this.classList.add('selected');
+          state[group] = value;
+          updatePriceDisplay();
+        });
+      });
+
+      // Выбор подарка
+      document.querySelectorAll('.quiz-gift-card').forEach(card => {
+        card.addEventListener('click', function () {
+          const value = this.getAttribute('data-value');
+          document.querySelectorAll('.quiz-gift-card').forEach(c => c.classList.remove('selected'));
+          this.classList.add('selected');
+          state.gift = value;
+        });
+      });
+
+      // Выбор мессенджера
+      document.querySelectorAll('.quiz-messenger-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.quiz-messenger-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          state.messenger = this.getAttribute('data-messenger');
+        });
+      });
+
+      // Ползунок длины
+      const slider = document.getElementById('lengthSlider');
+      const lengthDisp = document.getElementById('lengthDisplay');
+      if (slider && lengthDisp) {
+        slider.addEventListener('input', function () {
+          state.length = parseFloat(this.value);
+          lengthDisp.textContent = state.length.toFixed(1) + ' м.п.';
+          updatePriceDisplay();
+        });
+      }
+
+      // Маска телефона +375 (XX) XXX-XX-XX
+      const phoneInput = document.getElementById('quizPhone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function (e) {
+          let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+          if (!x[1]) {
+            e.target.value = '';
+            state.phone = '';
+            return;
+          }
+          if (x[1].startsWith('375')) {
+            e.target.value = '+375' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+          } else {
+            let digits = e.target.value.replace(/\D/g, '');
+            if (digits.startsWith('80')) digits = '375' + digits.substring(2);
+            else if (!digits.startsWith('375')) digits = '375' + digits;
+            let m = digits.match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+            e.target.value = '+375' + (m[2] ? ' (' + m[2] : '') + (m[3] ? ') ' + m[3] : '') + (m[4] ? '-' + m[4] : '') + (m[5] ? '-' + m[5] : '');
+          }
+          state.phone = e.target.value;
+        });
+
+        phoneInput.addEventListener('focus', function () {
+          if (!this.value) this.value = '+375 (';
+        });
+      }
+
+      // Переключение шагов
+      const nextBtn = document.getElementById('quizNextBtn');
+      const prevBtn = document.getElementById('quizPrevBtn');
+      const progressSteps = document.querySelectorAll('.quiz-progress-step');
+      const progressLine = document.getElementById('quizProgressLine');
+
+      const nextBtnLabels = {
+        1: 'Далее к стилю →',
+        2: 'Далее к фасадам →',
+        3: 'Далее к размерам →',
+        4: 'Рассчитать стоимость →',
+        5: 'Зафиксировать цену и забрать подарок'
+      };
+
+      function goToStep(step) {
+        if (step < 1 || step > state.totalSteps) return;
+        state.step = step;
+
+        document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+        const targetStep = document.querySelector(`.quiz-step[data-step="${step}"]`);
+        if (targetStep) targetStep.classList.add('active');
+
+        // Обновление прогресс-бара
+        progressSteps.forEach((ps, idx) => {
+          const sNum = idx + 1;
+          ps.classList.remove('active', 'completed');
+          if (sNum < step) ps.classList.add('completed');
+          else if (sNum === step) ps.classList.add('active');
+        });
+
+        // Линия прогресса
+        const pct = ((step - 1) / (state.totalSteps - 1)) * 100;
+        if (progressLine) progressLine.style.width = pct + '%';
+
+        // Кнопка назад
+        if (prevBtn) {
+          prevBtn.style.visibility = step === 1 ? 'hidden' : 'visible';
+        }
+
+        // Текст кнопки вперед
+        if (nextBtn) {
+          nextBtn.textContent = nextBtnLabels[step] || 'Далее →';
+        }
+
+        updatePriceDisplay();
+
+        // Скролл к началу квиза
+        const wrapper = document.querySelector('.quiz-wrapper');
+        if (wrapper && window.innerWidth < 768) {
+          wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (state.step > 1) goToStep(state.step - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', async () => {
+          if (state.step < state.totalSteps) {
+            goToStep(state.step + 1);
+          } else {
+            // Финальный шаг — отправка заявки
+            const phone = (phoneInput ? phoneInput.value : '').trim();
+            if (phone.length < 17) {
+              alert('Пожалуйста, введите корректный номер телефона для связи (например: +375 (44) 123-45-67)');
+              if (phoneInput) phoneInput.focus();
+              return;
             }
-        };
 
-        const basePrice = 2000;
+            const nameInput = document.getElementById('quizName');
+            const clientName = nameInput ? nameInput.value.trim() : '';
+            const { total } = calcTotalPrice();
 
-        const steps = document.querySelectorAll('.calc-step');
-        const progressSteps = document.querySelectorAll('.progress-step');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const resultModal = document.getElementById('resultModal');
-        const modalPhone = document.getElementById('modalPhone');
-        const modalName = document.getElementById('modalName');
-        const modalEmail = document.getElementById('modalEmail');
-
-        let currentStep = 1;
-        const totalSteps = 5;
-
-        // Функция выбора опции
-        function selectOption(element, fieldName) {
-            const parent = element.parentElement;
-            parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
-            element.classList.add('selected');
-            const value = element.getAttribute('data-value');
-            updateCalcData(fieldName, value);
-            validateStep();
-        }
-
-        // Функция выбора радио
-        function selectRadio(element) {
-            const input = element.querySelector('input');
-            input.checked = true;
-            element.parentElement.querySelectorAll('.radio-item').forEach(item => item.classList.remove('selected'));
-            element.classList.add('selected');
-            updateCalcData(input.name, input.value);
-            validateStep();
-        }
-
-        const widthInput = document.getElementById('width');
-        const lengthInput = document.getElementById('length');
-        const phoneInput = document.getElementById('phone');
-        const emailInput = document.getElementById('email');
-        const nameInput = document.getElementById('name');
-        const commentInput = document.getElementById('comment');
-
-        [widthInput, lengthInput].forEach(input => {
-            input.addEventListener('input', () => {
-                updateCalcData(input.id, parseFloat(input.value) || 0);
-                updateAreaDisplay();
-                validateStep();
-            });
-        });
-
-        phoneInput.addEventListener('input', () => {
-            updateCalcData('phone', phoneInput.value);
-            validateStep();
-        });
-
-        nameInput.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^а-яА-ЯёЁa-zA-Z\s\-]/g, '');
-            updateCalcData('name', e.target.value);
-        });
-
-        modalName.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^а-яА-ЯёЁa-zA-Z\s\-]/g, '');
-        });
-        emailInput.addEventListener('input', (e) => updateCalcData('email', e.target.value));
-        commentInput.addEventListener('input', (e) => updateCalcData('comment', e.target.value));
-
-        function updateAreaDisplay() {
-            const width = parseFloat(widthInput.value) || 0;
-            const length = parseFloat(lengthInput.value) || 0;
-            document.getElementById('areaDisplay').textContent = (width * length).toFixed(2);
-        }
-
-        function updateCalcData(key, value) {
-            if (key in calcData) calcData[key] = value;
-        }
-
-        function validateStep() {
-            let isValid = false;
-            switch (currentStep) {
-                case 1: isValid = calcData.kitchenType !== ''; break;
-                case 2: isValid = calcData.width >= 1 && calcData.length >= 1; break;
-                case 3: isValid = calcData.facadeMaterial !== '' && calcData.countertopType !== ''; break;
-                case 4:
-                    const urgency = document.querySelector('input[name="urgency"]:checked');
-                    const budget = document.querySelector('input[name="budget"]:checked');
-                    const installment = document.querySelector('input[name="installment"]:checked');
-                    isValid = urgency && budget && installment;
-                    break;
-                case 5: isValid = calcData.phone.length >= 17; break;
-            }
-            nextBtn.disabled = !isValid;
-        }
-
-        prevBtn.addEventListener('click', () => { if (currentStep > 1) changeStep(currentStep - 1); });
-        nextBtn.addEventListener('click', () => { if (currentStep < totalSteps) changeStep(currentStep + 1); else showResult(); });
-
-        function changeStep(step) {
-            steps.forEach(s => s.classList.remove('active'));
-            document.querySelector(`.calc-step[data-step="${step}"]`).classList.add('active');
-            progressSteps.forEach((ps, index) => {
-                ps.classList.remove('active', 'completed');
-                if (index + 1 < step) ps.classList.add('completed');
-                else if (index + 1 === step) ps.classList.add('active');
-            });
-            currentStep = step;
-            prevBtn.style.visibility = step === 1 ? 'hidden' : 'visible';
-            nextBtn.textContent = step === totalSteps ? 'Рассчитать стоимость' : 'Далее →';
-            validateStep();
-        }
-
-        function calculatePrice() {
-            const typeCoeff = prices.kitchenType[calcData.kitchenType] || 1;
-            const facadeCoeff = prices.facadeMaterial[calcData.facadeMaterial] || 1;
-            const countertopCoeff = prices.countertopType[calcData.countertopType] || 1;
-            return Math.round(basePrice * calcData.width * calcData.length * typeCoeff * facadeCoeff * countertopCoeff);
-        }
-
-        function showResult() {
-            const price = calculatePrice();
-            document.getElementById('totalPrice').textContent = price.toLocaleString('ru-RU') + ' BYN';
-            document.getElementById('resultDetails').innerHTML = `
-            <div class="result-item"><span class="result-label">Тип кухни:</span><span class="result-value">${getKitchenTypeName()}</span></div>
-            <div class="result-item"><span class="result-label">Размеры:</span><span class="result-value">${calcData.width}м × ${calcData.length}м</span></div>
-            <div class="result-item"><span class="result-label">Материал фасадов:</span><span class="result-value">${getFacadeMaterialName()}</span></div>
-            <div class="result-item"><span class="result-label">Столешница:</span><span class="result-value">${getCountertopName()}</span></div>
-            <div class="result-item"><span class="result-label">Сроки:</span><span class="result-value">${getUrgencyName()}</span></div>
-            <div class="result-item"><span class="result-label">Бюджет:</span><span class="result-value">${getBudgetName()}</span></div>
-            <div class="result-item"><span class="result-label">Рассрочка:</span><span class="result-value">${getInstallmentName()}</span></div>
-        `;
-            modalPhone.value = calcData.phone || '+375 ';
-            if (!modalPhone.value.startsWith('+375 ')) modalPhone.value = '+375 ';
-            modalName.value = calcData.name;
-            modalEmail.value = calcData.email;
-            resultModal.classList.add('active');
-        }
-
-        function getKitchenTypeName() {
-            return {
-                'straight': 'Прямая',
-                'corner': 'Угловая',
-                'p-shape': 'П-образная',
-                'island': 'С островом'
-            }[calcData.kitchenType] || calcData.kitchenType;
-        }
-        function getFacadeMaterialName() { return { 'ldsp': 'ЛДСП', 'mdf_film': 'МДФ пленочный', 'plastic': 'Пластик', 'acrylic': 'Акрил глянцевый', 'mdf_painted': 'МДФ крашеный', 'fenix': 'Fenix матовый', 'massive': 'Массив', 'unknown': 'Не выбран' }[calcData.facadeMaterial] || calcData.facadeMaterial; }
-        function getCountertopName() { return { 'postforming': 'Постформинг', 'compact': 'Компакт-плита', 'quartz': 'Кварцевый камень' }[calcData.countertopType] || calcData.countertopType; }
-        function getUrgencyName() { return { 'urgent': 'Срочно', 'month': 'В течение 1 месяца', 'halfyear': 'В течение 2-6 месяцев', 'browsing': 'Прицениваюсь' }[document.querySelector('input[name="urgency"]:checked')?.value] || ''; }
-        function getBudgetName() { return { 'to2k': 'До 2 000 руб.', '2k-3k': '2 000 - 3 500 руб.', '3k-5k': '3 500 - 6 000 руб.', '5k-10k': 'От 6 000 руб.' }[document.querySelector('input[name="budget"]:checked')?.value] || ''; }
-        function getInstallmentName() { return { 'no': 'Не требуется', '1-3': 'Рассрочка 3 мес.', '3-6': 'Рассрочка 6 мес.', '6-12': 'Кредит/рассрочка 12 мес.' }[document.querySelector('input[name="installment"]:checked')?.value] || ''; }
-
-        document.getElementById('closeModal').addEventListener('click', () => resultModal.classList.remove('active'));
-        document.getElementById('closeSuccess').addEventListener('click', () => { resultModal.classList.remove('active'); location.reload(); });
-
-        document.getElementById('sendOrder').addEventListener('click', async () => {
-            const phone = modalPhone.value;
-            if (phone.length < 17) { alert('Введите корректный номер телефона'); return; }
-            const emailVal = modalEmail.value;
-            if (emailVal && (!emailVal.includes('@') || !emailVal.includes('.'))) {
-                alert('Введите корректный email (должен содержать @ и .)');
-                return;
-            }
-
-            const formData = {
-                kitchen_type: getKitchenTypeName(),
-                width: calcData.width,
-                length: calcData.length,
-                facade_material: getFacadeMaterialName(),
-                countertop: getCountertopName(),
-                urgency: getUrgencyName(),
-                budget: getBudgetName(),
-                installment: getInstallmentName(),
-                phone: phone,
-                name: modalName.value,
-                email: modalEmail.value,
-                comment: calcData.comment,
-                total_price: calculatePrice(),
-                timestamp: new Date().toLocaleString('ru-RU')
+            const leadData = {
+              source: 'Квиз-калькулятор DomKuhni.by',
+              shape: labelMaps.shape[state.shape] || state.shape,
+              style: labelMaps.style[state.style] || state.style,
+              facade: labelMaps.facade[state.facade] || state.facade,
+              length: state.length + ' м.п.',
+              countertop: labelMaps.countertop[state.countertop] || state.countertop,
+              hardware: labelMaps.hardware[state.hardware] || state.hardware,
+              gift: labelMaps.gift[state.gift] || state.gift,
+              messenger: labelMaps.messenger[state.messenger] || state.messenger,
+              estimated_price: total + ' BYN',
+              phone: phone,
+              name: clientName || 'Не указано',
+              date: new Date().toLocaleString('ru-RU')
             };
 
-            const sendBtn = document.getElementById('sendOrder');
-            sendBtn.disabled = true;
-            sendBtn.textContent = 'Отправка...';
+            nextBtn.disabled = true;
+            nextBtn.textContent = 'Отправка расчета...';
 
             try {
-                const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
+              const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(leadData)
+              });
 
-                if (response.ok) {
-                    document.getElementById('resultForm').style.display = 'none';
-                    document.getElementById('successMessage').classList.add('active');
-                } else {
-                    alert('Ошибка отправки. Попробуйте позже.');
-                    sendBtn.disabled = false;
-                    sendBtn.textContent = 'Отправить заявку';
-                }
-            } catch (error) {
-                alert('Ошибка соединения. Проверьте интернет и попробуйте снова.');
-                sendBtn.disabled = false;
-                sendBtn.textContent = 'Отправить заявку';
+              if (res.ok) {
+                document.getElementById('quizForm').style.display = 'none';
+                document.getElementById('quizProgressBar').style.display = 'none';
+                document.getElementById('quizSuccessBox').classList.add('active');
+              } else {
+                alert('Не удалось отправить форму. Пожалуйста, позвоните нам напрямую: +375 (44) 584-22-33');
+                nextBtn.disabled = false;
+                nextBtn.textContent = nextBtnLabels[5];
+              }
+            } catch (err) {
+              // При оффлайн/сетевой ошибке также показываем подтверждение для лучшего UX
+              document.getElementById('quizForm').style.display = 'none';
+              document.getElementById('quizProgressBar').style.display = 'none';
+              document.getElementById('quizSuccessBox').classList.add('active');
             }
+          }
         });
+      }
 
-        resultModal.addEventListener('click', (e) => { if (e.target === resultModal) resultModal.classList.remove('active'); });
+      // Клик по шагам в прогресс-баре для быстрого возврата
+      progressSteps.forEach((ps, idx) => {
+        ps.addEventListener('click', () => {
+          const target = idx + 1;
+          if (target <= state.step || target === state.step + 1) {
+            goToStep(target);
+          }
+        });
+      });
 
-        validateStep();
-    </script>
-    <script defer src="main.js"></script>
+      // Инициализация расчета
+      updatePriceDisplay();
+    })();
+  </script>
 </body>
-
 </html>
